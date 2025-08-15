@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Tình hình phân bổ chi phí mua hàng</title>
+    <style>
+        @page {
+            margin: 15mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .company-header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .company-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .company-address {
+            margin-bottom: 5px;
+        }
+
+        .company-tax-id {
+            margin-bottom: 15px;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .report-title {
+            font-weight: bold;
+            font-size: 20px;
+            text-transform: uppercase;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .total-row {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="company-header">
+        <div class="company-name">Công ty: {%= filters.company_name %}</div>
+        <div class="company-address">Địa chỉ: {%= filters.company_address %}</div>
+        <div class="company-tax-id">Mã số thuế: {%= filters.tax_id %}</div>
+    </div>
+
+    <div class="report-header">
+        <div class="report-title">TÌNH HÌNH PHÂN BỔ CHI PHÍ MUA HÀNG</div>
+        <div>Từ ngày {%= filters.from_date %} đến ngày {%= filters.to_date %}</div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="4">Chứng từ chi phí mua hàng</th>
+                <th colspan="4">Chứng từ mua hàng được phân bổ</th>
+                <th rowspan="2">Chênh lệch</th>
+            </tr>
+            <tr>
+                <th>Ngày hạch toán</th>
+                <th>Ngày chứng từ</th>
+                <th>Số chứng từ</th>
+                <th>Số tiền</th>
+                <th>Ngày hạch toán (PB)</th>
+                <th>Ngày chứng từ (PB)</th>
+                <th>Số chứng từ (PB)</th>
+                <th>Số tiền (PB)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% var totalAmount = 0; %}
+            {% var totalAllocated = 0; %}
+            {% var totalDifference = 0; %}
+            {% for (var i = 0; i < data.length - 2; i++) { %}
+            <tr>
+                <td>{{ data[i].posting_date || '' }}</td>
+                <td>{{ data[i].bill_date || '' }}</td>
+                <td>{{ data[i].bill_no || '' }}</td>
+                <td class="text-right">{{ parseFloat(data[i].total_amount || 0).toLocaleString() }}</td>
+                <td>{{ data[i].allocated_posting_date || '' }}</td>
+                <td>{{ data[i].allocated_bill_date || '' }}</td>
+                <td>{{ data[i].allocated_bill_no || '' }}</td>
+                <td class="text-right">{{ parseFloat(data[i].allocated_amount || 0).toLocaleString() }}</td>
+                <td class="text-right">{{ parseFloat(data[i].difference || 0).toLocaleString() }}</td>
+            </tr>
+            {% totalAmount += parseFloat(data[i].total_amount || 0); %}
+            {% totalAllocated += parseFloat(data[i].allocated_amount || 0); %}
+            {% totalDifference += parseFloat(data[i].difference || 0); %}
+            {% } %}
+            <tr class="total-row">
+                <td colspan="3" class="text-left">Cộng</td>
+                <td class="text-right">{{ totalAmount.toLocaleString() }}</td>
+                <td colspan="3"></td>
+                <td class="text-right">{{ totalAllocated.toLocaleString() }}</td>
+                <td class="text-right">{{ totalDifference.toLocaleString() }}</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="3" class="text-left">Tổng cộng</td>
+                <td class="text-right">{{ totalAmount.toLocaleString() }}</td>
+                <td colspan="3"></td>
+                <td class="text-right">{{ totalAllocated.toLocaleString() }}</td>
+                <td class="text-right">{{ totalDifference.toLocaleString() }}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2024-11-20 10:01:53.516850",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "Leepak",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng Ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "account",
+   "fieldtype": "Link",
+   "label": "T\u00e0i kho\u1ea3n",
+   "mandatory": 1,
+   "options": "Account",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-11-20 10:33:30.935566",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "GL05 - B\u1ea3ng k\u00ea ch\u1ee9ng t\u1eeb ghi s\u1ed5",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \r\n  DATE_FORMAT(GL.POSTING_DATE, '%%e/%%c/%%Y') \"Ng\u00e0y ghi s\u1ed5\",\r\n  GL.NAME \"S\u1ed1 ch\u1ee9ng t\u1eeb\", \r\n  GL.REMARKS \"Di\u1ec5n gi\u1ea3i\", \r\n  NULL \"M\u00e3 KH\",\r\n  GL.PARTY \"T\u00ean KH\",\r\n  SUBSTRING_INDEX(GL.AGAINST, ' -', 1) \"S\u1ed1 hi\u1ec7u TK\",\r\n  SUBSTRING_INDEX(GL.ACCOUNT, ' -', 1) \"TK \u0110\u1ed1i \u1ee9ng\", \r\n  GL.CREDIT_IN_ACCOUNT_CURRENCY \"Ph\u00e1t sinh n\u1ee3\", \r\n  GL.DEBIT_IN_ACCOUNT_CURRENCY \"Ph\u00e1t sinh c\u00f3\",\r\n  NULL \"\u0110V h\u1ea1ch to\u00e1n\",\r\n  GL._comments \"Ghi ch\u00fa\"\r\nfrom \r\n  `tabGL Entry` GL \r\n  LEFT JOIN `tabCustomer` C ON C.CUSTOMER_NAME = GL.PARTY\r\nWHERE \r\n  GL.AGAINST = %(account)s\r\n  AND IS_CANCELLED = 0\r\n  AND POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n  AND COMPANY = %(company)s",
+ "ref_doctype": "GL Entry",
+ "report_name": "GL05 - B\u1ea3ng k\u00ea ch\u1ee9ng t\u1eeb ghi s\u1ed5",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "K\u1ebf to\u00e1n"
+  },
+  {
+   "role": "Gi\u00e1m \u0111\u1ed1c T\u00e0i ch\u00ednh"
+  },
+  {
+   "role": "Auditor"
+  }
+ ]
+}

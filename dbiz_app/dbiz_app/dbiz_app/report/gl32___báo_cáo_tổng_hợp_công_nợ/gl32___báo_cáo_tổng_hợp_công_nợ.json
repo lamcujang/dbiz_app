@@ -1,0 +1,66 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-11-22 09:52:03.899668",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "Leepak",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng Ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "qwe",
+   "fieldtype": "Link",
+   "label": "M\u00e3 t\u00e0i kho\u1ea3n ",
+   "mandatory": 0,
+   "options": "Account",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "",
+ "letterhead": null,
+ "modified": "2024-11-26 14:32:01.266771",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "GL32 - B\u00e1o c\u00e1o t\u1ed5ng h\u1ee3p c\u00f4ng n\u1ee3",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "WITH NHOM AS (\n    SELECT \n        'SUPPLIER' AS TYPE, \n        S.SUPPLIER_TYPE AS NHOM_NCC_KH\n    FROM `tabGL Entry` GL\n    LEFT JOIN `tabSupplier` S ON S.SUPPLIER_NAME = GL.PARTY\n    WHERE GL.COMPANY = %(company)s\n      AND SUBSTR(GL.ACCOUNT, 1, 3) IN ('338', '331', '335', '131', '141', '138')\n      AND GL.PARTY IS NOT NULL\n      AND GL.IS_CANCELLED = 0 \n      AND S.SUPPLIER_TYPE IS NOT NULL\n    GROUP BY S.SUPPLIER_TYPE\n\n    UNION ALL\n\n    SELECT \n        'CUSTOMER' AS TYPE,\n        C.CUSTOMER_GROUP AS NHOM_NCC_KH\n    FROM `tabGL Entry` GL\n    LEFT JOIN `tabCustomer` C ON C.CUSTOMER_NAME = GL.PARTY\n    WHERE GL.COMPANY = %(company)s\n      AND SUBSTR(GL.ACCOUNT, 1, 3) IN ('338', '331', '335', '131', '141', '138')\n      AND GL.PARTY IS NOT NULL\n      AND GL.IS_CANCELLED = 0 \n      AND C.CUSTOMER_GROUP IS NOT NULL\n    GROUP BY C.CUSTOMER_GROUP\n),\nGL_ENTRIES AS (\n    SELECT \n        GL.COMPANY,\n        GL.ACCOUNT,\n        GL.PARTY,\n        GL.POSTING_DATE,\n        GL.DEBIT,\n        GL.CREDIT,\n        GL.TRANSACTION_CURRENCY,\n        GL.IS_CANCELLED\n    FROM `tabGL Entry` GL\n    WHERE GL.COMPANY = %(company)s\n      AND SUBSTR(GL.ACCOUNT, 1, 3) IN ('338', '331', '335', '131', '141', '138')\n      AND GL.IS_CANCELLED = 0\n),\nBEGINNING_BALANCE AS (\n    SELECT \n        GL.COMPANY,\n        GL.ACCOUNT,\n        GL.PARTY,\n        SUM(GL.DEBIT) AS DEBIT_OPEN,\n        SUM(GL.CREDIT) AS CREDIT_OPEN\n    FROM GL_ENTRIES GL\n    WHERE GL.POSTING_DATE < %(start_date)s\n    GROUP BY GL.COMPANY, GL.ACCOUNT, GL.PARTY\n),\nTRANSACTIONS AS (\n    SELECT \n        GL.COMPANY,\n        GL.ACCOUNT,\n        GL.PARTY,\n        SUM(GL.DEBIT) AS DEBIT_TRANS,\n        SUM(GL.CREDIT) AS CREDIT_TRANS\n    FROM GL_ENTRIES GL\n    WHERE GL.POSTING_DATE BETWEEN %(start_date)s AND %(end_date)s\n    GROUP BY GL.COMPANY, GL.ACCOUNT, GL.PARTY\n),\nENDING_BALANCE AS (\n    SELECT \n        GL.COMPANY,\n        GL.ACCOUNT,\n        GL.PARTY,\n        SUM(GL.DEBIT) - SUM(GL.CREDIT) AS BALANCE\n    FROM GL_ENTRIES GL\n    GROUP BY GL.COMPANY, GL.ACCOUNT, GL.PARTY\n)\nSELECT \n    NHOM.TYPE AS `\u0110\u01a1n v\u1ecb`,\n    NHOM.NHOM_NCC_KH AS `Nh\u00f3m kh\u00e1ch h\u00e0ng`,\n    GL.PARTY AS `M\u00e3 \u0111\u1ed1i t\u01b0\u1ee3ng`,\n    COALESCE(S.SUPPLIER_NAME, C.CUSTOMER_NAME) AS `T\u00ean \u0111\u1ed1i t\u01b0\u1ee3ng`,\n    GL.TRANSACTION_CURRENCY AS `\u0110\u01a1n v\u1ecb ti\u1ec1n t\u1ec7`,\n    GL.ACCOUNT AS `T\u00e0i kho\u1ea3n`,\n    BB.DEBIT_OPEN AS `N\u1ee3 \u0111\u1ea7u k\u1ef3`,\n    BB.CREDIT_OPEN AS `C\u00f3 \u0111\u1ea7u k\u1ef3`,\n    TR.DEBIT_TRANS AS `N\u1ee3 ph\u00e1t sinh`,\n    TR.CREDIT_TRANS AS `C\u00f3 ph\u00e1t sinh`,\n    COALESCE(EB.BALANCE, 0) AS `N\u1ee3 cu\u1ed1i k\u1ef3`,\n    0 AS `C\u00f3 cu\u1ed1i k\u1ef3` -- Adjust based on logic needed\nFROM GL_ENTRIES GL\nLEFT JOIN BEGINNING_BALANCE BB ON GL.COMPANY = BB.COMPANY AND GL.ACCOUNT = BB.ACCOUNT AND GL.PARTY = BB.PARTY\nLEFT JOIN TRANSACTIONS TR ON GL.COMPANY = TR.COMPANY AND GL.ACCOUNT = TR.ACCOUNT AND GL.PARTY = TR.PARTY\nLEFT JOIN ENDING_BALANCE EB ON GL.COMPANY = EB.COMPANY AND GL.ACCOUNT = EB.ACCOUNT AND GL.PARTY = EB.PARTY\nLEFT JOIN NHOM ON GL.PARTY = NHOM.NHOM_NCC_KH\nLEFT JOIN `tabSupplier` S ON GL.PARTY = S.SUPPLIER_NAME\nLEFT JOIN `tabCustomer` C ON GL.PARTY = C.CUSTOMER_NAME\nWHERE GL.COMPANY = %(company)s\nGROUP BY \n    NHOM.TYPE, \n    NHOM.NHOM_NCC_KH, \n    GL.PARTY, \n    S.SUPPLIER_NAME, \n    C.CUSTOMER_NAME, \n    GL.TRANSACTION_CURRENCY, \n    GL.ACCOUNT,\n    BB.DEBIT_OPEN,\n    BB.CREDIT_OPEN,\n    TR.DEBIT_TRANS,\n    TR.CREDIT_TRANS,\n    EB.BALANCE;\n",
+ "ref_doctype": "GL Entry",
+ "report_name": "GL32 - B\u00e1o c\u00e1o t\u1ed5ng h\u1ee3p c\u00f4ng n\u1ee3",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "K\u1ebf to\u00e1n"
+  },
+  {
+   "role": "Gi\u00e1m \u0111\u1ed1c T\u00e0i ch\u00ednh"
+  },
+  {
+   "role": "Auditor"
+  }
+ ]
+}

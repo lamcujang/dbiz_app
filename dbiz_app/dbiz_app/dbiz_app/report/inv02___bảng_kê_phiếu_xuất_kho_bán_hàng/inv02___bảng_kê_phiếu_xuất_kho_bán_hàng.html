@@ -1,0 +1,167 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 11px !important;
+    }
+
+    .print-format th,
+    .print-format td {
+        vertical-align: middle !important;
+    }
+
+    .print-format th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    .print-format table,
+    .print-format table th,
+    .print-format table td {
+        border: 1px solid #222426 !important;
+    }
+
+    .print-format .font-weight-bold {
+        font-weight: bold !important;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-8 text-left">
+            <div>
+                Tên công ty: {%= filters.company_name %}
+            </div>
+            <div>
+                Địa chỉ đơn vị: {%= filters.company_address || '' %}
+            </div>
+            <div>
+                Mã số thuế: {%= filters.tax_id %}
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-4 text-right">
+            <div>
+                Ngày báo cáo
+            </div>
+            <div>
+                {%= frappe.datetime.str_to_user(frappe.datetime.now_date()).split('-').join('/') %}
+            </div>
+            <div>
+                {%= frappe.datetime.now_time() %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h2 class="font-weight-bolder">{%= __("BẢNG KÊ PHIẾU XUẤT KHO BÁN HÀNG")%}</h2>
+
+            <div>
+                Từ ngày {%= frappe.datetime.str_to_user(filters.start_date).split('-').join('/') %}
+                đến {%= frappe.datetime.str_to_user(filters.end_date).split('-').join('/') %}
+            </div>
+
+            <div class="font-weight-bold">
+                {% if (filters.warehouse_name) { %}
+                {%= __("Kho: " + filters.warehouse_name) %}
+                {% } else { %}
+                {%= __("Kho: Tất cả") %}
+                {% } %}
+            </div>
+
+            <div class="font-weight-bold">
+                {% if (filters.customer_name) { %}
+                {%= __("Đối tác: " + filters.customer_name) %}
+                {% } else { %}
+                {%= __("Đối tác: Tất cả") %}
+                {% } %}
+            </div>
+
+            <div class="font-weight-bold">
+                {% if (filters.item_group_name) { %}
+                {%= __("Nhóm sản phẩm: " + filters.item_group_name) %}
+                {% } else { %}
+                {%= __("Nhóm sản phẩm: Tất cả") %}
+                {% } %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã kho</th>
+                        <th>Tên kho</th>
+                        <th>Loại xuất kho</th>
+                        <th>Ngày</th>
+                        <th>Số CT xuất kho</th>
+                        <th>Số đơn hàng/hóa đơn</th>
+                        <th>Trạng thái </th>
+                        <th>Diễn giải</th>
+                        <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>ĐVT</th>
+                        <th>Giá</th>
+                        <th>SL</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% let last = data.length - 1; %}
+                    {% for (let i = 0; i < last; i++) { %} <tr>
+                        <td class="text-center">{%= i + 1 %}</td>
+                        <td>{%= data[i]['warehouse_code'] %}</td>
+                        <td>{%= data[i]['warehouse_name'] %}</td>
+                        <td>{%= data[i]['ct_type'] %}</td>
+                        <td>{%= data[i]['posting_date'] %}</td>
+                        <td>{%= data[i]['ct_code'] %}</td>
+                        <td>{%= data[i]['order_no'] %}</td>
+                        <td>{%= data[i]['status'] %}</td>
+                        <td>{%= data[i]['description'] %}</td>
+                        <td>{%= data[i]['item_code'] %}</td>
+                        <td>{%= data[i]['item_name'] %}</td>
+                        <td class="text-center">{%= data[i]['stock_uom'] %}</td>
+                        <td class="text-right">{%= format_number_js(data[i]['rate']) %}</td>
+                        <td class="text-right">{%= format_number_js(data[i]['stock_qty']) %}</td>
+                        <td class="text-right">{%= format_number_js(data[i]['total_amount']) %}</td>
+                        </tr>
+                        {% } %}
+
+                        <tr class="font-weight-bold text-right">
+                            <td colspan="13">Tổng</td>
+                            <td>{%= format_number_js(data[last]['stock_qty']) %}</td>
+                            <td>{%= format_number_js(data[last]['total_amount']) %}</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-offset-8 col-xs-4 text-center">
+            {% const day = new Date().getDate() %}
+            {% const month = new Date().getMonth() + 1 %}
+            {% const year = new Date().getFullYear() %}
+            Ngày {%= day %} tháng {%= month %} năm {%= year %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 text-center">
+            <div><strong>Người lập</strong></div>
+            <div><i>(Ký, họ tên)</i></div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <div><strong>Cửa hàng trưởng</strong></div>
+            <div><i>(Ký, họ tên)</i></div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <div><strong>Kế toán trưởng</strong></div>
+            <div><i>(Ký, họ tên, đóng dấu)</i></div>
+        </div>
+    </div>
+</div>

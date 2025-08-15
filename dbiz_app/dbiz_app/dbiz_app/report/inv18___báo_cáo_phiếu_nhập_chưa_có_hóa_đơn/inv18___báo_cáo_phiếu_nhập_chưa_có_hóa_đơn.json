@@ -1,0 +1,91 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "tpr_d",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y phi\u1ebfu nh\u1eadp",
+   "width": 0
+  },
+  {
+   "fieldname": "tpr_n",
+   "fieldtype": "Data",
+   "label": "S\u1ed1 phi\u1ebfu nh\u1eadp",
+   "width": 0
+  },
+  {
+   "fieldname": "tpr_sn",
+   "fieldtype": "Data",
+   "label": "M\u00e3 KH",
+   "width": 0
+  },
+  {
+   "fieldname": "tpr_s",
+   "fieldtype": "Data",
+   "label": "T\u00ean KH",
+   "width": 0
+  },
+  {
+   "fieldname": "tpr_r",
+   "fieldtype": "Data",
+   "label": "Di\u1ec5n gi\u1ea3i",
+   "width": 0
+  }
+ ],
+ "creation": "2024-11-22 11:19:10.633025",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty ",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-05-06 16:41:32.815752",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "INV18 - B\u00e1o c\u00e1o phi\u1ebfu nh\u1eadp ch\u01b0a c\u00f3 h\u00f3a \u0111\u01a1n",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \r\n    tpr.posting_date as tpr_d, tpr.name tpr_n, tpr.supplier_name tpr_sn, tpr.supplier tpr_s,  tpr.remarks tpr_r\r\nFROM \r\n    `tabPurchase Receipt` tpr \r\nLEFT JOIN \r\n    `tabPurchase Receipt Item` tpri \r\nON\r\n\ttpr.name = tpri.parent \r\nWHERE \r\n    tpri.purchase_invoice IS NULL\r\n    and tpr.posting_date BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n    and tpr.company =  %(company)s\r\nGROUP BY tpr.name ",
+ "ref_doctype": "Purchase Receipt",
+ "report_name": "INV18 - B\u00e1o c\u00e1o phi\u1ebfu nh\u1eadp ch\u01b0a c\u00f3 h\u00f3a \u0111\u01a1n",
+ "report_script": "",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Stock Manager"
+  },
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Purchase User"
+  },
+  {
+   "role": "K\u1ebf to\u00e1n"
+  }
+ ]
+}

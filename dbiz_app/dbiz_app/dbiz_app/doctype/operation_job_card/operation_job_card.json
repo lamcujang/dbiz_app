@@ -1,0 +1,303 @@
+{
+ "actions": [],
+ "allow_copy": 1,
+ "autoname": "format:JOB-{employee}-{DD}-{####}",
+ "creation": "2024-12-27 08:58:43.803078",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "custom_btn",
+  "section_break_yvtr",
+  "work_order",
+  "employee",
+  "mortar",
+  "source_warehouse",
+  "production_item",
+  "column_break_ekim",
+  "job_card_name",
+  "shift",
+  "remaining_mixed_qty",
+  "column_break_asjq",
+  "job_card_operation_name",
+  "workstation",
+  "funnel",
+  "lov_item",
+  "items",
+  "details",
+  "boxs",
+  "bags",
+  "semi_items",
+  "html_wtcz",
+  "section_break_xpun",
+  "work_time",
+  "date",
+  "operation_type",
+  "amended_from",
+  "start_time",
+  "end_time",
+  "column_break_ahok",
+  "completed_qty",
+  "qty_finished",
+  "opeartion_job_card_previous_step"
+ ],
+ "fields": [
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Operation Job Card",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "section_break_yvtr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "work_time",
+   "fieldtype": "Data",
+   "label": "Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "start_time",
+   "fieldtype": "Datetime",
+   "label": "Start Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "job_card_operation_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Job Card Operation",
+   "options": "Operation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "job_card_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Job Card",
+   "options": "Job Card",
+   "reqd": 1
+  },
+  {
+   "fieldname": "workstation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Workstation",
+   "options": "Workstation"
+  },
+  {
+   "fieldname": "shift",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Shift",
+   "options": "Shift Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_time",
+   "fieldtype": "Datetime",
+   "label": "End Time",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.__islocal!==1",
+   "fieldname": "section_break_xpun",
+   "fieldtype": "Section Break",
+   "label": "Other Information"
+  },
+  {
+   "depends_on": "eval:doc.operation_type == 'Material Transfer For Job Card'",
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "no_copy": 1,
+   "options": "Operation Job Card Items"
+  },
+  {
+   "depends_on": "eval:doc.operation_type == 'Manufacture Semi-Finished Goods' && doc.job_card_operation_name != 'NKBTPC' && doc.job_card_operation_name != 'NKCUONMANG'",
+   "fieldname": "details",
+   "fieldtype": "Table",
+   "label": "Details",
+   "no_copy": 1,
+   "options": "Operation Job Card Workstations"
+  },
+  {
+   "depends_on": "eval: doc.operation_type == 'Packing'",
+   "fieldname": "boxs",
+   "fieldtype": "Table",
+   "label": "Boxs",
+   "no_copy": 1,
+   "options": "Operation Job Card Pallets"
+  },
+  {
+   "fieldname": "custom_btn",
+   "fieldtype": "HTML",
+   "is_virtual": 1,
+   "label": "Custom Btn"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_warehouse",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Source Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fetch_from": "job_card_operation_name.operation_type",
+   "fieldname": "operation_type",
+   "fieldtype": "Link",
+   "label": "Operation Type",
+   "options": "Operation Type"
+  },
+  {
+   "fieldname": "lov_item",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "<br><br><br><br><br><br>",
+   "fieldname": "html_wtcz",
+   "fieldtype": "HTML"
+  },
+  {
+   "depends_on": "eval: doc.job_card_operation_name == 'NKBTPC'",
+   "fieldname": "bags",
+   "fieldtype": "Table",
+   "label": "Bags",
+   "options": "Operation Job Card Bags"
+  },
+  {
+   "fieldname": "production_item",
+   "fieldtype": "Link",
+   "label": "Production Item",
+   "options": "Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "work_order",
+   "fieldtype": "Link",
+   "label": "Work Order",
+   "options": "Work Order",
+   "read_only": 1
+  },
+  {
+   "default": "A",
+   "depends_on": "eval:doc.job_card_operation_name =='TRON'",
+   "fieldname": "funnel",
+   "fieldtype": "Data",
+   "label": "Funnel",
+   "length": 1,
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.job_card_operation_name =='TRON'",
+   "fieldname": "mortar",
+   "fieldtype": "Select",
+   "label": "C\u1ed1i ch\u00ednh/ph\u1ee5",
+   "options": "MORTAR_MAIN\nMORTAR_SEC"
+  },
+  {
+   "fieldname": "column_break_ahok",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "completed_qty",
+   "fieldtype": "Float",
+   "label": "Completed Qty"
+  },
+  {
+   "depends_on": "eval:doc.job_card_operation_name =='TRON'",
+   "fieldname": "remaining_mixed_qty",
+   "fieldtype": "Float",
+   "label": "S\u1ed1 m\u1ebb c\u00f2n l\u1ea1i trong ng\u00e0y",
+   "precision": "1",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.job_card_operation_name =='TRON'",
+   "fieldname": "qty_finished",
+   "fieldtype": "Float",
+   "label": "Qty Finished",
+   "read_only": 1
+  },
+  {
+   "fieldname": "opeartion_job_card_previous_step",
+   "fieldtype": "Link",
+   "label": "Opeartion Job Card Previous Step",
+   "no_copy": 1,
+   "options": "Operation Job Card",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ekim",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_asjq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.job_card_operation_name == 'NKCUONMANG'",
+   "fieldname": "semi_items",
+   "fieldtype": "Table",
+   "label": "Semi Items",
+   "options": "Operation Job Card Semi Items"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "hidden": 1,
+   "link_doctype": "Stock Entry",
+   "link_fieldname": "operation_job_card"
+  }
+ ],
+ "make_attachments_public": 1,
+ "modified": "2025-07-16 15:20:31.724521",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Operation Job Card",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

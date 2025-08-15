@@ -1,0 +1,93 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2024-11-20 12:52:32.027601",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "Leepak",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  },
+  {
+   "default": "156 - Kho - H\u00e0ng h\u00f3a - S",
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Kho",
+   "mandatory": 0,
+   "options": "Warehouse",
+   "wildcard_filter": 0
+  },
+  {
+   "default": "",
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "\u0110\u1ed1i t\u00e1c",
+   "mandatory": 0,
+   "options": "Supplier",
+   "wildcard_filter": 0
+  },
+  {
+   "default": "T\u00e0i S\u1ea3n C\u1ed1 \u0111\u1ecbnh",
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Nh\u00f3m s\u1ea3n ph\u1ea9m",
+   "mandatory": 0,
+   "options": "Item Group",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-11-20 12:52:32.027601",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "INV02 - B\u1ea3ng k\u00ea phi\u1ebfu xu\u1ea5t kho b\u00e1n h\u00e0ng",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \n    tdni.warehouse AS 'M\u00e3 kho',\n    tw.warehouse_name AS 'T\u00ean kho',\n    'Xu\u1ea5t b\u00e1n h\u00e0ng' AS 'Lo\u1ea1i xu\u1ea5t kho',\n    tdn.posting_date as 'Ng\u00e0y',\n    tsle.name AS 'S\u1ed1 CT xu\u1ea5t kho',\n    tso.name AS 'S\u1ed1 \u0111\u01a1n h\u00e0ng/h\u00f3a \u0111\u01a1n',\n    tdn.status AS 'Tr\u1ea1ng th\u00e1i',\n    tdni.description AS 'Di\u1ec5n gi\u1ea3i',\n    tdni.item_code AS 'M\u00e3 s\u1ea3n ph\u1ea3m',\n    tdni.item_name AS 'T\u00ean s\u1ea3n ph\u1ea9m',\n    tdni.stock_uom AS '\u0110VT',\n    tdni.price_list_rate AS 'Gi\u00e1',\n    tdni.qty AS 'SL',\n    tdni.price_list_rate * tdni.qty AS 'Th\u00e0nh ti\u1ec1n'\nFROM `tabDelivery Note Item` tdni \nLEFT JOIN `tabDelivery Note` tdn ON tdn.name = tdni.parent \nLEFT JOIN `tabWarehouse` tw ON tw.name = tdni.warehouse \nLEFT JOIN `tabStock Ledger Entry` tsle ON tsle.warehouse  = tdni.warehouse \nLEFT JOIN `tabSales Order` tso ON tso.name = tdni.against_sales_order\nLEFT JOIN `tabCustomer` tc ON tc.name = tdn.customer\nLEFT JOIN `tabItem Group` tig ON tig.name = tdni.item_group\nWHERE tdn.company = %(company)s\n    AND tdni.warehouse = %(warehouse)s\n    AND tdn.customer = %(customer)s\n    AND tdn.posting_date BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\n    AND tdni.item_group = %(item_group)s",
+ "ref_doctype": "Delivery Note",
+ "report_name": "INV02 - B\u1ea3ng k\u00ea phi\u1ebfu xu\u1ea5t kho b\u00e1n h\u00e0ng",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Stock Manager"
+  },
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "K\u1ebf to\u00e1n"
+  },
+  {
+   "role": "Delivery User"
+  },
+  {
+   "role": "Delivery Manager"
+  }
+ ]
+}

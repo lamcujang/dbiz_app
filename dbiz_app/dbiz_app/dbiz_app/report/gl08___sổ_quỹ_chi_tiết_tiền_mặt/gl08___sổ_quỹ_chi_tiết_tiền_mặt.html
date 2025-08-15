@@ -1,0 +1,151 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 11px !important;
+    }
+
+    .print-format th,
+    .print-format td {
+        vertical-align: middle !important;
+    }
+
+    .print-format th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    .print-format table,
+    .print-format table th,
+    .print-format table td {
+        border: 1px solid #222426 !important;
+    }
+
+    .print-format .font-weight-bold {
+        font-weight: bold !important;
+    }
+</style>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-8 text-left">
+            <div>
+                Tên công ty: {%= filters.company_name %}
+            </div>
+            <div>
+                Địa chỉ đơn vị: {%= filters.company_address || '' %}
+            </div>
+            <div>
+                Mã số thuế: {%= filters.tax_id %}
+            </div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <div>
+                Mẫu số S07-DN
+            </div>
+            <div>
+                (Ban hành theo Thông tư số: 200/2014/TT-BTC Ngày 22/12/2014 của BTC)
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h2 class="font-weight-bold" style="font-size: 18px;">SỔ KẾ TOÁN CHI TIẾT QUỸ TIỀN MẶT</h2>
+
+            <div>
+                Từ ngày {%= frappe.datetime.str_to_user(filters.start_date).split('-').join('/') %}
+                đến {%= frappe.datetime.str_to_user(filters.end_date).split('-').join('/') %}
+            </div>
+
+            <div class="font-weight-bold ">
+                {% if (filters.account) { %}
+                {%= __("Tài khoản: " + filters.account_number + " - " + filters.account_name) %}
+                {% } else { %}
+                {%= __("Tài khoản: Tất cả") %}
+                {% } %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="font-weight-bold text-right">
+                {%= __(data[0]['label']) %}: &nbsp;
+                {% if(data[0]['opening_qty']) { %}
+                {%= format_number_js(data[0]['opening_qty']) %}
+                {% } else { %}
+                {{ 0 }}
+                {% } %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered text-wrap">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Ngày ghi sổ</th>
+                        <th rowspan="2">Ngày chứng từ</th>
+                        <th colspan="2">Số hiệu chứng từ</t>
+                        <th rowspan="2">Diễn giải</th>
+                        <th rowspan="2">Đối tượng</th>
+                        <th rowspan="2">TK đối ứng</th>
+                        <th colspan="3">Diễn giải</th>
+                        <th rowspan="2">Ghi chú</th>
+                    </tr>
+                    <tr>
+                        <th>Thu</th>
+                        <th>Chi</th>
+                        <th>Nợ</th>
+                        <th>Có</th>
+                        <th>Tồn</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% let last = data.length - 1; %}
+                    {% for (let i = 0; i < last; i++) { %} <tr>
+                        <td class="text-center">{%= data[i]['creation_date'] %}</td>
+                        <td class="text-center">{%= data[i]['posting_date'] %}</td>
+                        <td>{%= data[i]['voucher_no_receive'] %}</td>
+                        <td>{%= data[i]['voucher_no_pay'] %}</td>
+                        <td>{%= data[i]['remarks'] %}</td>
+                        <td>{%= data[i]['party'] %}</td>
+                        <td class="text-center">{%= data[i]['contra_account'] %}</td>
+                        <td class="text-right">{%= format_number_js(data[i]['debit']) %}</td>
+                        <td class="text-right">{%= format_number_js(data[i]['credit']) %}</td>
+                        <td class="text-right">{%= format_number_js(data[i]['in_stock']) %}</td>
+                        <td>{%= data[i]['comments'] %}</td>
+                        </tr>
+                        {% } %}
+
+                        <tr class="font-weight-bold text-right">
+                            <td colspan="7">Tổng</td>
+                            <td>{%= format_number_js(data[last]['debit']) %}</td>
+                            <td>{%= format_number_js(data[last]['credit']) %}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 text-center">
+            <div><strong>Người ghi sổ</strong></div>
+            <div><i>(Ký, họ tên)</i></div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <div><strong>Kế toán trưởng</strong></div>
+            <div><i>(Ký, họ tên)</i></div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <div><strong>Giám đốc</strong></div>
+            <div><i>(Ký, họ tên, đóng dấu)</i></div>
+        </div>
+    </div>
+</div>

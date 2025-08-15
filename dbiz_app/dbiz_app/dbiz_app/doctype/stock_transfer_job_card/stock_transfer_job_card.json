@@ -1,0 +1,175 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:STO-TRF-{employee}-{####}",
+ "creation": "2024-12-28 10:41:48.063536",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "custom_btn",
+  "section_break_ggas",
+  "transfer_type",
+  "job_card",
+  "employee",
+  "source_warehouse",
+  "target_warehouse",
+  "stock_transfer_job_card_item",
+  "column_break_ihvu",
+  "items",
+  "html_gjsv",
+  "section_break_spgm",
+  "transfer_time",
+  "company",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_spgm",
+   "fieldtype": "Section Break",
+   "label": "More Information"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Stock Transfer Job Card",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Stock Transfer Job Card",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "target_warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Target Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Stock Transfer Job Card Items",
+   "reqd": 1
+  },
+  {
+   "fieldname": "custom_btn",
+   "fieldtype": "HTML",
+   "is_virtual": 1,
+   "label": "Custom Button"
+  },
+  {
+   "fieldname": "section_break_ggas",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "transfer_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Transfer Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "transfer_type",
+   "fieldtype": "Link",
+   "label": "Transfer Type",
+   "options": "Stock Transfer Job Card Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "stock_transfer_job_card_item",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_ihvu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "<br><br><br><br><br><br>",
+   "fieldname": "html_gjsv",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "source_warehouse",
+   "fieldtype": "Link",
+   "label": "Source Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval: ![\"CKCUONMANG\", \"CKXEBTP\", \"CHUYENKHOTHANHPHAM\"].includes(doc.transfer_type);",
+   "fieldname": "job_card",
+   "fieldtype": "Link",
+   "label": "Job Card",
+   "options": "Job Card"
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-02-05 09:47:18.863458",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Stock Transfer Job Card",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

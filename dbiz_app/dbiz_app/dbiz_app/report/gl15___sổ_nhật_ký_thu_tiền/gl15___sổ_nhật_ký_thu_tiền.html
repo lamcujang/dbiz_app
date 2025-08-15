@@ -1,0 +1,136 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 12px !important;
+        line-height: 1.8 !important;
+    }
+
+    .print-format table td,
+    .print-format table th {
+        vertical-align: middle !important;
+    }
+
+    .print-format table th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    /* Fit table cell width to the content */
+    .print-format table td.fit,
+    .print-format table th.fit {
+        white-space: nowrap !important;
+        width: 1% !important;
+    }
+
+    .print-format table,
+    .print-format table th,
+    .print-format table td {
+        border: 1px solid #222426 !important;
+    }
+
+    .font-weight-bold {
+        font-weight: bold !important;
+    }
+
+    /* Styles specific to printing and PDF generation */
+    @media print {
+        @page {
+            size: A4 portrait !important;
+        }
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left Section -->
+        <div class="col-xs-8 text-left">
+            <div>
+                <strong>Tên đơn vị:</strong> Công ty {%= filters.company_name %}
+            </div>
+
+            <div>
+                <strong>Địa chỉ đơn vị:</strong> {%= filters.company_address || '' %}
+            </div>
+
+            <div><strong>Mã số thuế:</strong> {%= filters.tax_id %}</div>
+        </div>
+        <!-- Right Section -->
+        <div class="col-xs-4">
+            <div class="text-center">
+                <div><strong>Mẫu số S03a1-DN</strong></div>
+                <div>(Ban hành kèm theo Thông tư số 200/2014/TT-BTC ngày 22/12/2014 của Bộ Tài chính)</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 class="text-center">NHẬT KÝ THU TIỀN</h4>
+            <div class="text-center">
+                Từ ngày {%= frappe.datetime.str_to_user(filters.start_date).replace(/-/g, "/") %}
+                đến {%= frappe.datetime.str_to_user(filters.end_date).replace(/-/g, "/") %}
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered text-wrap">
+        <thead>
+            <tr>
+                <th>Ngày tháng</th>
+                <th>Số hiệu</th>
+                <th>Khách hàng</th>
+                <th>Diễn giải</th>
+                <th>TK nợ</th>
+                <th>TK có</th>
+                <th>Số phát sinh</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% let totalAmount = 0; %}
+            {% for (let i = 0; i < data.length - 1; i++) { %} <tr>
+                <td>{{ data[i]["ngay_ghi_so"] }}</td>
+                <td>{{ data[i]["so_chung_tu"] }}</td>
+                <td>{{ data[i]["ten_kh"] }}</td>
+                <td>{{ data[i]["dien_giai"] }}</td>
+                <td>{{ data[i]["tk"] }}</td>
+                <td>{{ data[i]["doi_ung"] }}</td>
+                <td class="text-right">
+                    {{ parseFloat(data[i]["phat_sinh"]).toLocaleString('vi-VN') }}
+                    {% totalAmount += parseFloat(data[i]["phat_sinh"]) || 0; %}
+                </td>
+                </tr>
+                {% } %}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="6" class="font-weight-bold text-right">Tổng cộng:</td>
+                <td class="font-weight-bold text-right">{{ totalAmount.toLocaleString('vi-VN') }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="row">
+        <div class="col-xs-offset-8 col-xs-4 text-center">
+            Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new Date().getFullYear() }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 text-center">
+            <div><strong>Người ghi sổ</strong></div>
+            <div><i>(Ký, họ tên)</i></div>
+        </div>
+        <div class="col-xs-4 text-center">
+
+            <div><strong>Kế toán trưởng</strong></div>
+            <div><i>(Ký, họ tên)</i></div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <div><strong>Giám đốc</strong></div>
+            <div><i>(Ký, họ tên, đóng dấu)</i></div>
+        </div>
+    </div>
+</div>

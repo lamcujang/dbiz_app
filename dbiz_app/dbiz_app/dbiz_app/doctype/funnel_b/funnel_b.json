@@ -1,0 +1,166 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-04-11 16:02:02.736694",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "ratio",
+  "bag_qty",
+  "required_qty",
+  "column_break_ixdg",
+  "ratio_main",
+  "bag_qty_main",
+  "kg_qty_main",
+  "column_break_nysw",
+  "ratio_sec",
+  "bag_qty_sec",
+  "kg_qty_sec",
+  "section_break_boet",
+  "item_name",
+  "uom",
+  "conversion_factor",
+  "column_break_nugq",
+  "item_group",
+  "stock_uom"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ratio",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "T\u1ef7 l\u1ec7 %",
+   "precision": "2"
+  },
+  {
+   "fieldname": "bag_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Bao",
+   "precision": "1",
+   "read_only": 1
+  },
+  {
+   "fieldname": "required_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Kg",
+   "precision": "1",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ixdg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ratio_main",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "T\u1ef7 l\u1ec7 tr\u1ed9n c\u1ed1i ch\u00ednh",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "bag_qty_main",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Bao",
+   "precision": "1"
+  },
+  {
+   "fieldname": "kg_qty_main",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Kg",
+   "precision": "1"
+  },
+  {
+   "fieldname": "column_break_nysw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bag_qty_sec",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Bao",
+   "precision": "1"
+  },
+  {
+   "fieldname": "kg_qty_sec",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Kg",
+   "precision": "1"
+  },
+  {
+   "fieldname": "section_break_boet",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name"
+  },
+  {
+   "fetch_from": "item_code.sencondary_uom",
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "Uom",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "conversion_factor",
+   "fieldtype": "Float",
+   "label": "Conversion Factor",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_nugq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "item_code.item_group",
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Item Group",
+   "options": "Item Group"
+  },
+  {
+   "fetch_from": "item_code.stock_uom",
+   "fieldname": "stock_uom",
+   "fieldtype": "Link",
+   "label": "Stock UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "ratio_sec",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "T\u1ef7 l\u1ec7 tr\u1ed9n c\u1ed1i ph\u1ee5",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-11 16:15:52.136065",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Funnel B",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

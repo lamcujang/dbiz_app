@@ -1,0 +1,13 @@
+{
+ "creation": "2024-10-22 15:59:41.765318",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart Source",
+ "idx": 0,
+ "modified": "2024-10-22 15:59:41.765318",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "test",
+ "owner": "Administrator",
+ "source_name": "test",
+ "timeseries": 0
+}

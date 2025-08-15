@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .print-format {
+            padding: 4mm;
+            font-size: 8.0pt !important;
+        }
+
+        .print-format td {
+            vertical-align: middle !important;
+        }
+
+        .print-format th {
+            vertical-align: middle !important;
+        }
+
+        table {
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        tr,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+
+        th {
+            font-weight: bold !important;
+            color: black !important;
+            text-align: center !important;
+            font-size: 10px;
+            vertical-align: middle !important;
+        }
+
+        .title {
+            margin-top: 30px;
+            margin-bottom: 0px;
+            font-weight: bold;
+        }
+
+        .signature {
+            margin-bottom: 30px;
+        }
+
+        .number,
+        .name {
+            text-align: left;
+        }
+
+        .number {
+            width: 10%;
+        }
+
+        .name {
+            width: 30%;
+        }
+
+        .so {
+            text-align: right;
+            width: 10%;
+        }
+
+        .header-so {
+            width: 20%;
+        }
+
+        .print-format .row:not(.section-break) {
+            line-height: 1.6;
+            margin-top: 0px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-xs-8">
+            <strong>Tên công ty: {%= filters.company_name %}</strong>
+        </div>
+        <div class="col-xs-4 text-center">
+            <strong>Mẫu số S06-DN</strong>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8">
+            <strong>Địa chỉ đơn vị: {{ filters.company_address || '' }}</strong> <br>
+            <strong>Mã số thuế: {{ filters.tax_id }}</strong>
+        </div>
+        <div class="col-xs-4 text-center">
+            (Ban hành theo Thông tư số: 200/2014/TT-BTC <br> Ngày 22/12/2014 của BTC)
+        </div>
+    </div>
+    <h2 class="text-center title">{%= __("BẢNG CÂN ĐỐI SỐ PHÁT SINH")
+        %}</h2>
+    <p class="text-center">
+        Từ ngày {%= new Date(filters.start_date).toLocaleDateString('vi-VN') %} đến {%= new
+        Date(filters.end_date).toLocaleDateString('vi-VN') %}
+    </p>
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th class="number">A</th>
+                <th class="name">B</th>
+                <th class="so">1</th>
+                <th class="so">2</th>
+                <th class="so">3</th>
+                <th class="so">4</th>
+                <th class="so">5</th>
+                <th class="so">6</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th rowspan="2" class="number">Số hiệu Tài khoản</th>
+                <th rowspan="2" class="name">Tên Tài Khoản Kế toán</th>
+                <th colspan="2" class="header-so">Số dư đầu tháng</th>
+                <th colspan="2" class="header-so">Số phát sinh trong tháng</th>
+                <th colspan="2" class="header-so">Số dư cuối tháng</th>
+            </tr>
+            <tr>
+                <th class="so">Nợ</th>
+                <th class="so">Có</th>
+                <th class="so">Nợ</th>
+                <th class="so">Có</th>
+                <th class="so">Nợ</th>
+                <th class="so">Có</th>
+            </tr>
+            {% for(var i=0, l=data.length; i<l-1; i++) { %} <tr>
+                <td style="text-align: right;">{%=data[i]['ACCOUNT_NUMBER'] %}</td>
+                <td>{%=data[i]['ACCOUNT_NAME'] %}</td>
+                <td style="text-align: right;">
+                    {%= data[i]['DAU_KY_NO'] != null ? Math.round(data[i]['DAU_KY_NO']).toLocaleString('vi-VN') : 0 %}
+                </td>
+                <td style="text-align: right;">
+                    {%= data[i]['DAU_KY_CO'] != null ? Math.round(data[i]['DAU_KY_CO']).toLocaleString('vi-VN') : 0 %}
+                </td>
+                <td style="text-align: right;">
+                    {%= data[i]['PHAT_SINH_NO'] != null ? Math.round(data[i]['PHAT_SINH_NO']).toLocaleString('vi-VN') :
+                    0 %}
+                </td>
+                <td style="text-align: right;">
+                    {%= data[i]['PHAT_SINH_CO'] != null ? Math.round(data[i]['PHAT_SINH_CO']).toLocaleString('vi-VN') :
+                    0 %}
+                </td>
+                <td style="text-align: right;">
+                    {%= data[i]['CUOI_KY_NO'] != null ? Math.round(data[i]['CUOI_KY_NO']).toLocaleString('vi-VN') : 0 %}
+                </td>
+                <td style="text-align: right;">
+                    {%= data[i]['CUOI_KY_CO'] != null ? Math.round(data[i]['CUOI_KY_CO']).toLocaleString('vi-VN') : 0 %}
+                </td>
+                </tr>
+                {% } %}
+                <tr>
+                    <td colspan="2" style="text-align: right;"><strong>Tổng cộng</strong></td>
+                    <td style="text-align: right;">
+                        <strong>{%= data[data.length-1]['DAU_KY_NO'] != null ?
+                            Math.round(data[data.length-1]['DAU_KY_NO']).toLocaleString('vi-VN') : 0 %}</strong>
+                    </td>
+                    <td style="text-align: right;">
+                        <strong>{%= data[data.length-1]['DAU_KY_CO'] != null ?
+                            Math.round(data[data.length-1]['DAU_KY_CO']).toLocaleString('vi-VN') : 0 %}</strong>
+                    </td>
+                    <td style="text-align: right;">
+                        <strong>{%= data[data.length-1]['PHAT_SINH_NO'] != null ?
+                            Math.round(data[data.length-1]['PHAT_SINH_NO']).toLocaleString('vi-VN') : 0 %}</strong>
+                    </td>
+                    <td style="text-align: right;">
+                        <strong>{%= data[data.length-1]['PHAT_SINH_CO'] != null ?
+                            Math.round(data[data.length-1]['PHAT_SINH_CO']).toLocaleString('vi-VN') : 0 %}</strong>
+                    </td>
+                    <td style="text-align: right;">
+                        <strong>{%= data[data.length-1]['CUOI_KY_NO'] != null ?
+                            Math.round(data[data.length-1]['CUOI_KY_NO']).toLocaleString('vi-VN') : 0 %}</strong>
+                    </td>
+                    <td style="text-align: right;">
+                        <strong>{%= data[data.length-1]['CUOI_KY_CO'] != null ?
+                            Math.round(data[data.length-1]['CUOI_KY_CO']).toLocaleString('vi-VN') : 0 %}</strong>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+    <div class="row" style="margin-top:30px">
+        <div class="col-xs-offset-8 col-xs-4 text-right">
+            <div class="text-center">
+                <p>
+                    Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+                    Date().getFullYear() }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row signature">
+        <div class="col-xs-4 text-right">
+            <div class="text-center">
+                <p>
+                    <strong>Người lập phiếu</strong>
+                </p>
+                <p>
+                    <i>(Ký, họ tên)</i>
+                </p>
+            </div>
+        </div>
+        <div class="col-xs-4 text-right">
+            <div class="text-center">
+                <p>
+                    <strong>Kế toán trưởng</strong>
+                </p>
+                <p>
+                    <i>(Ký, họ tên)</i>
+                </p>
+            </div>
+        </div>
+        <div class="col-xs-4 text-right">
+            <div class="text-center">
+                <p>
+                    <strong>Giám đốc</strong>
+                </p>
+                <p>
+                    <i>(Ký, họ tên, đóng dấu)</i>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

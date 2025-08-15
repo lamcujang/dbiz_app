@@ -1,0 +1,213 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 11px !important;
+    }
+
+    .print-format th,
+    .print-format td {
+        vertical-align: middle !important;
+    }
+
+    .print-format th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    .print-format table,
+    .print-format table th,
+    .print-format table td {
+        border: 2px solid #222426 !important;
+    }
+
+    .print-format .font-weight-bold {
+        font-weight: bold !important;
+    }
+
+    .flex {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .flex-justify-between {
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -moz-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+
+    .data-label {
+        flex: 1;
+    }
+
+    .data-value {
+        flex: 0;
+        min-width: 100px;
+        padding-left: 10px;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-8 text-left">
+            <div>
+                Tên công ty: {%= filters.company_name %}
+            </div>
+            <div>
+                Địa chỉ đơn vị: {%= filters.company_address || '' %}
+            </div>
+            <div>
+                Mã số thuế: {%= filters.tax_id %}
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h2 class="font-weight-bold" style="font-size: 18px;">BẢNG KÊ HÓA ĐƠN DỊCH VỤ MUA VÀO</h2>
+
+            <div>
+                Từ ngày {%= frappe.datetime.str_to_user(filters.start_date).split('-').join('/') %}
+                đến {%= frappe.datetime.str_to_user(filters.end_date).split('-').join('/') %}
+            </div>
+
+            <div class="font-weight-bold text-right">
+                {% if (filters.currency_name) { %}
+                {%= __("Đơn vị tiền: " + filters.currency_name) %}
+                {% } else { %}
+                {%= __("Đơn vị tiền: Tất cả") %}
+                {% } %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered">
+                <tr class="static">
+                    <th rowspan="2">STT</th>
+                    <th colspan="2">Hóa đơn, chứng từ, biên lai nộp thuế</th>
+                    <th rowspan="2">Tên người bán</th>
+                    <th rowspan="2">Mã số thuế người bán</th>
+                    <th rowspan="2">Giá trị HHDV mua vào chưa có thuế</th>
+                    <th rowspan="2">Thuế GTGT đủ điều kiện khấu trừ thuế</th>
+                    <th class="fit" rowspan="2">Đơn vị</th>
+                    <th rowspan="2">Số chứng từ</th>
+                    <th class="fit" rowspan="2">Ghi chú</th>
+                </tr>
+                <tr class="static">
+                    <th>Số hóa đơn</th>
+                    <th>Ngày tạo hóa đơn</th>
+                </tr>
+                <thead>
+                    <tr class="repeat">
+                        <th>(1)</th>
+                        <th>(2)</th>
+                        <th>(3)</th2>
+                        <th>(4)</th>
+                        <th>(5)</th>
+                        <th>(6)</th>
+                        <th>(7)</th>
+                        <th>(8)</th0>
+                        <th>(9)</th>
+                        <th>(10)</th2>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% var current_tax_type = null; %}
+                    <!-- Index for rows under each tax_type -->
+                    {% var index = 1; %}
+                    {% for (var i = 0, l = data.length; i < l - 3; i++) { %} {% if (current_tax_type
+                        !==data[i]['tax_type']) { %} <!-- Display tax_type as new row -->
+                        <tr>
+                            <td colspan="10" class="text-left"><strong>Thuế: {%= data[i]['tax_type'] %}</strong></td>
+                        </tr>
+                        {% current_tax_type = data[i]['tax_type'] %}
+                        {% index = 1; %} <!-- Reset index when tax_type changes -->
+                        {% } %}
+
+                        <!-- Display the row data under the current tax_type -->
+                        <tr>
+                            {% if (data[i]['tax_id'] !== 'Tổng:') { %}
+                            <td class="text-center">{%= index %}</td>
+                            <td>{%= data[i]['invoice_no'] %}</td>
+                            <td class="text-center">{%= data[i]['posting_date'] %}</td>
+                            <td>{%= data[i]['supplier_name'] %}</td>
+                            <td class="text-center">{%= data[i]['tax_id'] %}</td>
+                            <td class="text-right">{%= format_number_js(data[i]['total']) %}</td>
+                            <td class="text-right">{%=
+                                format_number_js(data[i]['total_taxes_and_charges']) %}
+                            </td>
+                            <td>{%= data[i]['unit'] %}</td>
+                            <td>{%= data[i]['name'] %}</td>
+                            <td>{%= data[i]['remarks'] %}</td>
+                            {% } else { %}
+                            <td colspan="5" class="font-weight-bold text-right">{%= data[i]['tax_id'] %}</td>
+                            <td class="font-weight-bold text-right">{%= format_number_js(data[i]['total'])
+                                %}
+                            </td>
+                            <td class="font-weight-bold text-right">{%=
+                                format_number_js(data[i]['total_taxes_and_charges']) %}
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            {% } %}
+                        </tr>
+                        <!-- Increment the tax_type-specific index -->
+                        {% index++; %}
+                        {% } %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="text-right font-weight-bold">
+                <div class="flex flex-justify-between">
+                    <span class="data-label">Tổng doanh thu hàng hóa, dịch vụ mua vào:</span>
+                    <span class="data-value">
+                        {%= format_number_js(data[i]['total']) %}
+                    </span>
+                </div>
+
+                <div class="flex flex-justify-between">
+                    <span class="data-label">Tổng thuế GTGT của hàng hóa, dịch vụ mua vào:</span>
+                    <span class="data-value">
+                        {%= format_number_js(data[i+1]['total']) %}
+                    </span>
+                </div>
+
+                <div class="flex flex-justify-between">
+                    <span class="data-label">Tổng doanh thu hàng hóa, dịch vụ mua vào chịu thuế GTGT:</span>
+                    <span class="data-value">
+                        {%= format_number_js(data[i+2]['total']) %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-offset-8 col-xs-4 text-center">
+            {% const day = new Date().getDate() %}
+            {% const month = new Date().getMonth() + 1 %}
+            {% const year = new Date().getFullYear() %}
+            Ngày {%= day %} tháng {%= month %} năm {%= year %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-offset-8 col-xs-4 text-center">
+            <strong>Tổng giám đốc</strong>
+        </div>
+    </div>
+</div>

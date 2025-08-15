@@ -1,0 +1,612 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-09-25 11:52:10.229689",
+ "default_view": "List",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "engine": "InnoDB",
+ "field_order": [
+  "code",
+  "name1",
+  "\u0111\u1ecbnh_l\u01b0\u1ee3ng_column",
+  "quantitative_buckle_strap",
+  "quantitative_lock_nuts",
+  "section_break_qafa",
+  "details",
+  "formula_tab",
+  "item_material",
+  "item_roughness",
+  "film_color",
+  "item_smell",
+  "item_extend_tp",
+  "raw_material_density",
+  "extend_tp",
+  "column_break_vbvp",
+  "length_block_off_mm",
+  "lenght_bag_btp_mm",
+  "lenght_cut",
+  "lenght_bag_body",
+  "witdh_use_mm",
+  "lenght_production_item",
+  "tr\u1ecdng_l\u01b0\u1ee3ng_gr_column",
+  "core_tube",
+  "roll_includes_core",
+  "carton_includes_core",
+  "d\u00e0y_m\u00e0ng_mic_column",
+  "item_height",
+  "item_height_real",
+  "quai_t\u00fai_column",
+  "percent_off_applies",
+  "percent_off_max",
+  "weight_off_gr",
+  "section_break_rvmp",
+  "storage_qty_carton",
+  "column_break_rdhl",
+  "storage_qty_kg",
+  "column_break_gatr",
+  "volume_carton_need",
+  "column_break_gyap",
+  "volume_kg_need",
+  "section_break_ryxv",
+  "tl_th\u00e0nh_ph\u1ea9m_column",
+  "bag_weight_after_threading_wire",
+  "bag_weight_after_threading_wire_real",
+  "column_break_ofcm",
+  "weight_btp_gr",
+  "quantitative_gr_per_m",
+  "knife_handle_specifications",
+  "nguy\u00ean_li\u1ec7u_ch\u00ednh_column",
+  "raw_materials_need",
+  "percent_scrap_mixed",
+  "percent_scrap_blow",
+  "percent_scrap_cut",
+  "total_percent_scrap",
+  "column_break_efrp",
+  "qty",
+  "volume_blow_need",
+  "nguy\u00ean_li\u1ec7u_c\u1ea7n_column",
+  "raw_materials_need_buckle_strap",
+  "raw_materials_need_bag_body",
+  "raw_materials_need_lock_nuts",
+  "new_section",
+  "solder_paste_compensation",
+  "miserable_blow",
+  "d\u00e2y_lu\u1ed3n_column",
+  "weight_btp_gr_wire",
+  "quantitative_gr_per_m_wire",
+  "th\u00e2n_t\u00fai_column",
+  "weight_btp_gr_bag_body",
+  "quantitative_gr_per_m_bag_body",
+  "d\u00e2y_kh\u00f3a_column",
+  "order_body_bag",
+  "order_body_bag_real",
+  "bag_body_film_weight",
+  "tl_btp1_t\u00fai_gr_column",
+  "buckle_strap",
+  "bag_body",
+  "lock_nut_weight_gr",
+  "d\u00e2y_lu\u1ed3n_section",
+  "gr_m\u00e9t_l\u1edbp_d\u00e2y_lu\u1ed3n_column",
+  "wire_gr_per_m_class_order",
+  "wire_gr_per_m_class_real",
+  "column_break_jige",
+  "core_tube_wire",
+  "line_number",
+  "column_break_dgjd",
+  "te_bien",
+  "wire_lenght",
+  "column_break_bpda",
+  "wire_gr_per_m_class_film"
+ ],
+ "fields": [
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Code",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_qafa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "details",
+   "fieldtype": "Table",
+   "label": "Details",
+   "options": "Bag Type Details"
+  },
+  {
+   "fieldname": "formula_tab",
+   "fieldtype": "Tab Break",
+   "label": "Formula"
+  },
+  {
+   "fieldname": "item_material",
+   "fieldtype": "Code",
+   "label": "Ch\u1ea5t li\u1ec7u",
+   "max_height": "100px"
+  },
+  {
+   "fieldname": "item_roughness",
+   "fieldtype": "Code",
+   "label": "Nh\u00e1m",
+   "max_height": "100px"
+  },
+  {
+   "fieldname": "film_color",
+   "fieldtype": "Code",
+   "label": "M\u00e0u t\u00fai",
+   "max_height": "100px"
+  },
+  {
+   "fieldname": "item_smell",
+   "fieldtype": "Code",
+   "label": "M\u00f9i",
+   "max_height": "100px"
+  },
+  {
+   "fieldname": "item_extend_tp",
+   "fieldtype": "Code",
+   "label": "M\u1edf r\u1ed9ng TP(mm)"
+  },
+  {
+   "fieldname": "raw_material_density",
+   "fieldtype": "Code",
+   "label": "T\u1ec9 tr\u1ecdng nguy\u00ean li\u1ec7u"
+  },
+  {
+   "fieldname": "tr\u1ecdng_l\u01b0\u1ee3ng_gr_column",
+   "fieldtype": "Column Break",
+   "label": "Tr\u1ecdng l\u01b0\u1ee3ng (gr)"
+  },
+  {
+   "fieldname": "roll_includes_core",
+   "fieldtype": "Code",
+   "label": "Cu\u1ed9n (g\u1ed3m l\u00f5i)"
+  },
+  {
+   "fieldname": "carton_includes_core",
+   "fieldtype": "Code",
+   "label": "Th\u00f9ng (g\u1ed3m l\u00f5i)"
+  },
+  {
+   "fieldname": "d\u00e0y_m\u00e0ng_mic_column",
+   "fieldtype": "Column Break",
+   "label": "D\u00e0y m\u00e0ng (mic)"
+  },
+  {
+   "fieldname": "item_height",
+   "fieldtype": "Code",
+   "label": "\u0110\u1eb7t h\u00e0ng",
+   "max_height": "100px"
+  },
+  {
+   "fieldname": "item_height_real",
+   "fieldtype": "Code",
+   "label": "Th\u1ef1c t\u1ebf",
+   "max_height": "100px"
+  },
+  {
+   "fieldname": "quai_t\u00fai_column",
+   "fieldtype": "Column Break",
+   "label": "Quai t\u00fai"
+  },
+  {
+   "fieldname": "percent_off_applies",
+   "fieldtype": "Code",
+   "label": "% b\u1ecf (\u00e1p d\u1ee5ng)",
+   "max_height": "100px"
+  },
+  {
+   "fieldname": "percent_off_max",
+   "fieldtype": "Code",
+   "label": "% b\u1ecf (max)"
+  },
+  {
+   "fieldname": "weight_off_gr",
+   "fieldtype": "Code",
+   "label": "Tr\u1ecdng l\u01b0\u1ee3ng b\u1ecf (gr)"
+  },
+  {
+   "fieldname": "section_break_ryxv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tl_th\u00e0nh_ph\u1ea9m_column",
+   "fieldtype": "Column Break",
+   "label": "TL Th\u00e0nh ph\u1ea9m"
+  },
+  {
+   "fieldname": "bag_weight_after_threading_wire",
+   "fieldtype": "Code",
+   "label": "\u0110\u1eb7t h\u00e0ng (gr)"
+  },
+  {
+   "fieldname": "bag_weight_after_threading_wire_real",
+   "fieldtype": "Code",
+   "label": "Th\u1ef1c t\u1ebf"
+  },
+  {
+   "fieldname": "column_break_ofcm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "weight_btp_gr",
+   "fieldtype": "Code",
+   "label": "TL BTP (gr)"
+  },
+  {
+   "fieldname": "quantitative_gr_per_m",
+   "fieldtype": "Code",
+   "label": "\u0110\u1ecbnh l\u01b0\u1ee3ng (gr/m)"
+  },
+  {
+   "fieldname": "nguy\u00ean_li\u1ec7u_ch\u00ednh_column",
+   "fieldtype": "Column Break",
+   "label": "Nguy\u00ean li\u1ec7u ch\u00ednh"
+  },
+  {
+   "fieldname": "raw_materials_need",
+   "fieldtype": "Code",
+   "label": "Nguy\u00ean li\u1ec7u c\u1ea7n (kg)"
+  },
+  {
+   "fieldname": "percent_scrap_mixed",
+   "fieldtype": "Code",
+   "label": "Ph\u1ebf + hao h\u1ee5t (Tr\u1ed9n)",
+   "max_height": "50px"
+  },
+  {
+   "fieldname": "percent_scrap_blow",
+   "fieldtype": "Code",
+   "label": "Ph\u1ebf + hao h\u1ee5t (Th\u1ed5i)",
+   "max_height": "50px"
+  },
+  {
+   "fieldname": "percent_scrap_cut",
+   "fieldtype": "Code",
+   "label": "Ph\u1ebf + hao h\u1ee5t (C\u1eaft)",
+   "max_height": "50px"
+  },
+  {
+   "fieldname": "total_percent_scrap",
+   "fieldtype": "Code",
+   "label": "T\u1ed5ng % t\u1ec9 l\u1ec7 ph\u1ebf"
+  },
+  {
+   "fieldname": "column_break_efrp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Code",
+   "label": "T\u1ed5ng nguy\u00ean li\u1ec7u c\u1ea7n c\u1ea5p"
+  },
+  {
+   "fieldname": "volume_blow_need",
+   "fieldtype": "Code",
+   "label": "Kh\u1ed1i l\u01b0\u1ee3ng c\u1ea7n th\u1ed5i",
+   "max_height": "50px"
+  },
+  {
+   "fieldname": "knife_handle_specifications",
+   "fieldtype": "Code",
+   "label": "QC dao quai"
+  },
+  {
+   "fieldname": "core_tube",
+   "fieldtype": "Code",
+   "label": "\u1ed0ng l\u00f5i",
+   "max_height": "100px"
+  },
+  {
+   "fieldname": "new_section",
+   "fieldtype": "Section Break",
+   "label": "New"
+  },
+  {
+   "fieldname": "extend_tp",
+   "fieldtype": "Code",
+   "label": "R\u1ed9ng TP"
+  },
+  {
+   "fieldname": "length_block_off_mm",
+   "fieldtype": "Code",
+   "label": "D\u00e0i ph\u1ea7n block b\u1ecf (mm)"
+  },
+  {
+   "fieldname": "lenght_bag_btp_mm",
+   "fieldtype": "Code",
+   "label": "D\u00e0i t\u00fai BTP(mm)"
+  },
+  {
+   "fieldname": "lenght_bag_body",
+   "fieldtype": "Code",
+   "label": "D\u00e0i th\u00e2n t\u00fai"
+  },
+  {
+   "fieldname": "lenght_cut",
+   "fieldtype": "Code",
+   "label": "D\u00e0i c\u1eaft"
+  },
+  {
+   "fieldname": "witdh_use_mm",
+   "fieldtype": "Code",
+   "label": "R\u1ed9ng s\u1eed d\u1ee5ng(mm)"
+  },
+  {
+   "fieldname": "solder_paste_compensation",
+   "fieldtype": "Code",
+   "label": "B\u00f9 h\u00e0n d\u00e1n"
+  },
+  {
+   "fieldname": "miserable_blow",
+   "fieldtype": "Code",
+   "label": "Kh\u1ed5 th\u1ed5i"
+  },
+  {
+   "fieldname": "d\u00e2y_lu\u1ed3n_column",
+   "fieldtype": "Column Break",
+   "label": "D\u00e2y lu\u1ed3n"
+  },
+  {
+   "fieldname": "weight_btp_gr_wire",
+   "fieldtype": "Code",
+   "label": "TL BTP(gr)"
+  },
+  {
+   "fieldname": "quantitative_gr_per_m_wire",
+   "fieldtype": "Code",
+   "label": "\u0110\u1ecbnh l\u01b0\u1ee3ng (gr/m)"
+  },
+  {
+   "fieldname": "th\u00e2n_t\u00fai_column",
+   "fieldtype": "Column Break",
+   "label": "Th\u00e2n t\u00fai"
+  },
+  {
+   "fieldname": "weight_btp_gr_bag_body",
+   "fieldtype": "Code",
+   "label": "TL BTP(gr)"
+  },
+  {
+   "fieldname": "quantitative_gr_per_m_bag_body",
+   "fieldtype": "Code",
+   "label": "\u0110\u1ecbnh l\u01b0\u1ee3ng (gr/m)"
+  },
+  {
+   "fieldname": "lock_nut_weight_gr",
+   "fieldtype": "Code",
+   "label": "TL h\u1ea1t kh\u00f3a(gr)"
+  },
+  {
+   "fieldname": "order_body_bag",
+   "fieldtype": "Code",
+   "label": "\u0110\u1eb7t h\u00e0ng"
+  },
+  {
+   "fieldname": "order_body_bag_real",
+   "fieldtype": "Code",
+   "label": "Th\u1ef1c t\u1ebf"
+  },
+  {
+   "fieldname": "d\u00e2y_kh\u00f3a_column",
+   "fieldtype": "Column Break",
+   "label": "D\u00e2y kh\u00f3a"
+  },
+  {
+   "fieldname": "buckle_strap",
+   "fieldtype": "Code",
+   "label": "D\u00e2y kh\u00f3a"
+  },
+  {
+   "fieldname": "bag_body",
+   "fieldtype": "Code",
+   "label": "Th\u00e2n t\u00fai"
+  },
+  {
+   "fieldname": "bag_body_film_weight",
+   "fieldtype": "Code",
+   "label": "TL m\u00e0ng th\u00e2n t\u00fai (g/m)"
+  },
+  {
+   "fieldname": "column_break_vbvp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tl_btp1_t\u00fai_gr_column",
+   "fieldtype": "Column Break",
+   "label": "TL BTP/1 t\u00fai (gr)(ZIP)"
+  },
+  {
+   "fieldname": "\u0111\u1ecbnh_l\u01b0\u1ee3ng_column",
+   "fieldtype": "Column Break",
+   "label": "\u0110\u1ecbnh l\u01b0\u1ee3ng"
+  },
+  {
+   "fieldname": "quantitative_buckle_strap",
+   "fieldtype": "Float",
+   "label": "D\u00e2y kh\u00f3a"
+  },
+  {
+   "fieldname": "quantitative_lock_nuts",
+   "fieldtype": "Float",
+   "label": "H\u1ea1t kh\u00f3a"
+  },
+  {
+   "fieldname": "nguy\u00ean_li\u1ec7u_c\u1ea7n_column",
+   "fieldtype": "Column Break",
+   "label": "Nguy\u00ean li\u1ec7u c\u1ea7n"
+  },
+  {
+   "fieldname": "raw_materials_need_buckle_strap",
+   "fieldtype": "Code",
+   "label": "D\u00e2y kh\u00f3a (kg)"
+  },
+  {
+   "fieldname": "raw_materials_need_bag_body",
+   "fieldtype": "Code",
+   "label": "Th\u00e2n t\u00fai (Kg)"
+  },
+  {
+   "fieldname": "raw_materials_need_lock_nuts",
+   "fieldtype": "Code",
+   "label": "H\u1ea1t kh\u00f3a (Kg)"
+  },
+  {
+   "fieldname": "lenght_production_item",
+   "fieldtype": "Code",
+   "label": "D\u00e0i th\u00e0nh ph\u1ea9m(mm)"
+  },
+  {
+   "fieldname": "section_break_rvmp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "storage_qty_carton",
+   "fieldtype": "Code",
+   "label": "S\u1ed1 t\u1ed3n kho (Th\u00f9ng)"
+  },
+  {
+   "fieldname": "column_break_rdhl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "storage_qty_kg",
+   "fieldtype": "Code",
+   "label": "S\u1ed1 t\u1ed3n kho (Kg)"
+  },
+  {
+   "fieldname": "column_break_gatr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "volume_carton_need",
+   "fieldtype": "Code",
+   "label": "S\u1ed1 c\u1ea7n s\u1ea3n xu\u1ea5t (Th\u00f9ng)"
+  },
+  {
+   "fieldname": "column_break_gyap",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "volume_kg_need",
+   "fieldtype": "Code",
+   "label": "S\u1ed1 c\u1ea7n s\u1ea3n xu\u1ea5t (Kg)"
+  },
+  {
+   "fieldname": "d\u00e2y_lu\u1ed3n_section",
+   "fieldtype": "Section Break",
+   "label": "D\u00e2y lu\u1ed3n"
+  },
+  {
+   "fieldname": "gr_m\u00e9t_l\u1edbp_d\u00e2y_lu\u1ed3n_column",
+   "fieldtype": "Column Break",
+   "label": "Gr/ m\u00e9t/ l\u1edbp d\u00e2y lu\u1ed3n"
+  },
+  {
+   "fieldname": "wire_gr_per_m_class_order",
+   "fieldtype": "Code",
+   "label": "\u0110\u1eb7t h\u00e0ng (gr)"
+  },
+  {
+   "fieldname": "wire_gr_per_m_class_real",
+   "fieldtype": "Code",
+   "label": "Th\u1ef1c t\u1ebf (gr)"
+  },
+  {
+   "fieldname": "column_break_jige",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "core_tube_wire",
+   "fieldtype": "Code",
+   "label": "Tr\u1ecdng l\u01b0\u1ee3ng \u1ed1ng l\u00f5i (gr)"
+  },
+  {
+   "fieldname": "line_number",
+   "fieldtype": "Code",
+   "label": "S\u1ed1 line"
+  },
+  {
+   "fieldname": "column_break_dgjd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "te_bien",
+   "fieldtype": "Code",
+   "label": "T\u1ec1 bi\u00ean"
+  },
+  {
+   "fieldname": "wire_lenght",
+   "fieldtype": "Code",
+   "label": "Ph\u1ebf t\u1ec1 bi\u00ean"
+  },
+  {
+   "fieldname": "column_break_bpda",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "wire_gr_per_m_class_film",
+   "fieldtype": "Code",
+   "label": "Gr/ m\u00e9t/ l\u1edbp m\u00e0ng"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-04 17:21:46.102721",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Bag Type",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "code,name1",
+ "show_name_in_global_search": 1,
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "name1"
+}

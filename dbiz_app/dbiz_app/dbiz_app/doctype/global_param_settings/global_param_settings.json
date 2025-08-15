@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-21 11:11:19.572287",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "open_ai_key",
+  "column_break_lfza",
+  "url"
+ ],
+ "fields": [
+  {
+   "fieldname": "column_break_lfza",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "open_ai_key",
+   "fieldtype": "Small Text",
+   "label": "Open AI Key"
+  },
+  {
+   "fieldname": "url",
+   "fieldtype": "Data",
+   "label": "Url"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-05-27 10:49:07.673056",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Global Param Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

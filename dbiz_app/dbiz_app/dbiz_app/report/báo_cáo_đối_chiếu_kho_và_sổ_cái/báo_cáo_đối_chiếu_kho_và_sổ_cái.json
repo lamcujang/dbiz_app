@@ -1,0 +1,29 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-11-25 14:28:52.711594",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-11-25 14:28:52.711594",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "B\u00e1o c\u00e1o \u0111\u1ed1i chi\u1ebfu kho v\u00e0 s\u1ed5 c\u00e1i",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "GL Entry",
+ "report_name": "B\u00e1o c\u00e1o \u0111\u1ed1i chi\u1ebfu kho v\u00e0 s\u1ed5 c\u00e1i",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Gi\u00e1m \u0111\u1ed1c T\u00e0i ch\u00ednh"
+  }
+ ]
+}

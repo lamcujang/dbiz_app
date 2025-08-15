@@ -1,0 +1,230 @@
+<style>
+	.print-format {
+		padding: 4mm;
+		font-size: 8.0pt !important;
+	}
+
+	.print-format td {
+		vertical-align: middle !important;
+	}
+
+	.print-format th {
+		vertical-align: middle !important;
+	}
+
+	table {
+		margin-top: 20px;
+	}
+
+	table,
+	th,
+	tr,
+	td {
+		border: 2px solid black;
+		border-collapse: collapse;
+		font-size: 10px;
+	}
+
+	th {
+		font-weight: bold !important;
+		color: black !important;
+		text-align: center !important;
+		font-size: 10px;
+    	vertical-align: middle !important; 
+	}
+
+	.title {
+		margin-top:30px;
+		margin-bottom: 0px; 
+		font-weight: bold;
+	}
+
+	.signature {
+		margin-bottom: 30px; 
+	}
+</style>
+<h2 style="margin-top:0">{%= __("Tên công ty: " + filters.company) %}</h2>
+<h2 style="margin-top:0">{%= __("Địa chỉ đơn vị: " + filters.company_address || '') %}</h2>
+<h2 style="margin-top:0">{%= __("Mã số thuế: " + filters.tax_id) %}</h2>
+
+<h2 class="text-center title">{%= __("BIÊN BẢN KIỂM KÊ TÀI SẢN CỐ ĐỊNH")
+	%}</h2>
+<p class="text-center">
+	Ngày kiểm kê: {%= frappe.datetime.str_to_user(filters.end_date).split('-').join('/') %}
+</p>
+<p>
+	Thời điểm kiểm kê: .... giờ .... ngày ... tháng ... năm	<br>
+	Ban kiểm kê gồm:<br>
+	- Ông/Bà: ................................... chức vụ ................. Đại diện ................. Trưởng ban.<br>
+	- Ông/Bà: ........................ chức vụ .................... Đại diện .......... Ủy viên.<br>
+	- Ông/Bà: ...................... chức vụ .................... Đại diện ................. Ủy viên.<br>
+	Đã kiểm kê TSCĐ, kết quả như sau:
+</p>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th rowspan="2">
+				STT
+			</th>
+			<th rowspan="2">
+				Tên TSCĐ
+			</th>
+			<th rowspan="2">
+				Mã số
+			</th>
+			<th rowspan="2">
+				Nơi sử dụng
+			</th>
+			<th colspan="3">
+				Theo sổ kế toán
+			</th>
+			<th colspan="3">
+				Theo kiểm kê
+			</th>
+			<th colspan="3">
+				Chênh lệch
+			</th>
+			<th rowspan="2">
+				Ghi chú
+			</th>
+		</tr>
+		<tr>
+			<th>
+				SLg
+			</th>
+			<th>
+				Nguyên giá
+			</th>
+			<th>
+				Giá trị còn lại
+			</th>
+			<th>
+				SLg
+			</th>
+			<th>
+				Nguyên giá
+			</th>
+			<th>
+				Giá trị còn lại
+			</th>
+			<th>
+				SLg
+			</th>
+			<th>
+				Nguyên giá
+			</th>
+			<th>
+				Giá trị còn lại
+			</th>
+		</tr>
+		<tr>
+			<td>A</td>
+			<td>B</td>
+			<td>C</td>
+			<td>D</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>10</td>
+		</tr>
+	</thead>
+	<tr>
+		<td></td>
+	</tr>
+	<tbody>
+		{% let last = data.length - 1; %}
+		{% for(let i=0; i < last; i++) { %} <tr>
+			<td>{%=i + 1%}</td>
+			<td>{%=data[i]['asset_name'] %}</td>
+			<td>{%=data[i]['name'] %}</td>
+			<td>{%=data[i]['location'] %}</td>
+			<td>{%= data[i]['asset_quantity'] %}</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['book_value']) %}
+			</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['book_remain']) %}
+			</td>
+			<td>{%= format_number_js(data[i]['actual_qty']) %}</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['new_value']) %}
+			</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['new_remain']) %}
+			</td>
+			<td>{%= format_number_js(data[i]['qty_diff']) %}</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['value_diff']) %}
+			</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['remain_diff']) %}
+			</td>
+			<td>{%= data[i]['note'] %}</td>
+		</tr>
+			{% } %}
+			<tr>
+				<td colspan="4" style="text-align: right;"><strong>Tổng cộng</strong></td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['asset_quantity']) %}
+					</strong>
+				</td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['book_value']) %}
+					</strong>
+				</td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['book_remain']) %}
+					</strong>
+				</td>
+				<td colspan="7"></td>
+			</tr>
+	</tbody>
+</table>
+<div class="row" style="margin-top:30px">
+	Đề nghị ........... cho thanh toán số tiền:.....................<br>
+	Tổng số tiền (viết bằng chữ): ..................................<br>
+	(Kèm theo............. chứng từ kế toán khác)
+</div>
+<div class="row signature" style="margin-top:50px">
+	<div class="col-md-4 text-right">
+		<div class="text-center">
+			<p>
+				<strong>Giám đốc</strong>
+			</p>
+			<p>
+				<i>(Ghi ý kiến giải quyết số chênh lệch)<br>
+					(Ký, họ tên, đóng dấu)</i>
+			</p>
+		</div>
+	</div>
+	<div class="col-md-4 text-right">
+		<div class="text-center">
+			<p>
+				<strong>Kế toán trưởng</strong>
+			</p>
+			<p>
+				<i>(Ký, họ tên)</i>
+			</p>
+		</div>
+	</div>
+	<div class="col-md-4 text-right">
+		<div class="text-center">
+			<p>
+				<strong>Trưởng ban kiểm kê</strong>
+			</p>
+			<p>
+				<i>(Ký, họ tên)</i>
+			</p>
+		</div>
+	</div>
+</div>

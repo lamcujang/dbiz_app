@@ -1,0 +1,197 @@
+<style>
+	.print-format {
+		padding: 4mm;
+		font-size: 8.0pt !important;
+	}
+
+	.print-format td {
+		vertical-align: middle !important;
+	}
+
+	.print-format th {
+		vertical-align: middle !important;
+	}
+
+	table {
+		margin-top: 20px;
+	}
+
+	table,
+	th,
+	tr,
+	td {
+		border: 2px solid black;
+		border-collapse: collapse;
+		font-size: 10px;
+	}
+
+	th {
+		font-weight: bold !important;
+		color: black !important;
+		text-align: center !important;
+		font-size: 10px;
+    	vertical-align: middle !important; 
+	}
+
+	.title {
+		margin-top:30px;
+		margin-bottom: 0px; 
+		font-weight: bold;
+	}
+
+	.signature {
+		margin-bottom: 30px; 
+	}
+</style>
+<p style="margin-top:0">{%= __("Tên công ty: " + filters.company_name) %}</p>
+<p style="margin-top:0">{%= __("Địa chỉ: " + filters.company_address) %}</p>
+<p style="margin-top:0">{%= __("Mã số thuế: " + filters.tax_id) %}</p>
+
+<h2 class="text-center title">{%= __("BÀNG TỔNG HỢP TÀI SẢN CỐ ĐỊNH, CÔNG CỤ DỤNG
+	CỤ")
+	%}</h2>
+<p class="text-center">
+	<strong>Từ ngày {%= new Date(filters.start_date).toLocaleDateString("vi-VN") %} đến {%= new Date(filters.end_date).toLocaleDateString("vi-VN") %} </strong>
+</p>
+<table>
+	<thead>
+		<tr>
+			<th>
+				Đơn vị
+			</th>
+			<th>
+				Mã, tên tài sản/Công cụ dụng cụ
+			</th>
+			<th>
+				Ngày đưa vào sử dụng
+			</th>
+			<th>
+				Số tháng khấu hao
+			</th>
+			<th>
+				Khấu hao hàng tháng
+			</th>
+			<th>
+				Số kỳ đã K/Hao
+			</th>
+			<th>
+				Đầu kỳ Nguyên giá
+			</th>
+			<th>
+				Đầu kỳ đã khấu hao
+			</th>
+			<th>
+				Đầu kỳ còn lại
+			</th>
+			<th>
+				Khấu hao trong kỳ
+			</th>
+			<th>
+				Cuối kỳ nguyên giá
+			</th>
+			<th>
+				Cuối kỳ đã KH
+			</th>
+			<th>
+				Cuối kỳ còn lại
+			</th>
+			<th>
+				Số lượng
+			</th>
+		</tr>
+	<tbody>
+		{% let last = data.length - 1; %}
+		{% for(var i=0; i < last; i++) { %} <tr>
+			<td>{%=data[i]['company'] %}</td>
+			<td>{%=data[i]['asset'] %}</td>
+			<td>{%=data[i]['available_for_use_date'] %}</td>
+			<td>{%=data[i]['total_number_of_depreciations'] %}</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['depreciation_amount'] || 0) %}
+			</td>
+			<td>{%= format_number_js(data[i]['opening_number_of_booked_depreciations'] || 0) %}</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['total_asset_cost'] || 0) %}
+			</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['opening_accumulated_depreciations'] || 0) %}
+			</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['remaining_opening'] || 0) %}
+			</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['depreciation_amount'] || 0) %}
+			</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['total_asset_cost'] || 0) %}
+			</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['depreciation_balance'] || 0) %}
+			</td>
+			<td style="text-align: right;">
+				{%= format_number_js(data[i]['remaining_balance'] || 0) %}
+			</td>						
+			<td>{%= format_number_js(data[i]['asset_quantity'] || 0) %}</td>
+		</tr>
+			{% } %}
+			<tr>
+				<td colspan="2" style="text-align: right;"><strong>Tổng cộng</strong></td>
+				<td></td>
+				<td></td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['depreciation_amount'] || 0) %}
+					</strong>
+				</td>
+				<td></td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['total_asset_cost'] || 0) %}
+					</strong>
+				</td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['opening_accumulated_depreciations'] || 0) %}
+					</strong>
+				</td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['remaining_opening'] || 0) %}
+					</strong>
+				</td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['depreciation_amount'] || 0) %}
+					</strong>
+				</td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['total_asset_cost'] || 0) %}
+					</strong>
+				</td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['depreciation_balance'] || 0) %}
+					</strong>
+				</td>
+				<td style="text-align: right;">
+					<strong>
+						{%= format_number_js(data[last]['remaining_balance'] || 0) %}
+					</strong>
+				</td>
+				<td></td>				
+			</tr>
+	</tbody>
+</table>
+<div class="row signature" style="margin-top:50px">
+	<div class="col-md-6 text-right">
+		<div class="text-center">
+			<p>
+				<strong>Người lập</strong>
+			</p>
+			<p>
+				<i>(Ký, họ tên)</i>
+			</p>
+		</div>
+	</div>
+</div>

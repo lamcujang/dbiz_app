@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-02-17 14:31:11.474917",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "full_date",
+  "day_name",
+  "day_of_year",
+  "month",
+  "quarter",
+  "first_day_of_month",
+  "first_day_of_quarter",
+  "column_break_qqrx",
+  "day_of_week",
+  "day_of_month",
+  "week_of_year",
+  "month_name",
+  "year",
+  "last_day_of_month",
+  "last_day_of_quarter"
+ ],
+ "fields": [
+  {
+   "fieldname": "full_date",
+   "fieldtype": "Date",
+   "label": "Full Date"
+  },
+  {
+   "fieldname": "day_name",
+   "fieldtype": "Data",
+   "label": "Day Name"
+  },
+  {
+   "fieldname": "day_of_year",
+   "fieldtype": "Int",
+   "label": "Day Of Year"
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Int",
+   "label": "Month"
+  },
+  {
+   "fieldname": "quarter",
+   "fieldtype": "Int",
+   "label": "Quarter"
+  },
+  {
+   "fieldname": "first_day_of_month",
+   "fieldtype": "Date",
+   "label": "First Day Of Month"
+  },
+  {
+   "fieldname": "first_day_of_quarter",
+   "fieldtype": "Date",
+   "label": "First Day Of Quarter"
+  },
+  {
+   "fieldname": "column_break_qqrx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "day_of_week",
+   "fieldtype": "Int",
+   "label": "Day Of Week"
+  },
+  {
+   "fieldname": "day_of_month",
+   "fieldtype": "Int",
+   "label": "Day Of Month"
+  },
+  {
+   "fieldname": "week_of_year",
+   "fieldtype": "Int",
+   "label": "Week Of Year"
+  },
+  {
+   "fieldname": "month_name",
+   "fieldtype": "Data",
+   "label": "Month Name"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Int",
+   "label": "Year"
+  },
+  {
+   "fieldname": "last_day_of_month",
+   "fieldtype": "Date",
+   "label": "Last Day Of Month"
+  },
+  {
+   "fieldname": "last_day_of_quarter",
+   "fieldtype": "Date",
+   "label": "Last Day Of Quarter"
+  }
+ ],
+ "in_create": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-02-17 15:29:58.354638",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Dim Date",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

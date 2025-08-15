@@ -1,0 +1,178 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-11-12 16:01:48.203764",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "pmt_amt",
+  "paid_amt",
+  "payment_button",
+  "column_break_chnh",
+  "prin_amt",
+  "int_amt",
+  "mat_int_amt",
+  "balance_amt",
+  "section_break_ndqb",
+  "int_gl",
+  "remarks",
+  "column_break_mptn",
+  "pe_name",
+  "int_check",
+  "short_term_check",
+  "transfer_check",
+  "company"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Ng\u00e0y tr\u1ea3",
+   "no_copy": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "pmt_amt",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Thanh to\u00e1n",
+   "no_copy": 1,
+   "options": "currency"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "paid_amt",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "\u0110\u00e3 thanh to\u00e1n",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.int_check === '1'",
+   "fieldname": "payment_button",
+   "fieldtype": "Button",
+   "label": "Thanh to\u00e1n"
+  },
+  {
+   "fieldname": "column_break_chnh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "prin_amt",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Ti\u1ec1n g\u1ed1c tr\u1ea3",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "int_amt",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Ti\u1ec1n l\u00e3i tr\u1ea3",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "mat_int_amt",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "L\u00e3i vay ghi nh\u1eadn (\u0111\u00e1o h\u1ea1n tr\u1ea3)",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "balance_amt",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "S\u1ed1 d\u01b0",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_ndqb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "int_gl",
+   "fieldtype": "Link",
+   "label": "B\u00fat to\u00e1n ghi nh\u1eadn l\u00e3i vay",
+   "options": "GL Entry",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "M\u00f4 t\u1ea3"
+  },
+  {
+   "fieldname": "column_break_mptn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.pe_name",
+   "fieldname": "pe_name",
+   "fieldtype": "Link",
+   "label": "Ch\u1ee9ng t\u1eeb thanh to\u00e1n",
+   "options": "Payment Entry",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "int_check",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "int_check"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "short_term_check",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "short_term_check",
+   "search_index": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "transfer_check",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "transfer_check",
+   "search_index": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "company",
+   "options": "Company"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-04-18 10:08:05.936854",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Company Loan Repayment Schedule",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

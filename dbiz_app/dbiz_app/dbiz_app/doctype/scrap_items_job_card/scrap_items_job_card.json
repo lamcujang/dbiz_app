@@ -1,0 +1,234 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:SCR-JC-{####}",
+ "creation": "2024-12-28 10:32:01.858189",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ilpb",
+  "html_qr_code",
+  "custom_btn",
+  "section_break_gwel",
+  "transfer_type",
+  "workstation",
+  "job_card",
+  "employee",
+  "shift",
+  "scrap_warehouse",
+  "column_break_cknk",
+  "scrap_type",
+  "item_code",
+  "item_name",
+  "stock_qty",
+  "stock_uom",
+  "section_break_spgm",
+  "operation",
+  "date",
+  "time",
+  "amended_from",
+  "stock_entry",
+  "column_break_rtrj",
+  "link_scrap_job_card"
+ ],
+ "fields": [
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_spgm",
+   "fieldtype": "Section Break",
+   "label": "Other Information"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Scrap Items Job Card",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "job_card",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Job Card",
+   "options": "Job Card"
+  },
+  {
+   "fieldname": "shift",
+   "fieldtype": "Link",
+   "label": "Shift",
+   "options": "Shift Type"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "default": "Now",
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "hidden": 1,
+   "label": "Time",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Date",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "workstation",
+   "fieldtype": "Link",
+   "label": "Workstation",
+   "options": "Workstation"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Scrap Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Scrap Item Name",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "stock_qty",
+   "fieldtype": "Float",
+   "label": "Qty",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item_code.stock_uom",
+   "fieldname": "stock_uom",
+   "fieldtype": "Link",
+   "label": "Stock UOM",
+   "options": "UOM",
+   "read_only": 1
+  },
+  {
+   "fieldname": "scrap_warehouse",
+   "fieldtype": "Link",
+   "label": "Scrap Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fetch_from": "job_card.operation",
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "label": "Operation",
+   "options": "Operation"
+  },
+  {
+   "fieldname": "html_qr_code",
+   "fieldtype": "HTML",
+   "is_virtual": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_break_ilpb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "custom_btn",
+   "fieldtype": "HTML",
+   "is_virtual": 1
+  },
+  {
+   "fieldname": "section_break_gwel",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "SCRAP_IMPORT",
+   "fieldname": "transfer_type",
+   "fieldtype": "Select",
+   "label": "Transfer Type",
+   "options": "SCRAP_IMPORT\nSCRAP_EXPORT"
+  },
+  {
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "label": "Stock Entry",
+   "options": "Stock Entry"
+  },
+  {
+   "fieldname": "scrap_type",
+   "fieldtype": "Link",
+   "label": "Scrap Type",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_cknk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_rtrj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "link_scrap_job_card",
+   "fieldname": "link_scrap_job_card",
+   "fieldtype": "Link",
+   "label": "Link Scrap Job Card",
+   "options": "Scrap Items Job Card",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-07-08 10:05:47.643383",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Scrap Items Job Card",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

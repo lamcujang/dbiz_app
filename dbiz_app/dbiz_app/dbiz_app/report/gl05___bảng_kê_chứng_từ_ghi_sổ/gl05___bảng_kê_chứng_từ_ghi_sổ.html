@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .number,
+        .name {
+            text-align: left;
+        }
+
+        .number {
+            width: 10%;
+        }
+
+        .name {
+            width: 30%;
+        }
+
+        .so {
+            text-align: right;
+            width: 10%;
+        }
+
+        .header-so {
+            width: 20%;
+        }
+
+        .print-format .row:not(.section-break) {
+            line-height: 1.6;
+            margin-top: 0px !important;
+        }
+
+        #sl {
+            font-weight: normal;
+        }
+
+        .number,
+        .name {
+            text-align: left;
+        }
+
+        .print-format td {
+            vertical-align: middle !important;
+        }
+    
+        .print-format th {
+            vertical-align: middle !important;
+        }
+
+        .col5 {
+            width: 5%;
+        }
+
+        .col8 {
+            width: 8%;
+        }
+
+        .col10 {
+            width: 10%;
+        }
+
+        .col10 {
+            width: 12%;
+        }
+
+        .col20 {
+            width: 20%;
+        }
+        table,
+        th,
+        tr,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+    
+        th {
+            font-weight: bold !important;
+            color: black !important;
+            text-align: center !important;
+            font-size: 10px;
+            vertical-align: middle !important; 
+        }
+    
+        .title {
+            margin-top:30px;
+            margin-bottom: 0px; 
+            font-weight: bold;
+        }
+    
+        .signature {
+            margin-bottom: 30px; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-xs-8">
+            <strong>Tên công ty : {%= filters.company_name %}</strong>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8">
+            <strong>Địa chỉ đơn vị: {%= filters.company_address || '' %}</strong> <br>
+            <strong>Mã số thuế: {{ filters.tax_id}}</strong>
+        </div>
+    </div>
+    <h2 class="text-center title">{%= __("BẢNG KÊ CHI TIẾT CHỨNG TỪ GHI SỔ")
+        %}</h2>
+    <p class="text-center">
+        Từ ngày {%= new Date(filters.start_date).toLocaleDateString('vi-VN') %} đến {%= new Date(filters.end_date).toLocaleDateString('vi-VN') %}
+    </p>
+    <div class="row">
+        <div class="text-center">
+            <h4>Tên tài khoản: {%= filters.account_name %}</h4>
+            <h4>Số hiệu: {%= filters.account_number %}</h4>
+        </div>
+    </div>
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th class="col5">Ngày tháng ghi sổ</th>
+                <th class="col10">Số chứng từ</th>
+                <th class="col20">Diễn giải</th>
+                <th class="col5">Mã khách hàng</th>
+                <th class="col10">Tên khách hàng</th>
+                <th class="col5">Số hiệu TK</th>
+                <th class="col5">TK đối ứng</th>
+                <th class="col10">Phát sinh Nợ</th>
+                <th class="col10">Phát sinh Có</th>
+                <th class="col5">ĐV hạch toán</th>
+                <th class="col5">Ghi chú</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for(var i=0, l=data.length; i<l-1; i++) { %} <tr id="sl">
+                <td class="col5">{%= data[i]['NGAY_GHI_SO'] %}</td>
+                <td class="col10">{%= data[i]['SO_CHUNG_TU'] %}</td>
+                <td class="col20">{%= data[i]['DIEN_GIAI'] %}</td>
+                <td class="col5">{%= data[i]['MA_KH'] || '' %}</td>
+                <td class="col10">{%= data[i]['TEN_KH'] %}</td>
+                <td class="col5">{%= data[i]['TK'] %}</td>
+                <td class="col5">{%= data[i]['DOI_UNG'] %}</td>
+                <td class="col10" style="text-align: right;">
+                    {%= data[i]['NO'] != null ? Math.round(data[i]['NO']).toLocaleString('vi-VN') : 0 %}
+                </td>
+                <td class="col10" style="text-align: right;">
+                    {%= data[i]['CO'] != null ? Math.round(data[i]['CO']).toLocaleString('vi-VN') : 0 %}
+                </td>                
+                <td class="col5">{%= data[i]['DV_HACH_TOAN'] || '' %}</td>
+                <td class="col5">{%= data[i]['GHI_CHU'] || '' %}</td>
+                </tr>
+                {% } %}
+
+                <tr>
+                    <td colspan="7" style="text-align: right;"><strong>Tổng cộng</strong></td>
+                    <td style="text-align: right;">
+                        <strong>
+                            {%= data[data.length-1]['NO'] != null ? Math.round(data[data.length-1]['NO']).toLocaleString('vi-VN') : 0 %}
+                        </strong>
+                    </td>
+                    <td style="text-align: right;">
+                        <strong>
+                            {%= data[data.length-1]['CO'] != null ? Math.round(data[data.length-1]['CO']).toLocaleString('vi-VN') : 0 %}
+                        </strong>
+                    </td>                    
+                    <td></td>
+                    <td></td>
+                </tr>
+        </tbody>
+    </table>
+    <div class="row" style="margin-top:30px">
+        <div class="col-xs-offset-8 col-xs-4 text-right">
+            <div class="text-center">
+                <p>
+                    Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new Date().getFullYear() }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row signature">
+        <div class="col-xs-4 text-right">
+            <div class="text-center">
+                <p>
+                    <strong>Người ghi sổ</strong>
+                </p>
+                <p>
+                    <i>(Ký, họ tên)</i>
+                </p>
+            </div>
+        </div>
+        <div class="col-xs-4 text-right">
+            <div class="text-center">
+                <p>
+                    <strong>Kế toán trưởng</strong>
+                </p>
+                <p>
+                    <i>(Ký, họ tên)</i>
+                </p>
+            </div>
+        </div>
+        <div class="col-xs-4 text-right">
+            <div class="text-center">
+                <p>
+                    <strong>Giám đốc</strong>
+                </p>
+                <p>
+                    <i>(Ký, họ tên, đóng dấu)</i>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

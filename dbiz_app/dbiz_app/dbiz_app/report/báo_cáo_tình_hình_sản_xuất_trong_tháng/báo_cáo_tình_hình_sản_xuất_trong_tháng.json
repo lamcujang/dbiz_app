@@ -1,0 +1,26 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-12-11 15:35:22.670090",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-12-11 15:44:34.880107",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "B\u00e1o c\u00e1o t\u00ecnh h\u00ecnh s\u1ea3n xu\u1ea5t trong th\u00e1ng",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Production Plan",
+ "report_name": "B\u00e1o c\u00e1o t\u00ecnh h\u00ecnh s\u1ea3n xu\u1ea5t trong th\u00e1ng",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}

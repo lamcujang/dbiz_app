@@ -1,0 +1,119 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 11px !important;
+    }
+
+
+    .print-format th,
+    .print-format td {
+        vertical-align: middle !important;
+    }
+
+    .print-format th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    .print-format table,
+    .print-format table th,
+    .print-format table td {
+        border: 1px solid #222426 !important;
+    }
+
+    .font-weight-bold {
+        font-weight: bold !important;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-9 text-left">
+            <div>
+                Tên công ty: {%= filters.company_name %}
+            </div>
+            <div>
+                Địa chỉ đơn vị: {%= filters.company_address || '' %}
+            </div>
+            <div>
+                Mã số thuế: {%= filters.tax_id %}
+            </div>
+        </div>
+        <div class="col-xs-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h2 class="font-weight-bold">BẢNG KÊ ĐƠN HÀNG BÁN</h2>
+
+            <div>
+                Từ ngày {%= frappe.datetime.str_to_user(filters.start_date).split('-').join('/') %}
+                đến {%= frappe.datetime.str_to_user(filters.end_date).split('-').join('/') %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Ngày CT</th>
+                        <th>Ca bán hàng</th>
+                        <th>POS (Outlet)</th>
+                        <th>Loại đơn hàng bán</th>
+                        <th>Số CT</th>
+                        <th>Ghi chú</th>
+                        <th>Diễn giải</th>
+                        <th>Mã SP</th>
+                        <th>SL</th>
+                        <th>Giá bán</th>
+                        <th>Tiền bán hàng</th>
+                        <th>Thuế</th>
+                        <th>Giá vốn</th>
+                        <th>Tiền vốn</th>
+                        <th>Mã KH</th>
+                        <th>Tên KH</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% let last = data.length - 1; %}
+
+                    {% for (let i = 0; i < last; i++) { %} <tr>
+                        <td class="text-center">{%= i + 1 %}</td>
+                        <td class="text-center">{%= data[i]['transaction_date'] %}</td>
+                        <td>{%= data[i]['ca_ban_hang'] %}</td>
+                        <td>{%= data[i]['pos'] %}</td>
+                        <td>{%= data[i]['order_type'] %}</td>
+                        <td>{%= data[i]['name'] %}</td>
+                        <td>{%= data[i]['note'] %}</td>
+                        <td>{%= data[i]['description'] %}</td>
+                        <td>{%= data[i]['item_code'] %}</td>
+                        <td class="text-right">{%= format_number_js(data[i]['qty']) %}</td>
+                        <td class="text-right">{%= format_number_js(data[i]['rate']) %}</td>
+                        <td class="text-right">{%= format_number_js(data[i]['net_amount']) %}</td>
+                        <td class="text-right">{%= format_number_js(data[i]['tax_amount']) %}</td>
+                        <td class="text-right">{%= data[i]['gia_von'] %}</td>
+                        <td class="text-right">{%= data[i]['tien_von'] %}</td>
+                        <td>{%=data[i]['customer_code'] %}</td>
+                        <td>{%=data[i]['customer_name'] %}</td>
+                        </tr>
+                        {% } %}
+
+                        <tr class="font-weight-bold text-right">
+                            <td colspan="11">Tổng</td>
+                            <td>{%= format_number_js(data[last]['net_amount']) %}</td>
+                            <td>{%= format_number_js(data[last]['tax_amount']) %}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

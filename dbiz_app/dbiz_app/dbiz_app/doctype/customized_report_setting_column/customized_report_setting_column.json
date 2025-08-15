@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-11 14:00:49.531555",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "label",
+  "fieldname",
+  "fieldtype",
+  "options",
+  "width"
+ ],
+ "fields": [
+  {
+   "fieldname": "label",
+   "fieldtype": "Data",
+   "label": "Column Name"
+  },
+  {
+   "fieldname": "fieldname",
+   "fieldtype": "Data",
+   "label": "Field Name"
+  },
+  {
+   "default": "Data",
+   "fieldname": "fieldtype",
+   "fieldtype": "Select",
+   "label": "Field Type",
+   "options": "Data\nCheck\nCurrency\nDate\nDatetime\nDuration\nDynamic Link\nFloat\nFold\nInt\nLink\nSelect\nTime"
+  },
+  {
+   "fieldname": "options",
+   "fieldtype": "Data",
+   "label": "Options"
+  },
+  {
+   "fieldname": "width",
+   "fieldtype": "Int",
+   "label": "Width"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-12-12 11:18:30.147069",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Customized Report Setting Column",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

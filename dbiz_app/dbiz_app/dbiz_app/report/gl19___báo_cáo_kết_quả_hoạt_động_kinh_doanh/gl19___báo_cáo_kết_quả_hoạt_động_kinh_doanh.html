@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sổ Nhật Ký Thu Tiền</title>
+    <style>
+        @media print {
+            @page {
+                size: A4 landscape;
+                /* Định dạng giấy nằm ngang */
+                margin: 3mm;
+                /* Căn lề nhỏ gọn */
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .print-header {
+            display: flex;
+            align-items: flex-start;
+            /* Đảm bảo căn từ trên xuống */
+        }
+
+        .left-section {
+            text-align: left;
+            /* Nội dung căn trái */
+        }
+
+        .right-section {
+            text-align: right;
+            /* Đảm bảo toàn bộ nội dung căn phải */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Căn giữa theo chiều dọc */
+            align-items: flex-end;
+            /* Đảm bảo nội dung về lề phải */
+        }
+
+        .right-section .text-center {
+            text-align: center;
+            /* Chỉ phần chữ căn giữa trong khối */
+        }
+
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .report-title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .filters {
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .filters p {
+            margin: 5px 0;
+        }
+
+        table {
+            width: 95%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+            table-layout: auto;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            word-wrap: break-word;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .header-row th {
+            background-color: #d9d9d9;
+            font-size: 12px;
+        }
+
+        .total-row td {
+            font-weight: bold;
+        }
+
+        .signature-block {
+            margin-top: 10px;
+            /* Tùy chỉnh khoảng cách trên nếu cần */
+        }
+
+        .signature-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            /* Chia làm 3 cột đều nhau */
+            text-align: center;
+            /* Căn giữa nội dung trong mỗi cột */
+            margin-top: 20px;
+            /* Tạo khoảng cách phía trên */
+        }
+
+        .signature {
+            display: flex;
+            flex-direction: column;
+            /* Căn dọc từng phần tử trong cột */
+            align-items: center;
+            /* Đảm bảo căn giữa nội dung */
+        }
+
+        .date {
+            margin-bottom: 5px;
+            /* Tạo khoảng cách giữa ngày tháng và phần chữ ký */
+            font-style: italic;
+            /* Làm nổi bật ngày tháng năm */
+        }
+
+        .date_hide {
+            visibility: hidden;
+            /* Ẩn phần tử nhưng vẫn giữ không gian */
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="print-header row">
+            <!-- Left Section -->
+            <div class="col-md-8 left-section">
+                <div><strong>Tên đơn vị:</strong> {%= filters.company_name %}</div>
+                <div><strong>Địa chỉ đơn vị:</strong> {%= filters.company_address || '' %}</div>
+                <div><strong>Mã số thuế:</strong> {%= filters.tax_id %}</div>
+            </div>
+            <!-- Right Section -->
+            <div class="col-md-4 right-section">
+                <div class="text-center">
+                    <div><strong>Mẫu số B 02 – DN</strong></div>
+                    <div>(Ban hành theo QĐ số 15/2006/QĐ-BTC ngày 20/03/2006 của Bộ trưởng BTC)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="report-title">
+            <h1><strong>BÁO CÁO KẾT QUẢ HOẠT ĐỘNG KINH DOANH</strong></h1>
+        </div>
+
+        <div class="filters">
+            <p><strong>Từ ngày:</strong> {%= filters.start_date %} &nbsp; <strong>đến ngày:</strong> {%=
+                filters.end_date %}</p>
+        </div>
+        <table>
+            <thead>
+                <tr style="font-weight: bold;">
+                    <th>Chỉ tiêu</th>
+                    <th>Mã số</th>
+                    <th>Tháng này</th>
+                    <th>Tháng trước</th>
+                </tr>
+                <tr style="font-weight: bold;">
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for (var i = 0; i < data.length; i++) { %}
+                <tr>
+                    <td class="text-left">{{ data[i]["RPT_NAME"] }}</td>
+                    <td class="text-center">{{ data[i]["RPT_KEY"] }}</td>
+                    <td class="text-right">{{ isNaN(parseFloat(data[i]["AMT"])) ? '0' : parseFloat(data[i]["AMT"]).toLocaleString('vi-VN') }}</td>
+                    <td class="text-right">{{ isNaN(parseFloat(data[i]["P_AMT"])) ? '0' : parseFloat(data[i]["P_AMT"]).toLocaleString('vi-VN') }}</td>
+                </tr>
+                {% } %}
+            </tbody>
+        </table>
+        <div class="signature-block">
+            <div class="signature">
+                <p class="date_hide">Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+                    Date().getFullYear() }}</p>
+                <p><strong>Người lập phiếu</strong></p>
+                <p>(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+            </div>
+            <div class="signature">
+                <p class="date_hide">Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+                    Date().getFullYear() }}</p>
+                <p><strong>Kế toán trưởng</strong></p>
+                <p>(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+            </div>
+            <div class="signature">
+                <p class="date">Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+                    Date().getFullYear() }}</p>
+                <p><strong>Giám đốc</strong></p>
+                <p>(Ký, họ tên, đóng dấu)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

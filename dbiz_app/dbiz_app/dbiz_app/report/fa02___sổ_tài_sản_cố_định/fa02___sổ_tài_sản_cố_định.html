@@ -1,0 +1,268 @@
+<style>
+	.print-format {
+		padding: 4mm;
+		font-size: 8.0pt !important;
+	}
+
+	.print-format td {
+		vertical-align: middle !important;
+	}
+
+	.print-format th {
+		vertical-align: middle !important;
+	}
+
+	table {
+		margin-top: 20px;
+	}
+
+	table,
+	th,
+	tr,
+	td {
+		border: 2px solid black;
+		border-collapse: collapse;
+		font-size: 10px;
+	}
+
+	th {
+		font-weight: bold !important;
+		color: black !important;
+		text-align: center !important;
+		font-size: 10px;
+    	vertical-align: middle !important; 
+	}
+
+	.title {
+		margin-top:30px;
+		margin-bottom: 0px; 
+		font-weight: bold;
+	}
+
+	.signature {
+		margin-bottom: 30px; 
+	}
+
+	.col-6 {
+		width: 6%;
+	}
+
+	.col-7 {
+		width: 7%;
+	}
+
+	.col-10 {
+		width: 10%;
+	}
+
+	.no-bottom-border {
+		border-collapse: collapse; 
+		border-bottom: none;
+	}
+	.no-bottom-border thead,
+	.no-bottom-border thead tr,
+	.no-bottom-border thead tr th {
+		border-bottom: none;
+	}
+</style>
+<p style="margin-top:0">{%= __("Tên công ty: " + filters.company_name) %}</p>
+<p style="margin-top:0">{%= __("Địa chỉ: " + filters.company_address) %}</p>
+<p style="margin-top:0">{%= __("Mã số thuế: " + filters.tax_id) %}</p>
+<h2 class="text-center title">{%= __("SỔ TÀI SẢN CỐ ĐỊNH")
+	%}</h2>
+<p class="text-center">
+	Tháng {%= new Date(filters.end_date).getMonth() + 1 %} năm {%= new Date(filters.end_date).getFullYear()%}
+</p>
+
+<table style="margin-top:0px !important">
+	<thead>
+		<tr>
+			<th class="col-6">A</th>
+			<th class="col-7">B</th>
+			<th class="col-7">C</th>
+			<th class="col-10">D</th>
+			<th class="col-7">E</th>
+			<th class="col-7">F</th>
+			<th class="col-7">G</th>
+			<th class="col-7">1</th>
+			<th class="col-7">2</th>
+			<th class="col-7">3</th>
+			<th class="col-7">4</th>
+			<th class="col-7">5</th>
+			<th class="col-7">6</th>
+			<th class="col-7">7</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th rowspan="3"class="col-6">
+				STT
+			</th>
+			<th colspan="7">
+				Ghi tăng TSCD
+			</th>
+			<th colspan="3">
+				Khấu hao TSCD
+			</th>
+			<th colspan="3">
+				Ghi giảm TSCD
+			</th>
+		</tr>
+		<tr>
+			<th colspan="2">
+				Chứng từ
+			</th>
+			<th rowspan="2" class="col-10">
+				Tên, đặc điểm, ký hiệu TSCĐ
+			</th>
+			<th rowspan="2" class="col-7">
+				Nước sản xuất
+			</th>
+			<th rowspan="2" class="col-7">
+				Tháng năm đưa vào sử dụng
+			</th>
+			<th rowspan="2" class="col-7">
+				Số hiệu TSCĐ
+			</th>
+			<th rowspan="2" class="col-7">
+				Nguyên giá TSCĐ
+			</th>
+			<th colspan="2">
+				Khấu hao
+			</th>
+			<th rowspan="2" class="col-7">
+				Khấu hao đã tính đến khi ghi giảm TSCĐ
+			</th>
+			<th colspan="2">
+				Chứng từ
+			</th>
+			<th rowspan="2" class="col-7">
+				Lý do giảm TSCĐ
+			</th>
+		</tr>
+		<tr>
+			<th class="col-7">
+				Số hiệu
+			</th>
+			<th class="col-7">
+				Ngày tháng
+			</th>
+			<th class="col-7">
+				Tỷ lệ (%)
+			</th>
+			<th class="col-7">
+				Mức khấu hao
+			</th>
+			<th class="col-7">
+				Số hiệu
+			</th>
+			<th class="col-7">
+				Ngày tháng
+			</th>
+		</tr>
+		<tr>
+			<td colspan="7"></td>
+			<td style="text-align: right;">
+				<strong>
+					{%= data[data.length-1]['Nguyên giá TSCĐ'] != null ? Math.ceil(data[data.length-1]['Nguyên giá TSCĐ']).toLocaleString('vi-VN') : 0 %}
+				</strong>			
+			</td>
+			<td></td>
+			<td style="text-align: right;">
+				<strong>
+					{%= data[data.length-1]['MUC_KHAU_HAO'] != null ? Math.ceil(data[data.length-1]['MUC_KHAU_HAO']).toLocaleString('vi-VN') : 0 %}
+				</strong>			
+			</td>
+			<td style="text-align: right;">
+				<strong>
+					{%= data[data.length-1]['KHAU_HAO_DA_TINH'] != null ? Math.ceil(data[data.length-1]['KHAU_HAO_DA_TINH']).toLocaleString('vi-VN') : 0 %}
+				</strong>
+			</td>
+			<td colspan="3"></td>
+		</tr>
+		{% for(var i=0, l=data.length; i<l-1; i++) { %} <tr>
+			<td>{%=i + 1 %}</td>
+			<td>{%=data[i]['Mã chứng từ ghi tăng'] %}</td>
+			<td>{%=data[i]['Thời gian ghi tăng'] %}</td>
+			<td>{%=data[i]['Tên, đặc điểm, ký hiệu TSCĐ'] %}</td>
+			<td>{%=data[i]['Nước sản xuất'] %}</td>
+			<td>{%=data[i]['Tháng năm đưa vào sử dụng'] %}</td>
+			<td>{%=data[i]['Số hiệu TSCĐ'] %}</td>
+			<td style="text-align: right;">
+				{%= data[i]['Nguyên giá TSCĐ'] != null ? Math.round(data[i]['Nguyên giá TSCĐ']).toLocaleString('vi-VN') : 0 %}
+			</td>			
+			<td style="text-align: center;">
+				{%= data[i]['TYLE'] != null ? data[i]['TYLE'].toFixed(2) : 0 %}
+			</td>
+			<td style="text-align: right;">
+				{%= data[i]['MUC_KHAU_HAO'] != null ? Math.round(data[i]['MUC_KHAU_HAO']).toLocaleString('vi-VN') : 0 %}
+			</td>
+			<td style="text-align: right;">
+				{%= data[i]['KHAU_HAO_DA_TINH'] != null ? Math.round(data[i]['KHAU_HAO_DA_TINH']).toLocaleString('vi-VN') : 0 %}
+			</td>			
+			<td>{%=data[i]['Số hiệu ghi giảm'] %}</td>
+			<td>{%=data[i]['Ngày ghi giảm'] %}</td>
+			<td>{%=data[i]['Ghi chú'] %}</td>
+		</tr>
+			{% } %}
+			<tr>
+				<td colspan="7" style="text-align: right;"><strong>Tổng cộng</strong></td>
+				<td style="text-align: right;">
+					<strong>
+						{%= data[data.length-1]['Nguyên giá TSCĐ'] != null ? Math.ceil(data[data.length-1]['Nguyên giá TSCĐ']).toLocaleString('vi-VN') : 0 %}
+					</strong>
+				</td>
+				<td></td>
+				<td style="text-align: right;">
+					<strong>
+						{%= data[data.length-1]['MUC_KHAU_HAO'] != null ? Math.ceil(data[data.length-1]['MUC_KHAU_HAO']).toLocaleString('vi-VN') : 0 %}
+					</strong>
+				</td>
+				<td style="text-align: right;">
+					<strong>
+						{%= data[data.length-1]['KHAU_HAO_DA_TINH'] != null ? Math.ceil(data[data.length-1]['KHAU_HAO_DA_TINH']).toLocaleString('vi-VN') : 0 %}
+					</strong>
+				</td>				
+				<td colspan="3"></td>
+			</tr>
+	</tbody>
+</table>
+<p style="margin-top:30px">
+
+	- Sổ này có .... trang, đánh số từ trang số 01 đến trang …
+	<br>
+	- Ngày mở sổ: ....
+</p>
+<div class="row" style="margin-top:50px">
+	<div class="col-md-8">
+	</div>
+	<div class="col-md-4  text-center">
+		<p>
+            Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new Date().getFullYear() }}
+        </p>
+	</div>
+</div>
+<div class="row signature">
+	<div class="col-md-6 text-right">
+		<div class="text-center">
+			<p>
+				<strong>Người ghi sổ</strong>
+			</p>
+			<p>
+				<i>(Ký, họ tên)</i>
+			</p>
+		</div>
+	</div>
+	<div class="col-md-2 text-right">
+	</div>
+	<div class="col-md-4 text-right">
+		<div class="text-center">
+			<p>
+				<strong>Giám đốc</strong>
+			</p>
+			<p>
+				<i>(Ký, họ tên)</i>
+			</p>
+		</div>
+	</div>
+</div>

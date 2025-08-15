@@ -1,0 +1,203 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 12px !important;
+        line-height: 1.8 !important;
+    }
+
+    .print-format table td,
+    .print-format table th {
+        vertical-align: middle !important;
+    }
+
+    .print-format table,
+    .print-format table th,
+    .print-format table td {
+        border: 1px solid #222426 !important;
+    }
+
+    .print-format table th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    /* Fit table cell width to the content */
+    .print-format table td.fit,
+    .print-format table th.fit {
+        white-space: nowrap !important;
+        width: 1% !important;
+    }
+
+    .table-bordered table th,
+    .table-bordered table td {
+        border: 1px solid #222426 !important;
+    }
+
+    .font-weight-bold {
+        font-weight: bold !important;
+    }
+
+    /* Styles specific to printing and PDF generation */
+    @media print {
+        @page {
+            size: A4 portrait !important;
+        }
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-8 text-left">
+            <div>
+                {%= __("Tên công ty: " + filters.company_name) %}
+            </div>
+            <div>
+                {%= __("Địa chỉ đơn vị: " + filters.company_address || '') %}
+            </div>
+            <div>
+                {%= __("Mã số thuế: " + filters.tax_id) %}
+            </div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <div>
+                Mẫu số 02 - VT
+            </div>
+            <div>
+                (Ban hành theo Thông tư số: 200/2014/TT-BTC Ngày 22/12/2014 của BTC)
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h4>{%= __("SỔ CÁI") %}</h4>
+
+            <div>
+                Từ ngày {%= frappe.datetime.str_to_user(filters.start_date).replace(/-/g, "/") %}
+                đến {%= frappe.datetime.str_to_user(filters.end_date).replace(/-/g, "/") %}
+            </div>
+
+            <div>
+                <strong>
+                    {% if (filters.account_name) { %}
+                    {%= __("Tên tài khoản: " + filters.account_name) %}
+                    {% } else { %}
+                    {%= __("Tên tài khoản: Tất cả") %}
+                    {% } %}
+                </strong>
+            </div>
+
+            <div>
+                <strong>
+                    {% if (filters.account_number) { %}
+                    {%= __("Số hiệu: " + filters.account_number) %}
+                    {% } %}
+                </strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered text-wrap">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Ngày tháng ghi sổ</th>
+                        <th colspan="2">Chứng từ ghi sổ</th>
+                        <th rowspan="2">Diễn giải</th>
+                        <th rowspan="2">Số hiệu TK đối ứng</th>
+                        <th colspan="2">Số tiền</th>
+                        <th rowspan="2">Ghi chú</th>
+                    </tr>
+                    <tr>
+                        <th>Số hiệu</th>
+                        <th>Ngày, tháng</th>
+                        <th>Nợ</th>
+                        <th>Có</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for(let i = 3; i < data.length; i++) { %} <tr>
+                        <td>{%= data[i]['creation_date'] %}</td>
+                        <td>{%= data[i]['name'] %}</td>
+                        <td>{%= data[i]['posting_date'] %}</td>
+                        <td>{%= data[i]['remarks'] %}</td>
+                        <td style="text-align: right;">{%= data[i]['against'] %}</td>
+                        <td class="col10" style="text-align: right;">
+                            {%= data[i]['debit'] != null
+                            ? parseFloat(data[i]['debit']).toLocaleString('vi-VN')
+                            : 0 %}
+                        </td>
+                        <td class="col10" style="text-align: right;">
+                            {%= data[i]['credit'] != null
+                            ? parseFloat(data[i]['credit']).toLocaleString('vi-VN')
+                            : 0 %}
+                        </td>
+                        <td>{%= data[i]['comments'] %}</td>
+                        </tr>
+                        {% } %}
+                </tbody>
+
+                <tfoot class="font-weight-bold">
+                    {% for (let i = 0; i < 3; i++) { %} <tr>
+                        <td colspan="5" class="text-right">{%= data[i]['against'] %}</td>
+                        <td class="text-right">
+                            {%= data[i]['debit'] != null
+                            ? parseFloat(data[i]['debit']).toLocaleString('vi-VN')
+                            : ' ' %}
+                        </td>
+                        <td class="text-right">
+                            {%= data[i]['credit'] !== null
+                            ? parseFloat(data[i]['credit']).toLocaleString('vi-VN')
+                            : ' ' %}
+                        </td>
+                        <td></td>
+                        </tr>
+                        {% } %}
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-left">
+            - Sổ này có ... trang, đánh số từ trang số 01 đến trang ... <br>
+            - Ngày mở sổ: ...
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-offset-8 col-xs-4 text-center">
+            Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+            Date().getFullYear() }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 text-center">
+            <div>
+                <strong>Người ghi sổ</strong>
+            </div>
+            <div>
+                <i>(Ký, họ tên)</i>
+            </div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <div>
+                <strong>Kế toán trưởng</strong>
+            </div>
+            <div>
+                <i>(Ký, họ tên)</i>
+            </div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <div>
+                <strong>Giám đốc</strong>
+            </div>
+            <div>
+                <i>(Ký, họ tên, đóng dấu)</i>
+            </div>
+        </div>
+    </div>
+</div>

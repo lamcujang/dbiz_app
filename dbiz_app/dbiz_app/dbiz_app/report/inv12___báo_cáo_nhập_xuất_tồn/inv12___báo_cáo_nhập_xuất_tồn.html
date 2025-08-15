@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BẢNG CÂN ĐỐI XUẤT-NHẬP-TỒN</title>
+    <style>
+        @media print {
+            @page {
+                size: A4 landscape;
+                /* Định dạng giấy nằm ngang */
+                margin: 3mm;
+                /* Căn lề nhỏ gọn */
+            }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .print-header {
+            margin-bottom: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .report-title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .filters {
+            text-align: left;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+
+        .filters p {
+            margin: 5px 0;
+        }
+
+        table {
+            width: 95%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+            table-layout: auto;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            word-wrap: break-word;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .header-row th {
+            background-color: #d9d9d9;
+            font-size: 12px;
+        }
+
+        .total-row td {
+            font-weight: bold;
+        }
+
+        .signature-block {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .signature {
+            width: 30%;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .signature p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="print-header row">
+            <div class="col-md-8 left-section">
+                <div><strong>Tên đơn vị:</strong> {%= filters.company_name %}</div>
+                <div><strong>Địa chỉ đơn vị:</strong> {%= filters.company_address || '' %}</div>
+                <div><strong>Mã số thuế:</strong> {%= filters.tax_id %}</div>
+            </div>
+        </div>
+
+        <div class="report-title">
+            <h1>BẢNG CÂN ĐỐI XUẤT - NHẬP - TỒN</h1>
+            <h1>(INVENTORY BALANCE)</h1>
+        </div>
+
+        <div class="filters" style="text-align: center;">
+            <p><strong>Từ ngày:</strong> {%= filters.start_date %} &nbsp; <strong>đến ngày:</strong> {%=
+                filters.end_date %}</p>
+            <p><strong>Kho:</strong> {%= filters.warehouse_name %} &nbsp;&nbsp;
+                {% if filters.product_category %}
+                <strong>Nhóm sản phẩm:</strong> {%= filters.product_category %}
+            </p>
+            {% endif %}
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2">STT</th>
+                    <th rowspan="2">Mã kho</th>
+                    <th rowspan="2">Tên kho</th>
+                    <th rowspan="2">Nhóm sản phẩm</th>
+                    <th rowspan="2">Mã vật tư</th>
+                    <th rowspan="2">Tên vật tư</th>
+                    <th rowspan="2">ĐVT</th>
+                    <th colspan="3">Số Dư Đầu Kỳ</th>
+                    <th colspan="2">Nhập Kho</th>
+                    <th colspan="2">Xuất Kho</th>
+                    <th colspan="3">Dư Cuối Kỳ</th>
+                </tr>
+                <tr class="header-row">
+                    <th>SL</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                    <th>SL</th>
+                    <th>Thành tiền</th>
+                    <th>SL</th>
+                    <th>Thành tiền</th>
+                    <th>SL</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- Loop through the data and calculate totals -->
+                {% var totalTon = 0; %}
+                {% var totalOpening_qty = 0; %}
+                {% var totalOpening_amount = 0; %}
+                {% var totalUnit_price = 0; %}
+                {% var totalStock_in_qty = 0; %}
+                {% var totalStock_in_amount = 0; %}
+                {% var totalStock_out_qty = 0; %}
+                {% var totalStock_out_amount = 0; %}
+                {% var totalClosing_qty = 0; %}
+                {% var totalClosing_amount = 0; %}
+                {% for (var i = 0; i < data.length; i++) { %} <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ data[i]["warehouse_code"] }}</td>
+                    <td>{{ data[i]["warehouse_name"] }}</td>
+                    <td>{{ data[i]["product_category"] }}</td>
+                    <td>{{ data[i]["item_code"] }}</td>
+                    <td>{{ data[i]["item_name"] }}</td>
+                    <td>{{ data[i]["unit"] }}</td>
+                    <td>
+                        {{data[i]["opening_qty"] }}
+                        {% totalOpening_qty += parseFloat(data[i]["opening_qty"]) || 0; %}
+                    </td>
+                    <td>
+                        {{ parseFloat(data[i]["opening_price"]).toLocaleString('vi-VN') }}
+                        {% totalUnit_price += parseFloat(data[i]["opening_price"]) || 0; %}
+                    </td>
+                    <td>
+                        {{ parseFloat(data[i]["opening_amount"]).toLocaleString('vi-VN') }}
+                        {% totalOpening_amount += parseFloat(data[i]["opening_amount"]) || 0; %}
+                    </td>
+                    <td>
+                        {{ data[i]["stock_in_qty"] }}
+                        {% totalStock_in_qty += parseFloat(data[i]["stock_in_qty"]) || 0; %}
+                    </td>
+                    <td>
+                        {{ parseFloat(data[i]["stock_in_amount"]).toLocaleString('vi-VN') }}
+                        {% totalStock_in_amount += parseFloat(data[i]["stock_in_amount"]) || 0; %}
+                    </td>
+                    <td>
+                        {{ data[i]["stock_out_qty"] }}
+                        {% totalStock_out_qty += parseFloat(data[i]["stock_out_qty"]) || 0; %}
+                    </td>
+                    <td>
+                        {{ parseFloat(data[i]["stock_out_amount"]).toLocaleString('vi-VN') }}
+                        {% totalStock_out_amount += parseFloat(data[i]["stock_out_amount"]) || 0; %}
+                    </td>
+                    <td>
+                        {{ data[i]["closing_qty"] }}
+                        {% totalClosing_qty += parseFloat(data[i]["closing_qty"]) || 0; %}
+                    </td>
+                    <td>{{ parseFloat(data[i]["closing_price"]).toLocaleString('vi-VN') }}</td>
+                    <td>
+                        {{ parseFloat(data[i]["closing_amount"]).toLocaleString('vi-VN') }}
+                        {% totalClosing_amount += parseFloat(data[i]["closing_amount"]) || 0; %}
+                    </td>
+                    </tr>
+                    {% } %}
+            </tbody>
+
+            <tfoot>
+                <tr class="total-row">
+                    <td colspan="7"><strong>Tổng cộng</strong></td>
+                    <td>{{ totalOpening_qty }}</td>
+                    <td>{{ totalUnit_price.toLocaleString('vi-VN') }}</td>
+                    <td>{{ totalOpening_amount.toLocaleString('vi-VN') }}</td>
+                    <td>{{ totalStock_in_qty }}</td>
+                    <td>{{ totalStock_in_amount.toLocaleString('vi-VN') }}</td>
+                    <td>{{ totalStock_out_qty }}</td>
+                    <td>{{ totalStock_out_amount.toLocaleString('vi-VN') }}</td>
+                    <td>{{ totalClosing_qty }}</td>
+                    <td>{{ totalUnit_price.toLocaleString('vi-VN') }}</td>
+                    <td>{{ totalClosing_amount.toLocaleString('vi-VN') }}</td>
+                </tr>
+            </tfoot>
+
+        </table>
+
+        <!-- <div class="signature-block">
+            <div class="signature">
+                <p class="date_hide">Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+                    Date().getFullYear() }}</p>
+                <p><strong>Thủ kho</strong></p>
+                <p>(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+            </div>
+            <div class="signature">
+                <p class="date_hide">Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+                    Date().getFullYear() }}</p>
+                <p><strong>Kế toán trưởng</strong></p>
+                <p>(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+            </div>
+            <div class="signature">
+                <p class="date">Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+                    Date().getFullYear() }}</p>
+                <p><strong>Giám đốc</strong></p>
+                <p>(Ký, họ tên, đóng dấu)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+            </div>
+        </div> -->
+    </div>
+</body>
+
+</html>

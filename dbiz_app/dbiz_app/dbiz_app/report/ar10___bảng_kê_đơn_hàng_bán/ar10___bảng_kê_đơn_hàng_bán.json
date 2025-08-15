@@ -1,0 +1,63 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2024-11-20 15:09:20.473957",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "Leepak",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-11-20 15:09:20.473957",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "AR10 - B\u1ea3ng k\u00ea \u0111\u01a1n h\u00e0ng b\u00e1n",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "WITH Total_Taxes AS (\r\nSELECT \r\n        tstac.parent AS sales_order_id, \r\n        SUM(tstac.tax_amount) AS total_tax_amount\r\nFROM\r\n    `tabSales Taxes and Charges` tstac\r\nGROUP BY\r\n    tstac.parent\r\n),\r\nItem_Totals AS (\r\nSELECT \r\n        tsoi.parent AS sales_order_id,\r\n        tsoi.item_code,\r\n        tsoi.qty,\r\n        tsoi.base_net_amount AS item_net_amount,\r\n        (tsoi.base_net_amount / (\r\n    SELECT\r\n        SUM(tsoi2.base_net_amount)\r\n    FROM\r\n        `tabSales Order Item` tsoi2\r\n    WHERE\r\n        tsoi2.parent = tsoi.parent)) AS allocation_percentage\r\nFROM\r\n    `tabSales Order Item` tsoi\r\nLEFT JOIN `tabSales Order` tso ON\r\n    tso.name = tsoi.parent\r\nWHERE\r\n    tso.company = 'SSG'\r\n    AND tsoi.transaction_date BETWEEN DATE('2024-11-01') AND DATE('2024-11-20')\r\nGROUP BY\r\n    tsoi.item_code\r\n),\r\nTAX_ALLOCATION AS (\r\nSELECT \r\n        it.sales_order_id,\r\n        it.item_code,\r\n        it.qty,\r\n        it.item_net_amount,\r\n        it.allocation_percentage,\r\n        tt.total_tax_amount,\r\n        (it.allocation_percentage * tt.total_tax_amount) AS allocated_tax_to_item\r\nFROM\r\n    Item_Totals it\r\nLEFT JOIN Total_Taxes tt ON\r\n    it.sales_order_id = tt.sales_order_id\r\n)\r\nSELECT \r\n    tsoi.transaction_date AS transaction_date,\r\n    NULL AS ca_ban_hang,\r\n    NULL AS pos,\r\n    tso.order_type AS order_type,\r\n    tso.name AS so_ct,\r\n    NULL AS note,\r\n    tsoi.description AS description,\r\n    ti.item_code AS item_code,\r\n    tsoi.qty AS quantity,\r\n    tsoi.rate AS price,\r\n    tsoi.amount AS net_amount,\r\n    (CASE \r\n        WHEN ISNULL(TA.allocated_tax_to_item) THEN 0\r\n        ELSE TA.allocated_tax_to_item\r\n    END) AS tax_amount,\r\n    NULL AS gia_von,\r\n    NULL AS tien_von,\r\n    tc.name AS customer_code,\r\n    tc.customer_name AS customer_name\r\nFROM\r\n    `tabSales Order Item` tsoi\r\nLEFT JOIN `tabSales Order` tso ON\r\n    tso.name = tsoi.parent\r\nLEFT JOIN `tabItem` ti ON\r\n    ti.item_code = tsoi.item_code\r\nLEFT JOIN TAX_ALLOCATION TA ON\r\n    TA.sales_order_id = tsoi.parent\r\n    AND TA.item_code = tsoi.item_code\r\nLEFT JOIN `tabCustomer` tc ON\r\n    tc.name = tso.customer\r\nWHERE\r\n    tso.company = %(company)s\r\n    AND tsoi.transaction_date BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\nORDER BY\r\n    tso.name ASC",
+ "ref_doctype": "Sales Order",
+ "report_name": "AR10 - B\u1ea3ng k\u00ea \u0111\u01a1n h\u00e0ng b\u00e1n",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "Sales Manager"
+  },
+  {
+   "role": "Maintenance User"
+  },
+  {
+   "role": "K\u1ebf to\u00e1n"
+  },
+  {
+   "role": "Stock User"
+  }
+ ]
+}

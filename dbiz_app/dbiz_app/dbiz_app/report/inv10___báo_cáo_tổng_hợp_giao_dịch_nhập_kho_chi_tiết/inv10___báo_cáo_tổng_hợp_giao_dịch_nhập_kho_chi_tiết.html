@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BÁO CÁO TỔNG HỢP GIAO DỊCH NHẬP KHO CHI TIẾT</title>
+    <style>
+        @media print {
+        @page {
+            size: A4 landscape; /* Định dạng giấy nằm ngang */
+            margin: 3mm; /* Căn lề nhỏ gọn */
+        }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .print-header {
+            margin-bottom: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .report-title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .filters {
+            text-align: left;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+
+        .filters p {
+            margin: 5px 0;
+        }
+
+        table {
+            width: 95%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+            table-layout: auto;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            word-wrap: break-word;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        .total-row td {
+            font-weight: bold;
+        }
+
+        .signature-block {
+            margin-top: 10px;
+            /* Tùy chỉnh khoảng cách trên nếu cần */
+        }
+
+        .signature-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            /* Chia làm 3 cột đều nhau */
+            text-align: center;
+            /* Căn giữa nội dung trong mỗi cột */
+            margin-top: 20px;
+            /* Tạo khoảng cách phía trên */
+        }
+
+        .signature {
+            display: flex;
+            flex-direction: column;
+            /* Căn dọc từng phần tử trong cột */
+            align-items: center;
+            /* Đảm bảo căn giữa nội dung */
+        }
+
+        .date {
+            margin-bottom: 5px;
+            /* Tạo khoảng cách giữa ngày tháng và phần chữ ký */
+            font-style: italic;
+            /* Làm nổi bật ngày tháng năm */
+        }
+
+        .date_hide {
+            visibility: hidden;
+            /* Ẩn phần tử nhưng vẫn giữ không gian */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="print-header row">
+            <div class="col-md-8 left-section">
+                <div><strong>Tên đơn vị:</strong> {%= __(filters.company_name) %}</div>
+                <div><strong>Địa chỉ đơn vị:</strong> {%= __(filters.company_address || '') %}</div>
+                <div><strong>Mã số thuế: </strong>{%= __(filters.tax_id) %}</div>
+            </div>
+        </div>
+
+        <div class="report-title">
+            <h1>BÁO CÁO TỔNG HỢP GIAO DỊCH NHẬP KHO CHI TIẾT</h1>
+        </div>
+
+        <div class="filters" style="text-align: center;">
+            <div><strong>Từ ngày:</strong>{%= filters.start_date %}&nbsp; <strong>đến ngày:</strong> {%=
+                filters.end_date %}</div>
+                {% if filters.warehouse %}
+                <p><strong>Tên kho:</strong> {%= __(filters.warehouse_name) %}</p>
+                {% endif %}
+                {% if filters.item_group %}
+                <p><strong>Nhóm sản phẩm:</strong> {%= __(filters.item_group) %}</p>
+                {% endif %}
+                {% if filters.supplier_group %}
+                <p><strong>Nhóm đối tác:</strong> {%= __(filters.supplier_group) %}</p>
+                {% endif %}
+                {% if filters.supplier %}
+                <p><strong>Đối tác:</strong> {%= __(filters.supplier) %}</p>
+                {% endif %}
+                
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã kho</th>
+                    <th>Tên kho</th>
+                    <th>Loại giao dịch</th>
+                    <th>Ngày</th>
+                    <th>Số chứng từ xuất kho</th>
+                    <th>Số đơn hàng/hóa đơn</th>
+                    <th>Nhà cung cấp</th>
+                    <th>Diễn giải</th>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>ĐVT</th>
+                    <th>Giá</th>
+                    <th>Slg.</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through the data and display rows -->
+                {% var totalTon = 0; %}
+                {% var totalAmount = 0; %}
+                {% for (var i = 0; i < data.length; i++) { %} <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ data[i]["warehouse_code"] }}</td>
+                    <td>{{ data[i]["warehouse_name"] }}</td>
+                    <td>{{ data[i]["transaction_type"] }}</td>
+                    <td>{{ data[i]["posting_date"] }}</td>
+                    <td>{{ data[i]["voucher_no"] }}</td>
+                    <td>{{ data[i]["order_invoice_no"] }}</td>
+                    <td>{{ data[i]["supplier_name"] }}</td>
+                    <td>{{ data[i]["description"] }}</td>
+                    <td>{{ data[i]["item_code"] }}</td>
+                    <td>{{ data[i]["item_name"] }}</td>
+                    <td>{{ data[i]["unit_of_measure"] }}</td>
+                    <td>{{ parseFloat(data[i]["rate"]).toLocaleString('vi-VN') }}</td>
+                    <td>
+                        {{ data[i]["quantity"] }}
+                        {% totalTon += parseFloat(data[i]["quantity"]) || 0; %}
+                    </td>
+                    <td>
+                        {{ parseFloat(data[i]["amount"]).toLocaleString('vi-VN') }}
+                        {% totalAmount += parseFloat(data[i]["amount"]) || 0; %}
+                    </td>
+                    </tr>
+                    {% } %}
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="13"><strong>Tổng :</strong></td>
+                    <td><strong>{{ totalTon.toLocaleString('vi-VN') }}</strong></td>
+                    <td><strong>{{ totalAmount.toLocaleString('vi-VN') }}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="signature-block">
+            <div class="signature">
+                <p class="date_hide">Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+                    Date().getFullYear() }}</p>
+                <p><strong>Thủ kho</strong></p>
+                <p>(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+            </div>
+            <div class="signature">
+                <p class="date_hide">Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+                    Date().getFullYear() }}</p>
+                <p><strong>Kế toán trưởng</strong></p>
+                <p>(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+            </div>
+            <div class="signature">
+                <p class="date">Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+                    Date().getFullYear() }}</p>
+                <p><strong>Giám đốc</strong></p>
+                <p>(Ký, họ tên, đóng dấu)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+                <p class="date_hide">(Ký, họ tên)</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

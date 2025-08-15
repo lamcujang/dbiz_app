@@ -1,0 +1,112 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-28 22:44:49.853631",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "pallet",
+  "second_qty",
+  "batch_no",
+  "image",
+  "column_break_ofwc",
+  "item_name",
+  "qty",
+  "uom",
+  "stock_uom",
+  "serial_no"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code Job Card Pallets",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pallet",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Pallet",
+   "options": "Pallet"
+  },
+  {
+   "fieldname": "second_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Second Qty Job Card Pallets",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ofwc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty",
+   "reqd": 1
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Uom",
+   "options": "UOM",
+   "reqd": 1
+  },
+  {
+   "fieldname": "stock_uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Stock Uom",
+   "options": "UOM",
+   "reqd": 1
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Serial No",
+   "options": "Serial No",
+   "read_only": 1
+  },
+  {
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Batch No",
+   "options": "Batch",
+   "read_only": 1
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-03-17 09:24:21.464847",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Operation Job Card Pallets",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

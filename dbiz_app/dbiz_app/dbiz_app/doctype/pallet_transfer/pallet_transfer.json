@@ -1,0 +1,147 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "PT_.####",
+ "creation": "2024-11-14 17:07:19.056701",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_fzh9",
+  "custom_btn",
+  "employee",
+  "date_transfer",
+  "amended_from",
+  "column_break_nrys",
+  "pallet_from",
+  "pallet_to",
+  "section_break_cwcq",
+  "items",
+  "html_lxwe"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_fzh9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pallet_from",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Pallet From",
+   "options": "Pallet",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_nrys",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_transfer",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Date Transfer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pallet_to",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Pallet To",
+   "options": "Pallet",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_cwcq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Pallet Transfer Items"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Pallet Transfer",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "custom_btn",
+   "fieldtype": "HTML",
+   "is_virtual": 1,
+   "label": "Custom Button"
+  },
+  {
+   "default": "<br><br><br><br>",
+   "fieldname": "html_lxwe",
+   "fieldtype": "HTML"
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-01-05 04:10:29.697373",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Pallet Transfer",
+ "naming_rule": "By script",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "nh\u00e2n vi\u00ean kho",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

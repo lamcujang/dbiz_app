@@ -1,0 +1,126 @@
+{
+ "add_total_row": 1,
+ "columns": [
+  {
+   "fieldname": "M\u00e3 ch\u1ee9ng t\u1eeb ghi t\u0103ng",
+   "fieldtype": "Data",
+   "label": "M\u00e3 ch\u1ee9ng t\u1eeb ghi t\u0103ng",
+   "width": 0
+  },
+  {
+   "fieldname": "Th\u1eddi gian ghi t\u0103ng",
+   "fieldtype": "Date",
+   "label": "Th\u1eddi gian ghi t\u0103ng",
+   "width": 0
+  },
+  {
+   "fieldname": "T\u00ean, nh\u00e3n hi\u1ec7u, quy c\u00e1ch t\u00e0i s\u1ea3n c\u1ed1 \u0111\u1ecbnh v\u00e0 c\u00f4ng c\u1ee5, d\u1ee5ng c\u1ee5",
+   "fieldtype": "Data",
+   "label": "T\u00ean, nh\u00e3n hi\u1ec7u, quy c\u00e1ch t\u00e0i s\u1ea3n c\u1ed1 \u0111\u1ecbnh v\u00e0 c\u00f4ng c\u1ee5, d\u1ee5ng c\u1ee5",
+   "width": 0
+  },
+  {
+   "fieldname": "\u0110\u01a1n v\u1ecb",
+   "fieldtype": "Data",
+   "label": "\u0110\u01a1n v\u1ecb",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ed1 l\u01b0\u1ee3ng ghi t\u0103ng",
+   "fieldtype": "Int",
+   "label": "S\u1ed1 l\u01b0\u1ee3ng ghi t\u0103ng",
+   "width": 0
+  },
+  {
+   "fieldname": "\u0110\u01a1n gi\u00e1 ghi t\u0103ng",
+   "fieldtype": "Float",
+   "label": "\u0110\u01a1n gi\u00e1 ghi t\u0103ng",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ed1 ti\u1ec1n ghi t\u0103ng",
+   "fieldtype": "Float",
+   "label": "S\u1ed1 ti\u1ec1n ghi t\u0103ng",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ed1 hi\u1ec7u ghi gi\u1ea3m",
+   "fieldtype": "Data",
+   "label": "S\u1ed1 hi\u1ec7u ghi gi\u1ea3m",
+   "width": 0
+  },
+  {
+   "fieldname": "L\u00fd do",
+   "fieldtype": "Data",
+   "label": "L\u00fd do",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ed1 l\u01b0\u1ee3ng ghi gi\u1ea3m",
+   "fieldtype": "Int",
+   "label": "S\u1ed1 l\u01b0\u1ee3ng ghi gi\u1ea3m",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ed1 ti\u1ec1n ghi gi\u1ea3m",
+   "fieldtype": "Float",
+   "label": "S\u1ed1 ti\u1ec1n ghi gi\u1ea3m",
+   "width": 0
+  },
+  {
+   "fieldname": "Ghi ch\u00fa",
+   "fieldtype": "Data",
+   "label": "Ghi ch\u00fa",
+   "width": 0
+  }
+ ],
+ "creation": "2024-11-22 09:10:51.983429",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-05-07 09:06:36.272776",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "FA01 - S\u1ed5 theo d\u00f5i t\u00e0i s\u1ea3n c\u1ed1 \u0111\u1ecbnh v\u00e0 ccdc",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "\r\nSELECT PURCHASE.NAME AS 'M\u00e3 ch\u1ee9ng t\u1eeb ghi t\u0103ng',\r\n       PURCHASE.POSTING_DATE AS 'Th\u1eddi gian ghi t\u0103ng',\r\n       AST.NAME AS 'T\u00ean, nh\u00e3n hi\u1ec7u, quy c\u00e1ch t\u00e0i s\u1ea3n c\u1ed1 \u0111\u1ecbnh v\u00e0 c\u00f4ng c\u1ee5, d\u1ee5ng c\u1ee5',\r\n       PURCHASE.UOM AS '\u0110\u01a1n v\u1ecb',\r\n       PURCHASE.QTY AS 'S\u1ed1 l\u01b0\u1ee3ng ghi t\u0103ng',\r\n       PURCHASE.AMOUNT/PURCHASE.QTY AS '\u0110\u01a1n gi\u00e1 ghi t\u0103ng',\r\n       PURCHASE.AMOUNT AS 'S\u1ed1 ti\u1ec1n ghi t\u0103ng',\r\n       SALES.NAME AS 'S\u1ed1 hi\u1ec7u ghi gi\u1ea3m',\r\n       SALES.REMARKS AS 'L\u00fd do',\r\n       SALES.QTY AS 'S\u1ed1 l\u01b0\u1ee3ng ghi gi\u1ea3m',\r\n       SALES.AMOUNT AS 'S\u1ed1 ti\u1ec1n ghi gi\u1ea3m',\r\n       PURCHASE.DESCRIPTION AS 'Ghi ch\u00fa'\r\nFROM `tabAsset` AST\r\nLEFT JOIN\r\n  (SELECT PR.NAME,\r\n          PR.REMARKS,\r\n          PRI.QTY,\r\n          PRI.AMOUNT,\r\n          PR.POSTING_DATE,\r\n          PRI.DESCRIPTION,\r\n          PRI.UOM,\r\n          PRI.ITEM_CODE\r\n   FROM `tabPurchase Receipt` PR\r\n   LEFT JOIN `tabPurchase Receipt Item` PRI ON PRI.PARENT = PR.NAME\r\n   WHERE PR.COMPANY = %(company)s\r\n     AND PRI.IS_FIXED_ASSET = 1\r\n     AND PR.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)) PURCHASE ON PURCHASE.NAME = AST.PURCHASE_RECEIPT\r\nLEFT JOIN\r\n  (SELECT SI.NAME,\r\n          SI.REMARKS,\r\n          SII.QTY,\r\n          SII.AMOUNT,\r\n          SII.ASSET,\r\n          SI.POSTING_DATE\r\n   FROM `tabSales Invoice` SI\r\n   LEFT JOIN `tabSales Invoice Item` SII ON SII.PARENT = SI.NAME\r\n   WHERE SI.COMPANY = %(company)s\r\n     AND SI.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)) SALES ON SALES.ASSET = AST.NAME\r\nWHERE (PURCHASE.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n       OR SALES.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s))\r\n       AND AST.STATUS IN('Submitted', 'Partially Depreciated', 'Fully Depreciated', 'Sold', 'Scrapped')\r\nUNION ALL\r\nSELECT PURCHASE.NAME,\r\n       PURCHASE.POSTING_DATE AS 'Th\u1eddi gian ghi t\u0103ng',\r\n       AST.NAME AS 'T\u00ean, nh\u00e3n hi\u1ec7u, quy c\u00e1ch t\u00e0i s\u1ea3n c\u1ed1 \u0111\u1ecbnh v\u00e0 c\u00f4ng c\u1ee5, d\u1ee5ng c\u1ee5',\r\n       PURCHASE.UOM AS '\u0110\u01a1n v\u1ecb',\r\n       PURCHASE.QTY AS 'S\u1ed1 l\u01b0\u1ee3ng ghi t\u0103ng',\r\n       PURCHASE.AMOUNT/PURCHASE.QTY AS '\u0110\u01a1n gi\u00e1 ghi t\u0103ng',\r\n       PURCHASE.AMOUNT AS 'S\u1ed1 ti\u1ec1n ghi t\u0103ng',\r\n       SALES.NAME AS 'S\u1ed1 hi\u1ec7u ghi gi\u1ea3m',\r\n       SALES.REMARKS AS 'L\u00fd do',\r\n       SALES.QTY AS 'S\u1ed1 l\u01b0\u1ee3ng ghi gi\u1ea3m',\r\n       SALES.AMOUNT AS 'S\u1ed1 ti\u1ec1n ghi gi\u1ea3m',\r\n       PURCHASE.DESCRIPTION AS 'Ghi ch\u00fa'\r\nFROM `tabAsset` AST\r\nLEFT JOIN\r\n  (SELECT PI.NAME,\r\n          PI.POSTING_DATE,\r\n          PI.REMARKS,\r\n          PII.QTY,\r\n          PII.AMOUNT,\r\n          PII.DESCRIPTION,\r\n          PII.UOM,\r\n          PII.ITEM_CODE\r\n   FROM `tabPurchase Invoice` PI\r\n   LEFT JOIN `tabPurchase Invoice Item` PII ON PII.PARENT = PI.NAME\r\n   WHERE PI.COMPANY = %(company)s\r\n     AND PII.IS_FIXED_ASSET = 1\r\n     AND PI.UPDATE_STOCK = 1\r\n     AND PI.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)) PURCHASE ON PURCHASE.NAME = AST.PURCHASE_INVOICE\r\nLEFT JOIN\r\n  (SELECT SI.NAME,\r\n          SI.REMARKS,\r\n          SII.QTY,\r\n          SII.ASSET,\r\n          SII.AMOUNT,\r\n          SI.POSTING_DATE\r\n   FROM `tabSales Invoice` SI\r\n   LEFT JOIN `tabSales Invoice Item` SII ON SII.PARENT = SI.NAME\r\n   WHERE SII.IS_FIXED_ASSET = 1\r\n     AND SI.COMPANY = %(company)s\r\n     AND SI.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)) SALES ON SALES.ASSET = AST.NAME\r\nWHERE AST.STATUS IN('Submitted', 'Partially Depreciated', 'Fully Depreciated', 'Sold', 'Scrapped')\r\nAND (PURCHASE.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n       OR SALES.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s))\r\n       ",
+ "ref_doctype": "Asset",
+ "report_name": "FA01 - S\u1ed5 theo d\u00f5i t\u00e0i s\u1ea3n c\u1ed1 \u0111\u1ecbnh v\u00e0 ccdc",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "K\u1ebf to\u00e1n"
+  },
+  {
+   "role": "Quality Manager"
+  }
+ ]
+}

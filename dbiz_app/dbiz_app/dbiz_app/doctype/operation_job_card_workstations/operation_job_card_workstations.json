@@ -1,0 +1,104 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-28 18:28:01.434426",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "qty",
+  "batch_no",
+  "fg_qty",
+  "column_break_vrkq",
+  "item_name",
+  "uom",
+  "weight",
+  "convert_qty",
+  "image"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code Job Card Workstations",
+   "options": "Workstation",
+   "reqd": 1
+  },
+  {
+   "description": "S\u1ed1 BTP X\u1ea3 ho\u00e0n th\u00e0nh",
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty Job Card Workstations",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vrkq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "item_code.workstation_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Uom",
+   "options": "UOM",
+   "reqd": 1
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "convert_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Convert Qty Job Card Workstations",
+   "read_only": 1
+  },
+  {
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "label": "Batch No",
+   "options": "Batch",
+   "read_only": 1
+  },
+  {
+   "description": "BTP / Multiplier = FG ho\u00e0n thi\u1ec7n, d\u00f9ng FG Qty n\u00e0y chuy\u1ec3n sang job card \u0111\u1ec3 x\u1eed l\u00fd ti\u1ebfp",
+   "fieldname": "fg_qty",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "FG Qty"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-03-31 13:38:47.907640",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Operation Job Card Workstations",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

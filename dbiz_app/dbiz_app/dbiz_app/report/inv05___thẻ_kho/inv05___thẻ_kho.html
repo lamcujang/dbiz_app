@@ -1,0 +1,252 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 12px !important;
+        line-height: 1.8 !important;
+    }
+
+    .print-format td,
+    .print-format th {
+        vertical-align: middle !important;
+    }
+
+    .print-format th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    /* Fit table cell width to the content */
+    .print-format td.fit,
+    .print-format th.fit {
+        white-space: nowrap !important;
+        width: 1% !important;
+    }
+
+    .print-format table,
+    .print-format table th,
+    .print-format table td {
+        border: 1px solid #222426 !important;
+    }
+
+    .font-weight-bold {
+        font-weight: bold !important;
+    }
+
+    .flex {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .flex-justify-between {
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -moz-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+
+    .data-label {
+        flex: 1;
+    }
+
+    .data-value {
+        flex: 1;
+    }
+
+    /* Styles specific to printing and PDF generation */
+    @media print {
+        @page {
+            size: A4 portrait !important;
+        }
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-8 text-left">
+            <div><strong>Tên đơn vị:</strong> {%= filters.company_name %}</div>
+            <div><strong>Địa chỉ đơn vị:</strong> {%= filters.company_address || '' %}</div>
+            <div><strong>Mã số thuế: </strong>{%= filters.tax_id %}</div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <div><strong>Mẫu số: S12-DN</strong> </div>
+            <div>(Ban hành theo QĐ số 15/2006/QĐ-BTC Ngày 20/03/2006 của Bộ trưởng BTC)</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h4>THẺ KHO (SỔ KHO)</h4>
+            <div>
+                Từ ngày {%= frappe.datetime.str_to_user(filters.start_date).replace(/-/g, "/") %}
+                đến {%= frappe.datetime.str_to_user(filters.end_date).replace(/-/g, "/") %}
+            </div>
+            <div><strong>Tờ số:</strong></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-left">
+            <div class="row">
+                <div class="col-xs-3 text-left">
+                    <strong>Tên kho: </strong>
+                </div>
+                <div class="col-xs-6 text-left">
+                    {%= filters.warehouse_name %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-left">
+                    <strong>Tên, nhãn hiệu, quy cách vật tư: </strong>
+                </div>
+                <div class="col-xs-6 text-left">
+                    {%= filters.item_name %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-left">
+                    <strong>Đơn vị tính: </strong>
+                </div>
+                <div class="col-xs-6 text-left">
+                    {%= filters.uom_name %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-left">
+                    <strong>Mã số: </strong>
+                </div>
+                <div class="col-xs-6 text-left">
+                    {%= filters.item_code %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-left">
+                    <strong>Tồn đầu kỳ: </strong>
+                </div>
+                {% let opening_qty = 0; %}
+                {% for (let i = 0; i < data.length; i++) { %} 
+                {% opening_qty +=(parseFloat(data[i]['qty_after_transaction']) + parseFloat(data[i]['qty_output']) - parseFloat(data[i]['qty_input'])) || 0; %} 
+                {% break; %} 
+                {% } %} 
+                <div class="col-xs-6 text-left">
+                    {{ opening_qty.toFixed(2) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-bordered text-wrap">
+            <thead>
+                <tr>
+                    <th rowspan="2">Số TT</th>
+                    <th rowspan="2">Ngày, tháng</th>
+                    <th colspan="2">Số hiệu chứng từ</th>
+                    <th rowspan="2">Diễn giải</th>
+                    <th rowspan="2">Ngày nhập, xuất</th>
+                    <th colspan="3">Số lượng</th>
+                    <th rowspan="2">Ký xác nhận của kế toán</th>
+                </tr>
+                <tr>
+                    <th>Nhập</th>
+                    <th>Xuất</th>
+                    <th>Số lượng nhập</th>
+                    <th>Số lượng xuất</th>
+                    <th>Tồn</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% var totalNhap = 0, totalXuat = 0, totalTon = 0; %}
+                {% for (var i = 0; i < data.length; i++) { %}
+                <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ data[i]["posting_date"] }}</td>
+                    <td>{{ data[i]["voucher_no_input"]}}</td>
+                    <td>{{ data[i]["voucher_no_output"] }}</td>
+                    <td>{{ data[i]["description"] }}</td>
+                    <td>{{ data[i]["posting_date2"] }}</td>
+                    <td>
+                        {{ data[i]["qty_input"] }}
+                        {% totalNhap += parseFloat(data[i]["qty_input"]) || 0; %}
+                    </td>
+                    <td>
+                        {{ data[i]["qty_output"] }}
+                        {% totalXuat += parseFloat(data[i]["qty_output"]) || 0; %}
+                    </td>
+                    <td>
+                        {{ data[i]["qty_after_transaction"] }}
+                        {% totalTon += parseFloat(data[i]["qty_after_transaction"]) || 0; %}
+                    </td>
+                    <td></td>
+                </tr>
+                {% } %}
+            </tbody>
+            
+            <!-- Dòng tổng cuối kỳ -->
+            <tfoot>
+                <tr>
+                    <td colspan="6"><strong>Cộng cuối kỳ:</strong></td>
+                    <td>{{ totalNhap.toFixed(2) }}</td>
+                    <td>{{ totalXuat.toFixed(2) }}</td>
+                    <td>{{ totalTon.toFixed(2) }}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+
+
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div>- Sổ này có ... trang, đánh số từ trang số 01 đến trang ...</div>
+        <div>
+            - Ngày mở sổ: ...
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-offset-8 col-xs-4 text-center">
+        <i>
+            Ngày {{ new Date().getDate() }} tháng {{ new Date().getMonth() + 1 }} năm {{ new
+            Date().getFullYear() }}
+        </i>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4 text-center">
+        <div>
+            <strong>Thủ kho</strong>
+        </div>
+        <div>
+            <i>(Ký, họ tên)</i>
+        </div>
+    </div>
+    <div class="col-xs-4 text-center">
+        <div>
+            <strong>Kế toán trưởng</strong>
+        </div>
+        <div>
+            <i>(Ký, họ tên)</i>
+        </div>
+    </div>
+    <div class="col-xs-4 text-center">
+        <div>
+            <strong>Giám đốc</strong>
+        </div>
+        <div>
+            <i>(Ký, họ tên, đóng dấu)</i>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,146 @@
+{
+ "add_total_row": 1,
+ "columns": [
+  {
+   "fieldname": "\u0110\u01a1n v\u1ecb",
+   "fieldtype": "Data",
+   "label": "\u0110\u01a1n v\u1ecb",
+   "width": 0
+  },
+  {
+   "fieldname": "M\u00e3, t\u00ean t\u00e0i s\u1ea3n/C\u00f4ng c\u1ee5 d\u1ee5ng c\u1ee5",
+   "fieldtype": "Data",
+   "label": "M\u00e3, t\u00ean t\u00e0i s\u1ea3n/C\u00f4ng c\u1ee5 d\u1ee5ng c\u1ee5",
+   "width": 0
+  },
+  {
+   "fieldname": "Ng\u00e0y \u0111\u01b0a v\u00e0o s\u1eed d\u1ee5ng",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y \u0111\u01b0a v\u00e0o s\u1eed d\u1ee5ng",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ed1 th\u00e1ng kh\u1ea5u hao",
+   "fieldtype": "Int",
+   "label": "S\u1ed1 th\u00e1ng kh\u1ea5u hao",
+   "width": 0
+  },
+  {
+   "fieldname": "Kh\u1ea5u hao h\u00e0ng th\u00e1ng",
+   "fieldtype": "Float",
+   "label": "Kh\u1ea5u hao h\u00e0ng th\u00e1ng",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ed1 k\u1ef3 \u0111\u00e3 K/Hao",
+   "fieldtype": "Int",
+   "label": "S\u1ed1 k\u1ef3 \u0111\u00e3 K/Hao",
+   "width": 0
+  },
+  {
+   "fieldname": "\u0110\u1ea7u k\u1ef3 Nguy\u00ean gi\u00e1",
+   "fieldtype": "Float",
+   "label": "\u0110\u1ea7u k\u1ef3 Nguy\u00ean gi\u00e1",
+   "width": 0
+  },
+  {
+   "fieldname": "\u0110\u1ea7u k\u1ef3 \u0111\u00e3 kh\u1ea5u hao",
+   "fieldtype": "Float",
+   "label": "\u0110\u1ea7u k\u1ef3 \u0111\u00e3 kh\u1ea5u hao",
+   "width": 0
+  },
+  {
+   "fieldname": "\u0110\u1ea7u k\u1ef3 c\u00f2n l\u1ea1i",
+   "fieldtype": "Float",
+   "label": "\u0110\u1ea7u k\u1ef3 c\u00f2n l\u1ea1i",
+   "width": 0
+  },
+  {
+   "fieldname": "Kh\u1ea5u hao trong k\u1ef3",
+   "fieldtype": "Float",
+   "label": "Kh\u1ea5u hao trong k\u1ef3",
+   "width": 0
+  },
+  {
+   "fieldname": "Cu\u1ed1i k\u1ef3 nguy\u00ean gi\u00e1",
+   "fieldtype": "Float",
+   "label": "Cu\u1ed1i k\u1ef3 nguy\u00ean gi\u00e1",
+   "width": 0
+  },
+  {
+   "fieldname": "Cu\u1ed1i k\u1ef3 \u0111\u00e3 KH",
+   "fieldtype": "Float",
+   "label": "Cu\u1ed1i k\u1ef3 \u0111\u00e3 KH",
+   "width": 0
+  },
+  {
+   "fieldname": "Cu\u1ed1i k\u1ef3 c\u00f2n l\u1ea1i",
+   "fieldtype": "Float",
+   "label": "Cu\u1ed1i k\u1ef3 c\u00f2n l\u1ea1i",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ed1 l\u01b0\u1ee3ng",
+   "fieldtype": "Int",
+   "label": "S\u1ed1 l\u01b0\u1ee3ng",
+   "width": 0
+  }
+ ],
+ "creation": "2024-11-22 09:11:07.830226",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "finance_book",
+   "fieldtype": "Link",
+   "label": "S\u1ed5 t\u00e0i s\u1ea3n",
+   "mandatory": 1,
+   "options": "Finance Book",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-05-06 17:57:53.030420",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "FA03 - B\u1ea3ng t\u1ed5ng h\u1ee3p t\u00e0i s\u1ea3n",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \r\n\tDEPARTMENT AS '\u0110\u01a1n v\u1ecb',\r\n    CONCAT(TA.NAME, ', ', TA.ASSET_NAME) AS 'M\u00e3, t\u00ean t\u00e0i s\u1ea3n/C\u00f4ng c\u1ee5 d\u1ee5ng c\u1ee5',\r\n    AVAILABLE_FOR_USE_DATE AS 'Ng\u00e0y \u0111\u01b0a v\u00e0o s\u1eed d\u1ee5ng',\r\n    OP_DE.TOTAL_NUMBER_OF_DEPRECIATIONS AS 'S\u1ed1 th\u00e1ng kh\u1ea5u hao',\r\n    DEPRECIATION_AMOUNT AS 'Kh\u1ea5u hao h\u00e0ng th\u00e1ng',\r\n    OPENING_NUMBER_OF_BOOKED_DEPRECIATIONDS AS 'S\u1ed1 k\u1ef3 \u0111\u00e3 K/Hao',\r\n    TOTAL_ASSET_COST AS '\u0110\u1ea7u k\u1ef3 Nguy\u00ean gi\u00e1',\r\n    OPENING_ACCUMULATED_DEPRECIATIONDS AS '\u0110\u1ea7u k\u1ef3 \u0111\u00e3 kh\u1ea5u hao',\r\n    TOTAL_ASSET_COST - OPENING_ACCUMULATED_DEPRECIATIONDS AS '\u0110\u1ea7u k\u1ef3 c\u00f2n l\u1ea1i',\r\n    DEPRECIATION_AMOUNT AS 'Kh\u1ea5u hao trong k\u1ef3',\r\n    TOTAL_ASSET_COST AS 'Cu\u1ed1i k\u1ef3 nguy\u00ean gi\u00e1',\r\n    DEPRECIATION_AMOUNT + OPENING_ACCUMULATED_DEPRECIATIONDS AS 'Cu\u1ed1i k\u1ef3 \u0111\u00e3 KH',\r\n    TOTAL_ASSET_COST - OPENING_ACCUMULATED_DEPRECIATIONDS - DEPRECIATION_AMOUNT AS 'Cu\u1ed1i k\u1ef3 c\u00f2n l\u1ea1i',\r\n    TA.ASSET_QUANTITY AS 'S\u1ed1 l\u01b0\u1ee3ng'\r\nFROM \r\n\ttabAsset TA \r\nLEFT JOIN\r\n(\r\n    SELECT * \r\n    FROM \r\n        `tabAsset Depreciation Schedule` ADS \r\n    LEFT JOIN \r\n    (\r\n        SELECT SUM(DEPRECIATION_AMOUNT) AS OPENING_ACCUMULATED_DEPRECIATIONDS, COUNT(*) AS OPENING_NUMBER_OF_BOOKED_DEPRECIATIONDS, PARENT\r\n        FROM\r\n            `tabDepreciation Schedule`\r\n        WHERE \r\n            SCHEDULE_DATE < DATE(%(start_date)s)\r\n        GROUP BY PARENT\r\n    ) AS DS\r\n    ON DS.PARENT = ADS.NAME\r\n    WHERE ADS.DOCSTATUS = 1\r\n    AND ADS.finance_book = %(finance_book)s\r\n) AS OP_DE\r\nON TA.NAME = OP_DE.ASSET\r\nLEFT JOIN \r\n(\r\n    SELECT * \r\n    FROM \r\n        `tabAsset Depreciation Schedule` ADS \r\n    LEFT JOIN \r\n    (\r\n        SELECT SUM(DEPRECIATION_AMOUNT) AS DEPRECIATION_AMOUNT, PARENT\r\n        FROM\r\n            `tabDepreciation Schedule`\r\n        WHERE \r\n            SCHEDULE_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n        GROUP BY PARENT\r\n    ) AS DS\r\n    ON DS.PARENT = ADS.NAME\r\n    WHERE ADS.DOCSTATUS = 1\r\n    AND ADS.finance_book = %(finance_book)s\r\n) AS END_DE\r\nON TA.NAME = END_DE.ASSET\r\nWHERE TA.COMPANY = (%(company)s)\r\nAND TA.STATUS IN ('Submitted', 'Partially Depreciated', 'Fully Depreciated')\r\nGROUP BY TA.NAME;\r\n",
+ "ref_doctype": "Asset",
+ "report_name": "FA03 - B\u1ea3ng t\u1ed5ng h\u1ee3p t\u00e0i s\u1ea3n",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "K\u1ebf to\u00e1n"
+  },
+  {
+   "role": "Quality Manager"
+  }
+ ]
+}

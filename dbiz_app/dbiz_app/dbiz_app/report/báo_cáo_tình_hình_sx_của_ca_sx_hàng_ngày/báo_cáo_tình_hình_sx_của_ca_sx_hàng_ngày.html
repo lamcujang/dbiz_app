@@ -1,0 +1,92 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 11px !important;
+    }
+
+
+    .print-format table td,
+    .print-format table th {
+        vertical-align: middle !important;
+    }
+
+    .print-format table,
+    .print-format table th,
+    .print-format table td {
+        border: 1px solid #222426 !important;
+    }
+
+    .print-format table th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    .font-weight-bold {
+        font-weight: bold !important;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-xs-12 text-center">
+            <h2 class="font-weight-bold">{%= __("BÁO CÁO TÌNH HÌNH SX CỦA CA SX HÀNG NGÀY") %}</h2>
+
+            <table class="table table-bordered text-wrap">
+                <thead>
+                    <tr>
+                        <th>Thứ</th>
+                        <th>Tháng năm</th>
+                        <th>Tuần năm</th>
+                        <th>Ngày</th>
+                        <th>Công đoạn</th>
+                        <th>Ca</th>
+                        <th>Nhân công</th>
+                        <th>Sản lượng</th>
+                        <th>Phế</th>
+                        <th>Tỷ lệ phế</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for(let i = 0; i < data.length; i++) { %} <tr>
+                        {% if (data[i]['shift'] === null && data[i]['staff'] === null) { %}
+                        <td colspan="7" class="font-weight-bold text-right">Tổng:</td>
+                        <td class="font-weight-bold text-right">
+                            {%= data[i]['output_qty'] !== null
+                            ? format_number_js(data[i]['output_qty'])
+                            : '' %}
+                        </td>
+                        <td class="font-weight-bold text-right">
+                            {%= data[i]['scrap_qty'] !== null
+                            ? format_number_js(data[i]['scrap_qty'])
+                            : '' %}
+                        </td>
+                        <td class="font-weight-bold text-right">{%= data[i]['scrap_rate'] %}</td>
+                        {% } else { %}
+                        <td class="text-center">{%= data[i]['day_of_week'] %}</td>
+                        <td class="text-center">{%= data[i]['month_of_year'] %}</td>
+                        <td class="text-center">{%= data[i]['week_of_year'] %}</td>
+                        <td class="text-center">{%= data[i]['full_date'] %}</td>
+                        <td class="text-center">{%= data[i]['operation'] %}</td>
+                        <td class="text-center">{%= data[i]['shift'] %}</td>
+                        <td class="text-center">{%= data[i]['staff'] %}</td>
+                        <td class="text-right">
+                            {%= data[i]['output_qty'] !== null
+                            ? format_number_js(data[i]['output_qty'])
+                            : '' %}
+                        </td>
+                        <td class="text-right">
+                            {%= data[i]['scrap_qty'] !== null
+                            ? format_number_js(data[i]['scrap_qty'])
+                            : '' %}
+                        </td>
+                        <td class="text-right">{%= data[i]['scrap_rate'] %}</td>
+                        {% } %}
+                        </tr>
+                        {% } %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

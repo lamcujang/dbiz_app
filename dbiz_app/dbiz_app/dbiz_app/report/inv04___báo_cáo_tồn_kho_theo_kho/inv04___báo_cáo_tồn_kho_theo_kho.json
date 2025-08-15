@@ -1,0 +1,66 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2024-11-20 12:56:57.252241",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "SSG",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  },
+  {
+   "default": "156 - Kho - H\u00e0ng h\u00f3a - S",
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Kho",
+   "mandatory": 1,
+   "options": "Warehouse",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 4,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-04-29 14:49:40.342608",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "INV04 - B\u00e1o c\u00e1o t\u1ed3n kho theo kho",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \n    ti.item_group AS 'Nh\u00f3m s\u1ea3n ph\u1ea9m',\n    tsle.item_code AS 'M\u00e3 s\u1ea3n ph\u1ea9m',\n    ti.item_name AS 'T\u00ean s\u1ea3n ph\u1ea9m',\n    tsle.stock_uom AS '\u0110VT',\n    tsle.actual_qty + tsle.qty_after_transaction AS '\u0110\u1ea7u k\u1ef3',\n    CASE \n        WHEN tsle.actual_qty > 0 THEN ABS(tsle.actual_qty)\n        WHEN tsle.actual_qty < 0 THEN 0\n    END AS 'SL nh\u1eadp',\n    CASE \n        WHEN tsle.actual_qty > 0 THEN 0\n        WHEN tsle.actual_qty < 0 THEN ABS(tsle.actual_qty)\n    END AS 'SL xu\u1ea5t',\n    tsle.qty_after_transaction AS 'Cu\u1ed1i k\u1ef3'\nFROM `tabStock Ledger Entry` tsle \nLEFT JOIN `tabWarehouse` tw ON tw.name = tsle.warehouse \nLEFT JOIN `tabItem` ti ON ti.name = tsle.item_code\nWHERE tsle.company = %(company)s\n    AND tsle.posting_date BETWEEN DATE( %(start_date)s) AND DATE(%(end_date)s)\n    AND tsle.warehouse = %(warehouse)s",
+ "ref_doctype": "Stock Ledger Entry",
+ "report_name": "INV04 - B\u00e1o c\u00e1o t\u1ed3n kho theo kho",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Gi\u00e1m \u0111\u1ed1c T\u00e0i ch\u00ednh"
+  },
+  {
+   "role": "K\u1ebf to\u00e1n"
+  }
+ ]
+}

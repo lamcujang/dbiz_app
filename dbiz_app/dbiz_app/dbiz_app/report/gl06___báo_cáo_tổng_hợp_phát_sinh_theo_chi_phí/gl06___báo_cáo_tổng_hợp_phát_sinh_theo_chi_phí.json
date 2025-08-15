@@ -1,0 +1,65 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2024-11-20 10:02:33.408390",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "Leepak",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "account",
+   "fieldtype": "Link",
+   "label": "T\u00e0i kho\u1ea3n",
+   "mandatory": 1,
+   "options": "Account",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-04-28 23:25:28.715065",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "GL06 - B\u00e1o c\u00e1o t\u1ed5ng h\u1ee3p ph\u00e1t sinh theo chi ph\u00ed",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \r\n  SUBSTRING_INDEX(GL.ACCOUNT, ' -', 1) 'M\u00e3 TK',\r\n  TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(GL.ACCOUNT, ' -', 2), ' -', -1)) 'T\u00ean chi ph\u00ed',\r\n  DATE_FORMAT(GL.CREATION, '%%e/%%c/%%Y') 'Ng\u00e0y th\u00e1ng ghi s\u1ed5',\r\n  GL.VOUCHER_NO 'S\u1ed1 hi\u1ec7u', \r\n  DATE_FORMAT(GL.POSTING_DATE, '%%e/%%c/%%Y') 'Ng\u00e0y th\u00e1ng',\r\n  GL.REMARKS 'Di\u1ec5n gi\u1ea3i',\r\n  GL.DEBIT - GL.CREDIT 'S\u1ed1 ti\u1ec1n',\r\n  GL.CREDIT 'PS n\u1ee3', \r\n  GL.DEBIT 'PS c\u00f3'\r\nFROM \r\n  `tabGL Entry` GL \r\n  LEFT JOIN `tabCustomer` C ON C.CUSTOMER_NAME = GL.PARTY\r\nWHERE \r\n  GL.ACCOUNT = %(account)s\r\n  AND IS_CANCELLED = 0\r\n  AND POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n  AND COMPANY = %(company)s",
+ "ref_doctype": "GL Entry",
+ "report_name": "GL06 - B\u00e1o c\u00e1o t\u1ed5ng h\u1ee3p ph\u00e1t sinh theo chi ph\u00ed",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Gi\u00e1m \u0111\u1ed1c T\u00e0i ch\u00ednh"
+  },
+  {
+   "role": "Auditor"
+  },
+  {
+   "role": "K\u1ebf to\u00e1n"
+  }
+ ]
+}

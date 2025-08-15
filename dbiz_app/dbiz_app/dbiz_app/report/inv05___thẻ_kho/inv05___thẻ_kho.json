@@ -1,0 +1,124 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "Ng\u00e0y, th\u00e1ng",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y, th\u00e1ng",
+   "width": 0
+  },
+  {
+   "fieldname": "voucher_no_input",
+   "fieldtype": "Data",
+   "label": "Nh\u1eadp",
+   "width": 0
+  },
+  {
+   "fieldname": "voucher_no_output",
+   "fieldtype": "Data",
+   "label": "Xu\u1ea5t",
+   "width": 0
+  },
+  {
+   "fieldname": "Di\u1ec5n gi\u1ea3i",
+   "fieldtype": "Data",
+   "label": "Di\u1ec5n gi\u1ea3i",
+   "width": 0
+  },
+  {
+   "fieldname": "Ng\u00e0y nh\u1eadp, xu\u1ea5t",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y nh\u1eadp, xu\u1ea5t",
+   "width": 0
+  },
+  {
+   "fieldname": "Nh\u1eadp",
+   "fieldtype": "Int",
+   "label": "Nh\u1eadp",
+   "width": 0
+  },
+  {
+   "fieldname": "Xu\u1ea5t",
+   "fieldtype": "Int",
+   "label": "Xu\u1ea5t",
+   "width": 0
+  },
+  {
+   "fieldname": "T\u1ed3n",
+   "fieldtype": "Int",
+   "label": "T\u1ed3n",
+   "width": 0
+  }
+ ],
+ "creation": "2024-11-20 09:44:58.547482",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng Ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Kho",
+   "mandatory": 1,
+   "options": "Warehouse",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Link",
+   "label": "T\u00ean m\u1eb7t h\u00e0ng",
+   "mandatory": 1,
+   "options": "Item",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-12-09 08:48:02.633086",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "INV05 - Th\u1ebb Kho",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \n    sl.posting_date AS \"Ng\u00e0y, th\u00e1ng\", \n    CASE WHEN sl.actual_qty > 0 THEN sl.voucher_no ELSE NULL END AS \"voucher_no_input\",\n    CASE WHEN sl.actual_qty < 0 THEN sl.voucher_no ELSE NULL END AS \"voucher_no_output\",\n    NULL AS \"Di\u1ec5n gi\u1ea3i\",\n    sl.posting_date AS \"Ng\u00e0y nh\u1eadp, xu\u1ea5t\",\n    GREATEST(sl.actual_qty, 0) AS \"Nh\u1eadp\",\n    ABS(LEAST(sl.actual_qty, 0)) AS \"Xu\u1ea5t\",\n    sl.qty_after_transaction AS \"T\u1ed3n\"\nFROM \n    `tabStock Ledger Entry` sl \n    LEFT JOIN `tabItem` it ON sl.item_code = it.item_code \nWHERE \n    POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\n    AND COMPANY = %(company)s AND WAREHOUSE = %(warehouse)s\n    AND it.item_code = %(item_name)s",
+ "ref_doctype": "Stock Entry",
+ "report_name": "INV05 - Th\u1ebb Kho",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Manufacturing User"
+  },
+  {
+   "role": "Manufacturing Manager"
+  },
+  {
+   "role": "Stock Manager"
+  }
+ ]
+}

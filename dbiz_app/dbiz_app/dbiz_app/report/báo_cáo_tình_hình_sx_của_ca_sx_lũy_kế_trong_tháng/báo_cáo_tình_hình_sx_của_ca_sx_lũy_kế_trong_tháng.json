@@ -1,0 +1,42 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-12-10 09:13:50.525451",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-01-20 14:52:50.856002",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "B\u00e1o c\u00e1o t\u00ecnh h\u00ecnh sx c\u1ee7a ca SX l\u0169y k\u1ebf trong th\u00e1ng",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT LUYKE_TB.CA, \r\n\tLUYKE_TB.SL_NGAY, \r\n\tCEIL(LUYKE_TB.SL_LUYKE * 10) / 10 SL_LUYKE, \r\n\tCEIL(PHE_TB.PHE_LK * 10) / 10 PHE_LK, \r\n\tCEIL(PHE_TB.PHE_LK/LUYKE_TB.SL_LUYKE * 1000) / 10 TY_LE, \r\n\tCASE \r\n\t\tWHEN LUYKE_TB.work_order_type = \"WORK_ORDER_BLOW\" THEN \"Th\u1ed5i\"\r\n\t\tELSE \"C\u1eaft\"\r\n\tEND AS WORK_TYPE\r\nFROM\r\n(SELECT \r\n    te.employee_name AS CA, \r\n    SUM(CASE WHEN tjc.posting_date = DATE(%(end_date)s) THEN tjci.required_qty ELSE 0 END) AS SL_NGAY,\r\n    SUM(tjci.required_qty) AS SL_LUYKE,\r\n    two.work_order_type\r\nFROM \r\n    `tabJob Card` tjc  \r\nLEFT JOIN\r\n    `tabJob Card Time Log` tjctl \r\nON \r\n    tjc.name = tjctl.parent \r\nLEFT JOIN \r\n    `tabEmployee` te\r\nON \r\n    tjctl.employee = te.name \r\nLEFT JOIN \r\n    `tabJob Card Item` tjci \r\nON \r\n    tjc.name = tjci.parent\r\nLEFT JOIN\r\n\t`tabWork Order` two\r\nON \r\n\ttwo.name = tjc.work_order\r\nWHERE \r\n    tjc.posting_date BETWEEN DATE(%(start_date)s)\r\n                         AND DATE(%(end_date)s)\r\n    AND two.work_order_type in ('WORK_ORDER_BLOW', 'WORK_ORDER_CUT')\r\nGROUP BY \r\n    te.employee_name, two.work_order_type) LUYKE_TB\r\nLEFT JOIN\r\n(SELECT \r\n    te.employee_name AS CA, \r\n    SUM(tsed.qty) AS PHE_LK,\r\n    CASE\r\n        WHEN tip.name = \"PHECAT\" THEN \"WORK_ORDER_CUT\"\r\n        ELSE \"WORK_ORDER_BLOW\"\r\n    END AS ITEM_GROUP\r\nFROM \r\n    `tabStock Entry` tse \r\nLEFT JOIN \r\n    `tabEmployee` te\r\nON \r\n    tse.employee = te.name \r\nLEFT JOIN \r\n    `tabStock Entry Detail` tsed \r\nON \r\n    tse.name = tsed.parent \r\nLEFT JOIN\r\n    `tabItem` ti\r\nON \r\n    tsed.item_code = ti.name\r\nLEFT JOIN\r\n    `tabItem Group` tip\r\nON\r\n    ti.item_group = tip.name\r\nWHERE \r\n    tse.posting_date BETWEEN DATE(%(start_date)s)\r\n                         AND DATE(%(end_date)s)\r\n    AND (tip.name = \"PHELIEU\" OR tip.parent_item_group  = \"PHELIEU\")\r\nGROUP BY \r\n    te.employee_name, tip.name) PHE_TB\r\nON LUYKE_TB.CA = PHE_TB.CA AND LUYKE_TB.work_order_type = PHE_TB.ITEM_GROUP\r\nWHERE\r\n    CASE\r\n        WHEN %(type)s = \"Th\u1ed5i\" THEN LUYKE_TB.work_order_type = 'WORK_ORDER_BLOW'\r\n        WHEN %(type)s = \"C\u1eaft\" THEN LUYKE_TB.work_order_type = 'WORK_ORDER_CUT'\r\n        ELSE 1 = 1\r\n    END\r\nORDER BY LUYKE_TB.work_order_type, LUYKE_TB.CA",
+ "ref_doctype": "Job Card",
+ "report_name": "B\u00e1o c\u00e1o t\u00ecnh h\u00ecnh sx c\u1ee7a ca SX l\u0169y k\u1ebf trong th\u00e1ng",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Manufacturing Manager"
+  },
+  {
+   "role": "Manufacturing User"
+  },
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "C\u00f4ng nh\u00e2n tr\u1ed9n"
+  },
+  {
+   "role": "C\u00f4ng nh\u00e2n th\u1ed5i"
+  },
+  {
+   "role": "C\u00f4ng nh\u00e2n c\u1eaft"
+  }
+ ]
+}

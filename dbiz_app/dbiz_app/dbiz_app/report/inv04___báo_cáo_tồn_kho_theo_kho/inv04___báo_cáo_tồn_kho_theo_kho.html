@@ -1,0 +1,119 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 11px !important;
+    }
+
+    .print-format th,
+    .print-format td {
+        vertical-align: middle !important;
+    }
+
+    .print-format th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    .print-format table,
+    .print-format table th,
+    .print-format table td {
+        border: 1px solid #222426 !important;
+    }
+
+    .print-format .font-weight-bold {
+        font-weight: bold !important;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-8 text-left">
+            <div>
+                Tên công ty: {%= filters.company_name %}
+            </div>
+            <div>
+                Địa chỉ đơn vị: {%= filters.company_address || '' %}
+            </div>
+            <div>
+                Mã số thuế: {%= filters.tax_id %}
+            </div>
+        </div>
+        <div class="col-xs-4 text-right">
+            <div>
+                Ngày báo cáo
+            </div>
+            <div>
+                {%= frappe.datetime.str_to_user(frappe.datetime.now_date()).split('-').join('/') %}
+            </div>
+            <div>
+                {%= frappe.datetime.now_time() %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h2 class="font-weight-bold" style="font-size: 18px;">BÁO CÁO TỒN KHO THEO KHO</h2>
+
+            <div>
+                Từ ngày {%= frappe.datetime.str_to_user(filters.start_date).split('-').join('/') %}
+                đến {%= frappe.datetime.str_to_user(filters.end_date).split('-').join('/') %}
+            </div>
+            <div class="font-weight-bold">
+                {% if (filters.warehouse_name) { %}
+                {%= __("Kho: " + filters.warehouse_name) %}
+                {% } else { %}
+                {%= __("Kho: Tất cả") %}
+                {% } %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Nhóm sản phẩm</th>
+                        <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>ĐVT</th>
+                        <th>Đầu kỳ</th>
+                        <th>SL nhập</th>
+                        <th>SL xuất</th>
+                        <th>Cuối kỳ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% let last = data.length - 1; %}
+                    {% for(let i = 0; i < last; i++) { %} <tr>
+                        <td class="text-center">{%= i + 1 %}</td>
+                        <td>{%= data[i]['item_group'] %}</td>
+                        <td>{%= data[i]['item_code'] %}</td>
+                        <td>{%= data[i]['item_name'] %}</td>
+                        <td class="text-center">{%= data[i]['stock_uom'] %}</td>
+                        <td class="text-right">
+                            {%= format_number_js(data[i]['original_quantity']) %}
+                        </td>
+                        <td class="text-right">{%= format_number_js(data[i]['input_quantity']) %}</td>
+                        <td class="text-right">
+                            {%= format_number_js(data[i]['output_quantity']) %}
+                        </td>
+                        <td class="text-right">{%= format_number_js(data[i]['total_quantity']) %}</td>
+                        </tr>
+                        {% } %}
+
+                        <tr class="font-weight-bold text-right">
+                            <td colspan="5">Tổng</td>
+                            <td>{%= format_number_js(data[last]['original_quantity']) %}</td>
+                            <td>{%= format_number_js(data[last]['input_quantity']) %}</td>
+                            <td>{%= format_number_js(data[last]['output_quantity']) %}</td>
+                            <td>{%= format_number_js(data[last]['total_quantity']) %}</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

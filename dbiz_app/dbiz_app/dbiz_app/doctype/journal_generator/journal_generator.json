@@ -1,0 +1,152 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{gl_gen_name} - {abbr_company}",
+ "creation": "2024-12-05 14:53:43.568030",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "abbr_company",
+  "gl_gen_name",
+  "document_type",
+  "gl_category",
+  "posting_type",
+  "is_group_by_cost_center",
+  "dimension_group",
+  "column_break_svud",
+  "description",
+  "journal_remarks",
+  "section_break_jocd",
+  "account_adjust_dr",
+  "column_break_epsp",
+  "account_adjust_cr",
+  "section_break_tgld",
+  "accounts"
+ ],
+ "fields": [
+  {
+   "fieldname": "column_break_svud",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Select",
+   "label": "Document Type",
+   "options": "1. L\u00f4 b\u00fat to\u00e1n t\u1ed5ng h\u1ee3p\n3- B\u00fat to\u00e1n kh\u00f3a s\u1ed5\nB\u00fat to\u00e1n th\u1ee7 c\u00f4ng\nGL Journal"
+  },
+  {
+   "fieldname": "gl_category",
+   "fieldtype": "Link",
+   "label": "GL Category",
+   "options": "GL Generator Category"
+  },
+  {
+   "fieldname": "posting_type",
+   "fieldtype": "Select",
+   "label": "Posting Type",
+   "options": "Actual\nBudget\nStatistical"
+  },
+  {
+   "fieldname": "section_break_jocd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "account_adjust_dr",
+   "fieldtype": "Link",
+   "label": "Account Adjust DR",
+   "link_filters": "[[\"Account\",\"is_group\",\"=\",0]]",
+   "options": "Account"
+  },
+  {
+   "fieldname": "column_break_epsp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "account_adjust_cr",
+   "fieldtype": "Link",
+   "label": "Account Adjust CR",
+   "link_filters": "[[\"Account\",\"is_group\",\"=\",0]]",
+   "options": "Account"
+  },
+  {
+   "fieldname": "section_break_tgld",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "accounts",
+   "fieldtype": "Table",
+   "label": "Accounts",
+   "options": "Journal Generator Line"
+  },
+  {
+   "fetch_from": "company.abbr",
+   "fieldname": "abbr_company",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Abbr Company"
+  },
+  {
+   "fieldname": "gl_gen_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Journal Generator Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "dimension_group",
+   "fieldtype": "Table MultiSelect",
+   "label": "Group by Accounting Dimensions",
+   "options": "Accounting Dimensions Group"
+  },
+  {
+   "fieldname": "journal_remarks",
+   "fieldtype": "Small Text",
+   "label": "Journal Remarks"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_group_by_cost_center",
+   "fieldtype": "Check",
+   "label": "Group by Cost Center"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-12-10 11:19:14.982076",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Journal Generator",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

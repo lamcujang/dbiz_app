@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-05 16:48:28.432221",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "client",
+  "generator_line",
+  "account_element",
+  "gl_category",
+  "active",
+  "column_break_xyxw",
+  "multiplier_amount",
+  "round_amount",
+  "commenthelp"
+ ],
+ "fields": [
+  {
+   "fieldname": "client",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Client",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "generator_line",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Generator Line",
+   "reqd": 1
+  },
+  {
+   "fieldname": "account_element",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Account Element",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gl_category",
+   "fieldtype": "Select",
+   "label": "GL Category",
+   "options": "AP Invoice\nAP Payment\nAR Invoice\nAR Receipt\nB\u00fat to\u00e1n t\u1ed5ng h\u1ee3p\nCash/Payments\nDistribution\nFreight Order Manufacturing\nMaterial Management\nNone\nPayroll\nStandard"
+  },
+  {
+   "fieldname": "commenthelp",
+   "fieldtype": "Small Text",
+   "label": "Comment/Help"
+  },
+  {
+   "default": "1",
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Active"
+  },
+  {
+   "fieldname": "column_break_xyxw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "multiplier_amount",
+   "fieldtype": "Float",
+   "label": "Multiplier Amount"
+  },
+  {
+   "fieldname": "round_amount",
+   "fieldtype": "Int",
+   "label": "Round Amount"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-12-06 09:54:23.982585",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Generator Source",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

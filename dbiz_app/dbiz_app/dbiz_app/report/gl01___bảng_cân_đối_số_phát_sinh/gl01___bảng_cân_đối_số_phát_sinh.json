@@ -1,0 +1,34 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2024-11-20 09:58:41.586193",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "GL01",
+ "letterhead": null,
+ "modified": "2024-11-20 11:16:51.000116",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "GL01 - B\u1ea3ng c\u00e2n \u0111\u1ed1i s\u1ed1 ph\u00e1t sinh",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "WITH TMP AS (\r\n  SELECT \r\n    SUBSTRING_INDEX(GL.ACCOUNT, ' -', 1) AS ACCOUNT_NUMBER, \r\n    SUM(GL.DEBIT) AS DEBIT, \r\n    SUM(GL.CREDIT) AS CREDIT, \r\n    POSTING_DATE \r\n  FROM \r\n    `tabGL Entry` GL \r\n  WHERE \r\n    COMPANY = %(company)s\r\n    AND IS_CANCELLED = 0 \r\n  GROUP BY \r\n    SUBSTRING_INDEX(GL.ACCOUNT, ' -', 1), \r\n    TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(GL.ACCOUNT, ' -', 2), ' -', -1))\r\n) \r\nSELECT \r\n  AC.ACCOUNT_NUMBER, \r\n  AC.ACCOUNT_NAME, \r\n  IFNULL(O.OPENING_DEBIT,0) DAU_KY_NO, \r\n  IFNULL(O.OPENING_CREDIT,0) DAU_KY_CO, \r\n  IFNULL(GL.DEBIT,0) PHAT_SINH_NO, \r\n  IFNULL(GL.CREDIT,0) PHAT_SINH_CO, \r\n  IFNULL(E.ENDING_DEBIT, 0) CUOI_KY_NO, \r\n  IFNULL(E.ENDING_CREDIT, 0) CUOI_KY_CO \r\nFROM \r\n  `tabAccount` AC \r\n  LEFT JOIN (\r\n        SELECT \r\n          ACCOUNT_NUMBER, \r\n          DEBIT, \r\n          CREDIT \r\n        FROM \r\n          TMP \r\n        WHERE \r\n          POSTING_DATE >= DATE(\r\n            %(start_date)s\r\n          ) \r\n          AND POSTING_DATE <= DATE(\r\n            %(end_date)s\r\n          )\r\n      ) GL ON GL.ACCOUNT_NUMBER = AC.ACCOUNT_NUMBER\r\n      LEFT JOIN (\r\n        SELECT \r\n          ACCOUNT_NUMBER, \r\n          CASE WHEN DEBIT - CREDIT > 0 THEN DEBIT - CREDIT ELSE NULL END AS OPENING_DEBIT, \r\n          CASE WHEN CREDIT - DEBIT > 0 THEN CREDIT - DEBIT ELSE NULL END AS OPENING_CREDIT \r\n        FROM \r\n          TMP \r\n        WHERE \r\n          POSTING_DATE < DATE(\r\n            %(start_date)s\r\n          )\r\n      ) O ON O.ACCOUNT_NUMBER = AC.ACCOUNT_NUMBER \r\n      LEFT JOIN (\r\n        SELECT \r\n          ACCOUNT_NUMBER, \r\n          CASE WHEN DEBIT - CREDIT > 0 THEN DEBIT - CREDIT ELSE 0 END AS ENDING_DEBIT, \r\n          CASE WHEN CREDIT - DEBIT > 0 THEN CREDIT - DEBIT ELSE 0 END AS ENDING_CREDIT \r\n        FROM \r\n          TMP \r\n        WHERE \r\n          POSTING_DATE <= DATE(%(end_date)s)\r\n      ) E ON E.ACCOUNT_NUMBER = AC.ACCOUNT_NUMBER\r\nWHERE \r\n  AC.COMPANY = %(company)s\r\n  AND AC.IS_GROUP = 0",
+ "ref_doctype": "GL Entry",
+ "report_name": "GL01 - B\u1ea3ng c\u00e2n \u0111\u1ed1i s\u1ed1 ph\u00e1t sinh",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "K\u1ebf to\u00e1n"
+  },
+  {
+   "role": "Gi\u00e1m \u0111\u1ed1c T\u00e0i ch\u00ednh"
+  },
+  {
+   "role": "Auditor"
+  }
+ ]
+}

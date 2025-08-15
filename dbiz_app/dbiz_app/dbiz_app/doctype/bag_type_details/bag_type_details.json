@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-13 09:49:03.449475",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "field",
+  "column_break_zyhw",
+  "enable",
+  "required"
+ ],
+ "fields": [
+  {
+   "fieldname": "field",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Field",
+   "link_filters": "[\r\n  [\"DocField\", \"parent\", \"=\", \"Item\"]\r\n]",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_zyhw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enable"
+  },
+  {
+   "default": "0",
+   "fieldname": "required",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Required"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-06 17:06:09.488572",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Bag Type Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,70 @@
+<style>
+	.print-format {
+		padding: 4mm;
+		font-size: 8.0pt !important;
+	}
+
+	.print-format td {
+		vertical-align: middle !important;
+	}
+
+	table,
+	th,
+	tr,
+	td {
+		border: 2px solid black;
+		border-collapse: collapse;
+		font-size: 10px;
+	}
+
+	table th {
+		font-weight: bold !important;
+		color: black !important;
+		text-align: center !important;
+		font-size: 10px;
+	}
+
+
+</style>
+<h2 style="margin-top:0">{%= __("Tên công ty: " + filters.company_name) %}</h2>
+<h2 style="margin-top:0">{%= __("Địa chỉ đơn vị: " + filters.company_address) %}</h2>
+<h2 style="margin-top:0">{%= __("Mã số thuế: " + filters.tax_id) %}</h2>
+<h2 class="text-center" style="margin-top:0; font-weight: bold;">{%= __("Báo cáo phiếu nhập chưa có hóa đơn")
+	%}</h2>
+<h4 class="text-center">
+	Từ ngày {%= filters.start_date %} đến {%= filters.end_date %}
+</h4>
+<div class="row">
+    <div class="col-md-offset-10">
+        Ngày báo cáo: {%= new Date().toLocaleString() %}
+    </div>
+</div>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Ngày phiếu nhập
+			</th>
+			<th>
+				Số phiếu nhập
+			</th>
+			<th>
+				Mã KH
+			</th>
+			<th>
+				Tên KH
+			</th>
+			<th>
+				Diễn giải
+			</th>
+		</tr>
+	<tbody>
+		{% for(var i=0, l=data.length; i<l; i++) { %} <tr>
+			<td>{%=data[i]['posting_date'] %}</td>
+			<td>{%=data[i]['name'] %}</td>
+			<td>{%=data[i]['supplier'] %}</td>
+			<td>{%=data[i]['supplier_name'] %}</td>
+			<td>{%=data[i]['remarks'] %}</td>
+		{% } %}
+	</tbody>
+</table>

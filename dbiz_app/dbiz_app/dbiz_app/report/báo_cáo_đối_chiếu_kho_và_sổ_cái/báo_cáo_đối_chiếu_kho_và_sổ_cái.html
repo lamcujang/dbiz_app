@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Báo cáo đối chiếu sổ tài sản và sổ cái</title>
+    <style>
+        @page {
+            margin: 15mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        company-header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .company-address {
+            margin-bottom: 5px;
+        }
+
+        .company-tax-id {
+            margin-bottom: 15px;
+        }
+
+        .report-title {
+            font-weight: bold;
+            font-size: 20px;
+            text-transform: uppercase;
+            margin: 15px 0;
+        }
+
+        .account-info {
+            text-align: left;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+            font-size: 11px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .total-row {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="company-header">    
+        <div class="company-name">Công ty: {%= filters.company_name %}</div>
+        <div class="company-address">Địa chỉ: {%= filters.company_address %}</div>
+        <div class="company-tax-id">Mã số thuế: {%= filters.tax_id %}</div>
+    </div>
+    <div class="report-header">    
+        <div class="report-title">BÁO CÁO ĐỐI CHIẾU KHO VÀ SỔ CÁI</div>
+        <div>Kỳ đối chiếu: Ngày
+            Tài khoản: {%= filters.account %}</div>
+        <div>Từ ngày {%= filters.from_date %} đến ngày {%= filters.to_date %}</div>
+    </div>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th rowspan="2">Kỳ đối chiếu</th>
+                <th colspan="3">Theo sổ cái</th>
+                <th colspan="3">Theo sổ kho</th>
+                <th colspan="3">Chênh lệch</th>
+                <th rowspan="2">Chi tiết</th>
+            </tr>
+            <tr>
+                <th>Phát sinh Nợ</th>
+                <th>Phát sinh Có</th>
+                <th>Số dư</th>
+                <th>Nhập kho</th>
+                <th>Xuất kho</th>
+                <th>Tồn kho</th>
+                <th>PS Nợ - Nhập kho</th>
+                <th>PS Có - Xuất kho</th>
+                <th>Số dư - Tồn kho</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% var totalDebit = 0; %}
+            {% var totalCredit = 0; %}
+            {% var totalBalanceDiff = 0; %}
+            {% for (var i = 0; i < data.length; i++) { %}
+            <tr>
+                <td>{{ data[i].posting_date || '' }}</td>
+                <td class="text-right">{{ parseFloat(data[i].debit || 0).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ parseFloat(data[i].credit || 0).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ parseFloat(data[i].balance || 0).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ parseFloat(data[i].stock_in || 0).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ parseFloat(data[i].stock_out || 0).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ parseFloat(data[i].stock_balance || 0).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ parseFloat(data[i].debit_stock_in_diff || 0).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ parseFloat(data[i].credit_stock_out_diff || 0).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ parseFloat(data[i].balance_diff || 0).toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td><a href="#">Xem chi tiết</a></td>
+            </tr>
+            {% totalDebit += parseFloat(data[i].debit || 0); %}
+            {% totalCredit += parseFloat(data[i].credit || 0); %}
+            {% totalBalanceDiff += parseFloat(data[i].balance_diff || 0); %}
+            {% } %}
+            
+            <tr class="total-row">
+                <td class="text-left">Tổng cộng</td>
+                <td class="text-right">{{ totalDebit.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ totalCredit.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td colspan="6"></td>
+                <td class="text-right">{{ totalBalanceDiff.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

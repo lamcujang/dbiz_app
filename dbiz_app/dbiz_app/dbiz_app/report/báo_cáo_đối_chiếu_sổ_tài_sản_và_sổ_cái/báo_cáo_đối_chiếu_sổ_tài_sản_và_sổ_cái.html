@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Báo cáo đối chiếu sổ tài sản và sổ cái</title>
+    <style>
+        @page {
+            margin: 15mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        company-header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .company-address {
+            margin-bottom: 5px;
+        }
+
+        .company-tax-id {
+            margin-bottom: 15px;
+        }
+
+        .report-title {
+            font-weight: bold;
+            font-size: 20px;
+            text-transform: uppercase;
+            margin: 15px 0;
+        }
+
+        .account-info {
+            text-align: left;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+            font-size: 11px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .total-row {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="company-header">    
+        <div class="company-name">Công ty: {%= filters.company_name %}</div>
+        <div class="company-address">Địa chỉ: {%= filters.company_address %}</div>
+        <div class="company-tax-id">Mã số thuế: {%= filters.tax_id %}</div>
+    </div>
+    <div class="report-header">    
+        <div class="report-title">BÁO CÁO ĐỐI CHIẾU SỔ TÀI SẢN VÀ SỔ CÁI</div>
+        <div>Từ ngày {%= filters.from_date %} đến ngày {%= filters.to_date %}</div>
+    </div>
+
+    <div class="account-info">
+        {% if (filters.account) { %}
+            Tài khoản: {%= filters.account %}
+        {% } %}
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="5">Sổ tài sản</th>
+                <th colspan="5">Sổ cái</th>
+                <th rowspan="2" style="width: 10%;">Chênh lệch</th>
+            </tr>
+            <tr>
+                <th style="width: 8%;">Ngày ghi sổ</th>
+                <th style="width: 8%;">Ngày CT</th>
+                <th style="width: 10%;">Số CT</th>
+                <th style="width: 10%;">Loại chứng từ</th>
+                <th style="width: 10%;">Số tiền</th>
+                <th style="width: 8%;">Ngày HT</th>
+                <th style="width: 8%;">Ngày CT</th>
+                <th style="width: 10%;">Số CT</th>
+                <th style="width: 10%;">Diễn giải</th>
+                <th style="width: 10%;">Số tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% var totalAssetAmount = 0; %}
+            {% var totalGlAmount = 0; %}
+            {% var totalDifference = 0; %}
+            {% for (var i = 0; i < data.length - 1; i++) { %}
+            <tr>
+                <td class="text-center">{{ data[i].posting_date || '' }}</td>
+                <td class="text-center">{{ data[i].voucher_date || '' }}</td>
+                <td class="text-left">{{ data[i].voucher_no || '' }}</td>
+                <td class="text-left">{{ data[i].voucher_type || '' }}</td>
+                <td class="text-right">{{ parseFloat(data[i].amount || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+                <td class="text-center">{{ data[i].gl_posting_date || '' }}</td>
+                <td class="text-center">{{ data[i].gl_voucher_date || '' }}</td>
+                <td class="text-left">{{ data[i].gl_voucher_no || '' }}</td>
+                <td class="text-left">{{ data[i].remarks || '' }}</td>
+                <td class="text-right">{{ parseFloat(data[i].gl_amount || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ parseFloat(data[i].difference || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+            </tr>
+            {% totalAssetAmount += parseFloat(data[i].amount || 0); %}
+            {% totalGlAmount += parseFloat(data[i].gl_amount || 0); %}
+            {% totalDifference += parseFloat(data[i].difference || 0); %}
+            {% } %}
+            
+            <tr class="total-row">
+                <td colspan="4" class="text-left">Cộng</td>
+                <td class="text-right">{{ totalAssetAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+                <td colspan="4"></td>
+                <td class="text-right">{{ totalGlAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ totalDifference.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+            </tr>
+            
+            <tr class="total-row">
+                <td colspan="4" class="text-left">Tổng cộng</td>
+                <td class="text-right">{{ totalAssetAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+                <td colspan="4"></td>
+                <td class="text-right">{{ totalGlAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+                <td class="text-right">{{ totalDifference.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
+            </tr>
+        </tbody>
+        </table>
+        
+
+</body>
+
+</html>

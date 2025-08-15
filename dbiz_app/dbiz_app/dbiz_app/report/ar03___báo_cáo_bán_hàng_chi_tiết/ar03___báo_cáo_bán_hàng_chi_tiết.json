@@ -1,0 +1,63 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2024-11-20 10:06:48.045422",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "Leepak",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-11-20 10:06:48.045422",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "AR03 - B\u00e1o c\u00e1o b\u00e1n h\u00e0ng chi ti\u1ebft",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "WITH Total_Taxes AS (\n    SELECT \n        tstac.parent AS sales_order_id, \n        SUM(tstac.tax_amount) AS total_tax_amount\n    FROM `tabSales Taxes and Charges` tstac \n    GROUP BY tstac.parent\n), Item_Totals AS (\n    SELECT \n        tsoi.parent AS sales_order_id,\n        tsoi.item_code,\n        tsoi.qty,\n        tsoi.base_net_amount AS item_net_amount,\n        (tsoi.base_net_amount / (SELECT SUM(tsoi2.base_net_amount) \n                                    FROM `tabSales Order Item` tsoi2  \n                                    WHERE tsoi2.parent = tsoi.parent)) AS allocation_percentage\n    FROM `tabSales Order Item` tsoi\n    LEFT JOIN `tabSales Order` tso ON tso.name = tsoi.parent\n    WHERE tso.company =  %(company)s \n        AND tsoi.transaction_date BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s) \n), TAX_ALLOCATION AS (\n    SELECT \n        it.sales_order_id,\n        it.item_code,\n        it.qty,\n        it.item_net_amount,\n        it.allocation_percentage,\n        tt.total_tax_amount,\n        (it.allocation_percentage * tt.total_tax_amount) AS allocated_tax_to_item\n    FROM Item_Totals it\n    LEFT JOIN Total_Taxes tt ON it.sales_order_id = tt.sales_order_id\n) SELECT \n    tsoi.transaction_date AS 'Ng\u00e0y CT',\n    'Ho\u00e1 \u0111\u01a1n b\u00e1n h\u00e0ng (Nh\u1eadp th\u1ee7 c\u00f4ng)' AS 'Lo\u1ea1i h\u00f3a \u0111\u01a1n', \n    tsi.name AS 'S\u1ed1 h\u00f3a \u0111\u01a1n', \n    tso.name AS 'S\u1ed1 \u0111\u01a1n h\u00e0ng', \n    ti.item_code AS 'M\u00e3 s\u1ea3n ph\u1ea9m',\n    ti.item_name AS 'T\u00ean s\u1ea3n ph\u1ea9m',\n    ti.stock_uom AS '\u0110VT',\n    tsoi.base_price_list_rate AS 'Gi\u00e1 b\u00e1n', \n    SUM(tsoi.qty) AS 'SL',\n    SUM(tsoi.net_amount) AS 'Th\u00e0nh ti\u1ec1n (Ch\u01b0a thu\u1ebf)',\n    COALESCE(SUM(TA.allocated_tax_to_item), 0) AS 'Ti\u1ec1n thu\u1ebf',\n    SUM(tsoi.net_amount) + COALESCE(SUM(TA.allocated_tax_to_item), 0) AS 'Th\u00e0nh ti\u1ec1n (Sau thu\u1ebf)', \n    tso.customer AS 'M\u00e3 kh\u00e1ch h\u00e0ng', \n    tc.customer_type AS 'Ng\u01b0\u1eddi mua', \n    tso.company AS 'Ng\u01b0\u1eddi b\u00e1n' \nFROM `tabSales Order Item` tsoi \nLEFT JOIN `tabSales Order` tso ON tso.name = tsoi.parent \nLEFT JOIN `tabItem` ti ON ti.item_code = tsoi.item_code \nLEFT JOIN TAX_ALLOCATION TA ON TA.sales_order_id = tsoi.parent AND TA.item_code = tsoi.item_code\nLEFT JOIN `tabCustomer` tc ON tc.name = tso.customer \nLEFT JOIN `tabSales Invoice` tsi ON tsi.customer = tc.name \nWHERE tso.company = %(company)s \n        AND tsoi.transaction_date BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\nGROUP BY tsoi.transaction_date, tsoi.item_code",
+ "ref_doctype": "Sales Order",
+ "report_name": "AR03 - B\u00e1o c\u00e1o b\u00e1n h\u00e0ng chi ti\u1ebft",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "Sales Manager"
+  },
+  {
+   "role": "Maintenance User"
+  },
+  {
+   "role": "K\u1ebf to\u00e1n"
+  },
+  {
+   "role": "Stock User"
+  }
+ ]
+}

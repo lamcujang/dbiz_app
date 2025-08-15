@@ -1,0 +1,178 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:LCTR-{YYYY}{MM}-{####} ",
+ "creation": "2024-11-13 08:52:18.830086",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_v6oh",
+  "loan_product",
+  "loan_type",
+  "contract_type",
+  "amended_from",
+  "currency",
+  "short_loan_account",
+  "long_loan_account",
+  "remarks",
+  "column_break_pkog",
+  "company",
+  "party_type",
+  "party",
+  "posting_date",
+  "expire_date",
+  "is_limit",
+  "og_limit",
+  "limit"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_v6oh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "loan_product",
+   "fieldtype": "Link",
+   "label": "S\u1ea3n ph\u1ea9m vay",
+   "options": "Company Loan Type"
+  },
+  {
+   "fieldname": "loan_type",
+   "fieldtype": "Select",
+   "label": "Lo\u1ea1i kho\u1ea3n vay",
+   "options": "Borrow\nLend"
+  },
+  {
+   "fieldname": "contract_type",
+   "fieldtype": "Select",
+   "label": "Lo\u1ea1i h\u1ee3p \u0111\u1ed3ng",
+   "options": "\nH\u1ee3p \u0111\u1ed3ng vay v\u1ed1n\nH\u1ee3p \u0111\u1ed3ng b\u1ea3o l\u00e3nh"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Loan Contract",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "bank.default_currency",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Lo\u1ea1i ti\u1ec1n",
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "short_loan_account",
+   "fieldtype": "Link",
+   "label": "T\u00e0i kho\u1ea3n vay ng\u1eafn h\u1ea1n",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "long_loan_account",
+   "fieldtype": "Link",
+   "label": "T\u00e0i kho\u1ea3n vay d\u00e0i h\u1ea1n",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "M\u00f4 t\u1ea3"
+  },
+  {
+   "fieldname": "column_break_pkog",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "party_type",
+   "fieldtype": "Select",
+   "label": "Lo\u1ea1i \u0111\u1ed1i t\u00e1c",
+   "options": "Supplier\nEmployee\nCustomer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "party",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "\u0110\u1ed1i t\u00e1c",
+   "options": "party_type",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y l\u1eadp"
+  },
+  {
+   "fieldname": "expire_date",
+   "fieldtype": "Date",
+   "label": "Th\u1eddi h\u1ea1n h\u1ee3p \u0111\u1ed3ng"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_limit",
+   "fieldtype": "Check",
+   "label": "H\u1ee3p \u0111\u1ed3ng h\u1ea1n m\u1ee9c"
+  },
+  {
+   "depends_on": "eval:doc.is_limit",
+   "fieldname": "og_limit",
+   "fieldtype": "Currency",
+   "label": "H\u1ea1n m\u1ee9c h\u1ee3p \u0111\u1ed3ng"
+  },
+  {
+   "depends_on": "eval:doc.is_limit",
+   "fieldname": "limit",
+   "fieldtype": "Currency",
+   "label": "H\u1ea1n m\u1ee9c c\u00f2n l\u1ea1i",
+   "no_copy": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Company Loan",
+   "link_fieldname": "contract"
+  }
+ ],
+ "modified": "2025-06-26 15:36:45.775729",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Loan Contract",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

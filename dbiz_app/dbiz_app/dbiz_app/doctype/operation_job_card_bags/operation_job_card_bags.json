@@ -1,0 +1,111 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-17 11:10:56.671660",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "stock_uom",
+  "uom",
+  "conversion_factor",
+  "column_break_zggn",
+  "item_name",
+  "qty",
+  "second_qty",
+  "serial_no",
+  "batch_no"
+ ],
+ "fields": [
+  {
+   "fieldname": "stock_uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Stock Uom",
+   "options": "UOM",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Uom",
+   "options": "UOM",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_zggn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "second_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Second Qty",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Serial No",
+   "options": "Serial No",
+   "read_only": 1
+  },
+  {
+   "description": "T\u1ec9 l\u1ec7 cu\u1ed9n/t\u00fai",
+   "fieldname": "conversion_factor",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Conversion Factor"
+  },
+  {
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Batch No",
+   "options": "Batch",
+   "read_only": 1,
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-02-17 10:26:10.709015",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Operation Job Card Bags",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

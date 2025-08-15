@@ -1,0 +1,99 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-11 13:22:31.658028",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "rpt_key",
+  "report_key_name",
+  "order_id",
+  "desc",
+  "column_break_wdxz",
+  "calc_type",
+  "exec_lvl",
+  "company",
+  "is_hide",
+  "key_sign_display"
+ ],
+ "fields": [
+  {
+   "description": "B\u1ea5m v\u00e0o b\u1ea3n ghi n\u00e0y trong Doctype Report Key Detail \u0111\u1ec3 s\u1eeda chi ti\u1ebft.",
+   "fieldname": "rpt_key",
+   "fieldtype": "Link",
+   "label": "Report Key",
+   "options": "Report Key Detail"
+  },
+  {
+   "fetch_from": "rpt_key.rpt_key_name",
+   "fieldname": "report_key_name",
+   "fieldtype": "Data",
+   "label": "Report Key Name"
+  },
+  {
+   "fetch_from": "rpt_key.rpt_order_id",
+   "fieldname": "order_id",
+   "fieldtype": "Int",
+   "label": "Order ID"
+  },
+  {
+   "fetch_from": "rpt_key.calc_type",
+   "fieldname": "calc_type",
+   "fieldtype": "Select",
+   "label": "Calculation Type",
+   "options": "\nReport Key\nAccount\nSQL Query",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "rpt_key.exec_lvl",
+   "fieldname": "exec_lvl",
+   "fieldtype": "Int",
+   "label": "Execution Level"
+  },
+  {
+   "fetch_from": "rpt_key.rpt_desc",
+   "fieldname": "desc",
+   "fieldtype": "Data",
+   "label": "Description"
+  },
+  {
+   "fetch_from": "rpt_key.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fetch_from": "rpt_key.is_hide",
+   "fieldname": "is_hide",
+   "fieldtype": "Check",
+   "label": "Hide"
+  },
+  {
+   "fieldname": "column_break_wdxz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "rpt_key.key_sign_display",
+   "fieldname": "key_sign_display",
+   "fieldtype": "Select",
+   "label": "Key Sign Display",
+   "options": "1\n-1"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-12-12 23:26:30.027753",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Report Key Detail Child Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

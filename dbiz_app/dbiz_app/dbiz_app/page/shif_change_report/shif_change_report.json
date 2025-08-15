@@ -1,0 +1,19 @@
+{
+ "content": null,
+ "creation": "2024-11-25 23:56:50.039733",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2024-11-25 23:56:50.039733",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "shif_change_report",
+ "owner": "Administrator",
+ "page_name": "shif_change_report",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Shift Change Report page"
+}

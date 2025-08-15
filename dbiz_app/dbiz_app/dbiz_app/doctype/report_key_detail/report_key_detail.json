@@ -1,0 +1,192 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:rpt_key_id",
+ "creation": "2024-12-11 12:52:32.804098",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "report_key_section",
+  "rpt_key_id",
+  "rpt_key_name",
+  "rpt_order_id",
+  "company",
+  "column_break_qsgk",
+  "parent_rpt_key_id",
+  "rpt_desc",
+  "exec_lvl",
+  "key_sign_display",
+  "is_hide",
+  "section_break_ejlz",
+  "calc_type",
+  "column_break_oget",
+  "small_text_rrcv",
+  "section_break_kjpa",
+  "sql_query",
+  "small_text_ghqd",
+  "account_formula",
+  "rpt_key_formula"
+ ],
+ "fields": [
+  {
+   "description": "T\u00ean ch\u1ec9 ti\u00eau hi\u1ec3n th\u1ecb tr\u00ean b\u00e1o c\u00e1o.",
+   "fieldname": "rpt_key_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Report Key Name",
+   "reqd": 1
+  },
+  {
+   "description": "S\u1ed1 th\u1ee9 t\u1ef1 hi\u1ec3n th\u1ecb tr\u00ean b\u00e1o c\u00e1o.",
+   "fieldname": "rpt_order_id",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Order ID",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rpt_key_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Report Key ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "description": "M\u00f4 t\u1ea3 hi\u1ec3n th\u1ecb tr\u00ean b\u00e1o c\u00e1o.",
+   "fieldname": "rpt_desc",
+   "fieldtype": "Data",
+   "label": "Description"
+  },
+  {
+   "fieldname": "parent_rpt_key_id",
+   "fieldtype": "Link",
+   "label": "Parent Report Key ID",
+   "options": "Report Key Detail"
+  },
+  {
+   "fieldname": "report_key_section",
+   "fieldtype": "Section Break",
+   "label": "Report Key"
+  },
+  {
+   "fieldname": "column_break_qsgk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ejlz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "calc_type",
+   "fieldtype": "Select",
+   "label": "Calculation Type",
+   "options": "\nReport Key\nAccount\nSQL Query"
+  },
+  {
+   "depends_on": "eval:doc.calc_type === 'Report Key'",
+   "fieldname": "rpt_key_formula",
+   "fieldtype": "Table",
+   "label": "Report Key Formula",
+   "options": "Report Key Formula Detail"
+  },
+  {
+   "fieldname": "section_break_kjpa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.calc_type === 'Account'",
+   "fieldname": "account_formula",
+   "fieldtype": "Table",
+   "label": "Account Formula",
+   "options": "Report Account Formula Detail"
+  },
+  {
+   "default": "0",
+   "description": "Th\u1ee9 t\u1ef1 ch\u1ea1y c\u1ee7a ch\u1ec9 ti\u00eau: ch\u1ec9 ti\u00eau c\u1ea7n t\u1ed5ng h\u1ee3p t\u1eeb c\u00e1c ch\u1ec9 ti\u00eau c\u1ea5p th\u1ea5p h\u01a1n th\u00ec c\u1ea7n ph\u1ea3i c\u00f3 th\u1ee9 t\u1ef1 cao h\u01a1n.",
+   "fieldname": "exec_lvl",
+   "fieldtype": "Int",
+   "label": "Execute Level",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "description": "T\u00edch ch\u1ecdn n\u1ebfu mu\u1ed1n \u1ea9n ch\u1ec9 ti\u00eau n\u00e0y tr\u00ean b\u00e1o c\u00e1o.",
+   "fieldname": "is_hide",
+   "fieldtype": "Check",
+   "label": "Hide"
+  },
+  {
+   "depends_on": "eval:doc.calc_type === 'SQL Query'",
+   "fieldname": "sql_query",
+   "fieldtype": "Code",
+   "label": "SQL Query",
+   "max_height": "350px"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "key_sign_display",
+   "fieldtype": "Select",
+   "label": "Key Sign Display",
+   "options": "1\n-1",
+   "reqd": 1
+  },
+  {
+   "default": "C\u00e1ch th\u1ee9c t\u00ednh c\u1ee7a ch\u1ec9 ti\u00eau:\nReport Key: T\u1ed5ng h\u1ee3p t\u1eeb ch\u1ec9 ti\u00eau kh\u00e1c.\nAccount: T\u1ed5ng h\u1ee3p t\u1eeb c\u00e1c \u0111\u1ea7u t\u00e0i kho\u1ea3n \nSQL Query: L\u1ea5y s\u1ed1 d\u01b0 d\u1ef1a tr\u00ean truy v\u1ea5n ng\u01b0\u1eddi d\u00f9ng nh\u1eadp.",
+   "fieldname": "small_text_rrcv",
+   "fieldtype": "Small Text",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_oget",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Quy t\u1eafc vi\u1ebft SQL:\nV\u1edbi l\u1ec7nh SQL ng\u01b0\u1eddi d\u00f9ng nh\u1eadp, h\u1ec7 th\u1ed1ng s\u1ebd t\u1ef1 \u0111\u1ed9ng g\u00e1n th\u00eam \u0111i\u1ec1u posting_date \u1edf d\u01b0\u1edbi c\u00f9ng c\u00e2u l\u1ec7nh \u0111\u1ec3 t\u00ednh d\u1ef1a tr\u00ean ng\u00e0y b\u1eaft \u0111\u1ea7u v\u00e0 k\u1ebft th\u00fac.",
+   "depends_on": "eval:doc.calc_type === 'SQL Query'",
+   "fieldname": "small_text_ghqd",
+   "fieldtype": "Small Text",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Customized Report Setting",
+   "link_fieldname": "rpt_key",
+   "table_fieldname": "rpt_key_detail"
+  }
+ ],
+ "modified": "2024-12-12 23:08:05.205046",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Report Key Detail",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

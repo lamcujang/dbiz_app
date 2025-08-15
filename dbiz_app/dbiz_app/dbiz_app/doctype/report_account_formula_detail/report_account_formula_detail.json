@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-11 13:03:15.161963",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "account",
+  "sign",
+  "against_account",
+  "balance_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "account",
+   "fieldtype": "Link",
+   "label": "Account",
+   "options": "Account"
+  },
+  {
+   "default": "+",
+   "fieldname": "sign",
+   "fieldtype": "Select",
+   "label": "Sign",
+   "options": "+\n-"
+  },
+  {
+   "fieldname": "against_account",
+   "fieldtype": "Link",
+   "label": "Against Account",
+   "options": "Account"
+  },
+  {
+   "default": "Debit - Credit",
+   "fieldname": "balance_type",
+   "fieldtype": "Select",
+   "label": "Balance Type",
+   "options": "Debit - Credit\nCredit - Debit\nDebit\nCredit"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-12-12 16:13:00.053866",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Report Account Formula Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

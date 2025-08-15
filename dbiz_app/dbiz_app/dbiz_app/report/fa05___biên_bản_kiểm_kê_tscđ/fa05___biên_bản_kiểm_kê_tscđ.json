@@ -1,0 +1,125 @@
+{
+ "add_total_row": 1,
+ "columns": [
+  {
+   "fieldname": "T\u00ean TSCD",
+   "fieldtype": "Data",
+   "label": "T\u00ean TSCD",
+   "width": 0
+  },
+  {
+   "fieldname": "M\u00e3 t\u1ea3i s\u1ea3n",
+   "fieldtype": "Data",
+   "label": "M\u00e3 t\u1ea3i s\u1ea3n",
+   "width": 0
+  },
+  {
+   "fieldname": "N\u01a1i s\u1eed d\u1ee5ng",
+   "fieldtype": "Data",
+   "label": "N\u01a1i s\u1eed d\u1ee5ng",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ed1 l\u01b0\u1ee3ng theo s\u1ed5 k\u1ebf to\u00e1n",
+   "fieldtype": "Int",
+   "label": "S\u1ed1 l\u01b0\u1ee3ng theo s\u1ed5 k\u1ebf to\u00e1n",
+   "width": 0
+  },
+  {
+   "fieldname": "Nguy\u00ean gi\u00e1 theo s\u1ed5 s\u00e1ch",
+   "fieldtype": "Float",
+   "label": "Nguy\u00ean gi\u00e1 theo s\u1ed5 s\u00e1ch",
+   "width": 0
+  },
+  {
+   "fieldname": "Gi\u00e1 tr\u1ecb c\u00f2n l\u1ea1i theo s\u1ed5 s\u00e1ch",
+   "fieldtype": "Float",
+   "label": "Gi\u00e1 tr\u1ecb c\u00f2n l\u1ea1i theo s\u1ed5 s\u00e1ch",
+   "width": 0
+  },
+  {
+   "fieldname": "SL theo ki\u1ec3m k\u00ea",
+   "fieldtype": "Int",
+   "label": "SL theo ki\u1ec3m k\u00ea",
+   "width": 0
+  },
+  {
+   "fieldname": "Nguy\u00ean gi\u00e1 theo ki\u1ec3m k\u00ea",
+   "fieldtype": "Float",
+   "label": "Nguy\u00ean gi\u00e1 theo ki\u1ec3m k\u00ea",
+   "width": 0
+  },
+  {
+   "fieldname": "Gi\u00e1 tr\u1ecb c\u00f2n l\u1ea1i theo ki\u1ec3m k\u00ea",
+   "fieldtype": "Float",
+   "label": "Gi\u00e1 tr\u1ecb c\u00f2n l\u1ea1i theo ki\u1ec3m k\u00ea",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ef1 kh\u00e1c bi\u1ec7t v\u1ec1 s\u1ed1 l\u01b0\u1ee3ng",
+   "fieldtype": "Int",
+   "label": "S\u1ef1 kh\u00e1c bi\u1ec7t v\u1ec1 s\u1ed1 l\u01b0\u1ee3ng",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ef1 kh\u00e1c bi\u1ec7t nguy\u00ean gi\u00e1",
+   "fieldtype": "Float",
+   "label": "S\u1ef1 kh\u00e1c bi\u1ec7t nguy\u00ean gi\u00e1",
+   "width": 0
+  },
+  {
+   "fieldname": "S\u1ef1 kh\u00e1c bi\u1ec7t gi\u00e1 tr\u1ecb c\u00f2n l\u1ea1i",
+   "fieldtype": "Float",
+   "label": "S\u1ef1 kh\u00e1c bi\u1ec7t gi\u00e1 tr\u1ecb c\u00f2n l\u1ea1i",
+   "width": 0
+  },
+  {
+   "fieldname": "Ghi ch\u00fa",
+   "fieldtype": "Data",
+   "label": "Ghi ch\u00fa",
+   "width": 0
+  }
+ ],
+ "creation": "2024-11-22 09:30:57.533411",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "date_of_inventory",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y ki\u1ec3m k\u00ea",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-05-06 17:04:32.529346",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "FA05 - Bi\u00ean b\u1ea3n ki\u1ec3m k\u00ea TSC\u0110",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \r\n\tta.asset_name as 'T\u00ean TSCD',\r\n\tta.name as 'M\u00e3 s\u1ed1',\r\n\tta.location as 'N\u01a1i s\u1eed d\u1ee5ng',\r\n    ta.asset_quantity as 'S\u1ed1 l\u01b0\u1ee3ng theo s\u1ed5 k\u1ebf to\u00e1n',\r\n   \ttard.book_value as 'Nguy\u00ean gi\u00e1 theo s\u1ed5 s\u00e1ch',\r\n   \ttard.book_remain as 'Gi\u00e1 tr\u1ecb c\u00f2n l\u1ea1i theo s\u1ed5 s\u00e1ch',\r\n   \ttard.actual_qty 'SL theo ki\u1ec3m k\u00ea',\r\n   \ttard.new_value as 'Nguy\u00ean gi\u00e1 theo ki\u1ec3m k\u00ea',\r\n   \ttard.new_remain as 'Gi\u00e1 tr\u1ecb c\u00f2n l\u1ea1i theo ki\u1ec3m k\u00ea',\r\n   \t(tard.qty - tard.actual_qty) as 'S\u1ef1 kh\u00e1c bi\u1ec7t v\u1ec1 s\u1ed1 l\u01b0\u1ee3ng',\r\n   \t(tard.book_value - tard.new_value) as 'S\u1ef1 kh\u00e1c bi\u1ec7t nguy\u00ean gi\u00e1',\r\n   \t(tard.book_remain - tard.new_remain) 'S\u1ef1 kh\u00e1c bi\u1ec7t gi\u00e1 tr\u1ecb c\u00f2n l\u1ea1i',\r\n   \tnull as 'Ghi ch\u00fa' \r\nFROM \r\n    `tabAsset Reconciliation` tar \r\nLEFT JOIN \r\n\t`tabAsset Reconciliation Details` tard \r\nON\r\n\ttar.name = tard.parent \r\nLEFT JOIN \r\n\t`tabAsset` ta\r\nON\r\n\ttard.asset_name = ta.name \r\nWHERE \r\n    tar.posting_date < %(date_of_inventory)s\r\n    and tar.company = %(company)s\r\n    and ta.booked_fixed_asset = 1\r\n    and ta.STATUS IN('Submitted', 'Partially Depreciated', 'Fully Depreciated', 'Scrapped')",
+ "ref_doctype": "Asset Reconciliation",
+ "report_name": "FA05 - Bi\u00ean b\u1ea3n ki\u1ec3m k\u00ea TSC\u0110",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "K\u1ebf to\u00e1n"
+  },
+  {
+   "role": "Quality Manager"
+  }
+ ]
+}

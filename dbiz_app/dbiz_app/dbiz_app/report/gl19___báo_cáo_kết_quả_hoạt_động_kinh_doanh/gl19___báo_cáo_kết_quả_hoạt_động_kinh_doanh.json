@@ -1,0 +1,81 @@
+{
+ "add_total_row": 1,
+ "columns": [
+  {
+   "fieldname": "RPT_NAME",
+   "fieldtype": "Data",
+   "label": "Ch\u1ec9 ti\u00eau",
+   "width": 0
+  },
+  {
+   "fieldname": "RPT_KEY",
+   "fieldtype": "Data",
+   "label": "M\u00e3 s\u1ed1",
+   "width": 0
+  },
+  {
+   "fieldname": "AMT",
+   "fieldtype": "Float",
+   "label": "Th\u00e1ng n\u00e0y",
+   "width": 0
+  },
+  {
+   "fieldname": "P_AMT",
+   "fieldtype": "Float",
+   "label": "Th\u00e1ng tr\u01b0\u1edbc",
+   "width": 0
+  }
+ ],
+ "creation": "2024-11-21 10:45:38.125287",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-05-06 09:34:08.216265",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "GL19 - B\u00e1o c\u00e1o k\u1ebft qu\u1ea3 ho\u1ea1t \u0111\u1ed9ng kinh doanh",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "WITH NAME_TMP AS (\r\n\tSELECT '1. Doanh thu b\u00e1n h\u00e0ng v\u00e0 cung c\u1ea5p d\u1ecbch v\u1ee5' RPT_NAME, '01' RPT_KEY \r\n\tUNION ALL\r\n\tSELECT '2. C\u00e1c kho\u1ea3n gi\u1ea3m tr\u1eeb doanh thu' RPT_NAME, '02' RPT_KEY \r\n\tUNION ALL\r\n\tSELECT '3. Doanh thu thu\u1ea7n v\u1ec1 b\u00e1n h\u00e0ng v\u00e0 cung c\u1ea5p d\u1ecbch v\u1ee5 (10 = 01 - 02)' RPT_NAME, '10' RPT_KEY \r\n\tUNION ALL\r\n\tSELECT '4. Gi\u00e1 v\u1ed1n h\u00e0ng b\u00e1n' RPT_NAME, '11' RPT_KEY \r\n\tUNION ALL\r\n\tSELECT '5. L\u1ee3i nhu\u1eadn g\u1ed9p v\u1ec1 b\u00e1n h\u00e0ng v\u00e0 cung c\u1ea5p d\u1ecbch v\u1ee5 (20 = 10 - 11)' RPT_NAME, '20' RPT_KEY \r\n\tUNION ALL\r\n\tSELECT '6. Doanh thu ho\u1ea1t \u0111\u1ed9ng t\u00e0i ch\u00ednh' RPT_NAME, '21' RPT_KEY \r\n\tUNION ALL\r\n\tSELECT '7. Chi ph\u00ed t\u00e0i ch\u00ednh' RPT_NAME, '22' RPT_KEY \r\n\tUNION ALL\r\n\tSELECT '8. Chi ph\u00ed b\u00e1n h\u00e0ng' RPT_NAME, '24' RPT_KEY \r\n\tUNION ALL\r\n\tSELECT '9. Chi ph\u00ed qu\u1ea3n l\u00fd doanh nghi\u1ec7p' RPT_NAME, '25' RPT_KEY \r\n\tUNION ALL\r\n\tSELECT '10. L\u1ee3i nhu\u1eadn thu\u1ea7n t\u1eeb ho\u1ea1t \u0111\u1ed9ng kinh doanh {30 = 20 + (21 - 22) - (24 + 25)}' RPT_NAME, '30' RPT_KEY \r\n\tUNION ALL\r\n\tSELECT '11. Thu nh\u1eadp kh\u00e1c' RPT_NAME, '31' RPT_KEY  \r\n\tUNION ALL\r\n\tSELECT '12. Chi ph\u00ed kh\u00e1c' RPT_NAME, '32' RPT_KEY  \r\n\tUNION ALL\r\n\tSELECT '13. L\u1ee3i nhu\u1eadn kh\u00e1c (40 = 31 - 32)' RPT_NAME, '40' RPT_KEY  \r\n\tUNION ALL\r\n\tSELECT '14. T\u1ed5ng l\u1ee3i nhu\u1eadn k\u1ebf to\u00e1n tr\u01b0\u1edbc thu\u1ebf (50 = 30 + 40)' RPT_NAME, '50' RPT_KEY  \r\n\tUNION ALL\r\n\tSELECT '15. Chi ph\u00ed thu\u1ebf TNDN hi\u1ec7n h\u00e0nh' RPT_NAME, '51' RPT_KEY  \r\n\tUNION ALL\r\n\tSELECT '16. Chi ph\u00ed thu\u1ebf TNDN ho\u00e3n l\u1ea1i' RPT_NAME, '52' RPT_KEY  \r\n\tUNION ALL\r\n\tSELECT '17. L\u1ee3i nhu\u1eadn sau thu\u1ebf thu nh\u1eadp doanh nghi\u1ec7p (60 = 50 \u2013 51 - 52)' RPT_NAME, '60' RPT_KEY  \r\n\tUNION ALL\r\n\tSELECT '18. L\u00e3i c\u01a1 b\u1ea3n tr\u00ean c\u1ed5 phi\u1ebfu (*)' RPT_NAME, '70' RPT_KEY  \r\n\t)\r\n, TMP0 AS(  \r\nSELECT '01' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '511%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < DATE(%(start_date)s)\r\n\tAND GL.ACCOUNT like '511%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n\r\nUNION ALL\r\n\r\nSELECT '02' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '521%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < DATE(%(start_date)s)\r\n\tAND GL.ACCOUNT like '521%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '11' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '632%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < DATE(%(start_date)s)\r\n\tAND GL.ACCOUNT like '632%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '21' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '515%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < DATE(%(start_date)s)\r\n\tAND GL.ACCOUNT like '515%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '22' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '635%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < Date(%(start_date)s)\r\n\tAND GL.ACCOUNT like '635%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '24' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '641%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < Date(%(start_date)s)\r\n\tAND GL.ACCOUNT like '641%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '25' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '642%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < Date(%(start_date)s)\r\n\tAND GL.ACCOUNT like '642%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '31' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '711%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < Date(%(start_date)s)\r\n\tAND GL.ACCOUNT like '711%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '32' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '811%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < Date(%(start_date)s)\r\n\tAND GL.ACCOUNT like '811%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '51' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '8211%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < Date(%(start_date)s)\r\n\tAND GL.ACCOUNT like '8211%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\t\r\nSELECT '52' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\r\n\tAND GL.ACCOUNT like '8212%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(GL.CREDIT_IN_ACCOUNT_CURRENCY - GL.DEBIT_IN_ACCOUNT_CURRENCY) AMT\r\n\tFROM `tabGL Entry` GL\r\n\tWHERE GL.COMPANY =%(company)s\r\n\tAND GL.POSTING_DATE < Date(%(start_date)s)\r\n\tAND GL.ACCOUNT like '8212%%'\r\n\tAND IS_CANCELLED = 0\r\n\t) P ON 1=1\r\n),\r\nTMP1 AS (\r\nSELECT '10' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(T.AMT) AMT\r\n\tFROM TMP0 T\r\n\tWHERE RPT_KEY IN ('01','02')\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(T.P_AMT) AMT\r\n\tFROM TMP0 T\r\n\tWHERE RPT_KEY IN ('01','02')\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '20' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(T.AMT) AMT\r\n\tFROM TMP0 T\r\n\tWHERE RPT_KEY IN ('01','02','11')\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(T.P_AMT) AMT\r\n\tFROM TMP0 T\r\n\tWHERE RPT_KEY IN ('01','02','11')\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '30' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(T.AMT) AMT\r\n\tFROM TMP0 T\r\n\tWHERE RPT_KEY IN ('01','02','11','21','22','24','25')\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(T.P_AMT) AMT\r\n\tFROM TMP0 T\r\n\tWHERE RPT_KEY IN ('01','02','11','21','22','24','25')\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '40' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(T.AMT) AMT\r\n\tFROM TMP0 T\r\n\tWHERE RPT_KEY IN ('31','32')\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(T.P_AMT) AMT\r\n\tFROM TMP0 T\r\n\tWHERE RPT_KEY IN ('31','32')\r\n\t) P ON 1=1\r\n),\r\nTMP2 AS\r\n(\r\nSELECT '50' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(T.AMT) AMT\r\n\tFROM TMP1 T\r\n\tWHERE RPT_KEY IN ('30','40')\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(T.P_AMT) AMT\r\n\tFROM TMP1 T\r\n\tWHERE RPT_KEY IN ('30','40')\r\n\t) P ON 1=1\r\n\t\r\nUNION ALL\r\n\r\nSELECT '60' RPT_KEY, \r\nC.AMT AMT,\r\nP.AMT P_AMT\r\nFROM (\r\n\tSELECT \r\n\tSUM(T.AMT) AMT\r\n\tFROM TMP1 T\r\n\tWHERE RPT_KEY IN ('30','40','51','52')\r\n\t) C \r\nLEFT JOIN (\r\n\tSELECT \r\n\tSUM(T.P_AMT) AMT\r\n\tFROM TMP1 T\r\n\tWHERE RPT_KEY IN ('30','40','51','52')\r\n\t) P ON 1=1\r\n)\r\nSELECT \r\n    A1.RPT_NAME AS \"Ch\u1ec9 ti\u00eau\", \r\n    A1.RPT_KEY AS \"M\u00e3 s\u1ed1\", \r\n    A2.AMT AS \"Th\u00e1ng n\u00e0y\", \r\n    A2.P_AMT AS \"Th\u00e1ng tr\u01b0\u1edbc\"\r\nFROM NAME_TMP A1\r\nLEFT JOIN (\r\n\tSELECT * FROM TMP0\r\n\tUNION ALL\r\n\tSELECT * FROM TMP1\r\n\tUNION ALL\r\n\tSELECT * FROM TMP2\r\n) A2 ON A2.RPT_KEY = A1.RPT_KEY",
+ "ref_doctype": "GL Entry",
+ "report_name": "GL19 - B\u00e1o c\u00e1o k\u1ebft qu\u1ea3 ho\u1ea1t \u0111\u1ed9ng kinh doanh",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Gi\u00e1m \u0111\u1ed1c T\u00e0i ch\u00ednh"
+  },
+  {
+   "role": "Auditor"
+  },
+  {
+   "role": "K\u1ebf to\u00e1n"
+  }
+ ]
+}

@@ -1,0 +1,105 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 10px !important;
+        line-height: 1.8 !important;
+    }
+
+
+    .print-format table td,
+    .print-format table th {
+        vertical-align: middle !important;
+        border: 1px solid #222426 !important;
+    }
+
+    .print-format table th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    /* Fit table cell width to the content */
+    .print-format table td.fit,
+    .print-format table th.fit {
+        white-space: nowrap !important;
+        width: 1% !important;
+    }
+
+    .font-weight-bold {
+        font-weight: bold !important;
+    }
+
+    /* Styles specific to printing and PDF generation */
+    @media print {
+        @page {
+            size: A4 landscape !important;
+        }
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-xs-12">
+            <h3 class="text-center">{%= __("BÁO CÁO TIẾN ĐỘ SẢN XUẤT CẮT")%}</h3>
+
+            <table class="table table-bordered text-wrap">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Ngày xuất theo yêu cầu KH</th>
+                        <th rowspan="2">Ngày dự kiến xuất của nhà máy</th>
+                        <th rowspan="2">Khách hàng</th>
+                        <th rowspan="2">TBSX</th>
+                        <th rowspan="2">Tên hàng</th>
+                        <th rowspan="2">PO</th>
+                        <th rowspan="2">BTP sx trong tháng</th>
+                        <th rowspan="2">Số hộp còn trong kho (t.kê)</th>
+                        <th rowspan="2">Hàng đã xuất (Hộp)</th>
+                        <th colspan="3">KHSX</th>
+                        <th colspan="2">Đầu kỳ</th>
+                        <th colspan="2">Sản xuất trong tháng</th>
+                        <th colspan="2">Thiếu KH</th>
+                        <th rowspan="2">% hoàn thành kế hoạch</th>
+                        <th rowspan="2">Tình trạng/Ghi chú</th>
+                    </tr>
+                    <tr>
+                        <th>Hộp</th>
+                        <th>TL/Hộp</th>
+                        <th>Kg</th>
+                        <th>TP</th>
+                        <th>BTP</th>
+                        <th>Hộp</th>
+                        <th>Kg</th>
+                        <th>Hộp</th>
+                        <th>Kg</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for(let i = 0; i < data.length; i++) { %} <tr>
+                        <td class="text-center">{%= data[i]['delivery_date'] %}</td>
+                        <td class="text-center">{%= data[i]['export_cont_date'] %}</td>
+                        <td class="text-center">{%= data[i]['customer'] %}</td>
+                        <td class="text-center">{%= data[i]['production_plan'] %}</td>
+                        <td class="text-center">{%= data[i]['production_item'] %}</td>
+                        <td class="text-center">{%= data[i]['po'] %}</td>
+                        <td class="text-right">{%= data[i]['btp_month'] %}</td>
+                        <td class="text-right">{%= data[i]['stock_qty'] %}</td>
+                        <td class="text-right">{%= data[i]['exported_qty'] %}</td>
+                        <td class="text-right">{%= data[i]['planned_qty_carton'] %}</td>
+                        <td class="text-right">{%= data[i]['net_kgs_per_carton'] %}</td>
+                        <td class="text-right">{%= data[i]['planned_qty_kg'] %}</td>
+                        <td class="text-right">{%= data[i]['opening_qty_tp'] %}</td>
+                        <td class="text-right">{%= data[i]['opening_qty_btp'] %}</td>
+                        <td class="text-right">{%= data[i]['produced_qty_carton'] %}</td>
+                        <td class="text-right">{%= data[i]['produced_qty_kg'] %}</td>
+                        <td class="text-right">{%= data[i]['shortage_qty_carton'] %}</td>
+                        <td class="text-right">{%= data[i]['shortage_qty_kg'] %}</td>
+                        <td class="text-center">{%= data[i]['percentage'] %}</td>
+                        <td>{%= data[i]['status'] %}</td>
+                        </tr>
+                        {% } %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

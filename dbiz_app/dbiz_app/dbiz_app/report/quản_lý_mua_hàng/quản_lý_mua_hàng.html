@@ -1,0 +1,97 @@
+<style type="text/css">
+    .print-format {
+        font-size: 11px !important;
+    }
+
+    .print-format table td,
+    .print-format table th {
+        vertical-align: middle !important;
+        border: 1px solid #222426 !important;
+    }
+
+    .print-format table th {
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    .font-weight-bold {
+        font-weight: bold !important;
+    }
+</style>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h2 class="font-weight-bold">QUẢN LÝ MUA HÀNG</h2>
+
+            <div>
+                Từ ngày {%= frappe.datetime.str_to_user(filters.start_date).split('-').join('/') %}
+                đến {%= frappe.datetime.str_to_user(filters.end_date).split('-').join('/') %}
+            </div>
+
+            <div class="font-weight-bold">
+                {% if (filters.supplier_name) { %}
+                {%= __("Nhà cung cấp: " + filters.supplier_name) %}
+                {% } %}
+            </div>
+
+            <div class="font-weight-bold">
+                {% if (filters.item_name) { %}
+                {%= __("Sản phẩm: " + filters.item_name) %}
+                {% } %}
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên mã hàng</th>
+                <th>Tên sản phẩm</th>
+                <th>Kích thước (mm)</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Chất liệu</th>
+                <th>Nhóm chất liệu</th>
+                <th>Loại vật tư</th>
+                <th>PO/TBSX</th>
+                <th>Khách hàng</th>
+                <th>Nhà cung cấp</th>
+                <th>ĐVT</th>
+                <th>Trạng thái</th>
+                <th>Ngày Oder</th>
+                <th>Ngày dự kiến hàng về</th>
+                <th>Ngày thực tế hàng về</th>
+                <th>Số lượng nhận thực tế</th>
+                <th>Chênh lệch</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for(let i = 0; i < data.length; i++) { %} <tr>
+                <td class="text-center">{%= i+1 %}</td>
+                <td>{%= data[i]['item_code'] %}</td>
+                <td>{%= data[i]['item_name'] %}</td>
+                <td>{%= data[i]['item_size'] %}</td>
+                <td class="text-right">{%= data[i]['qty'] %}</td>
+                <td class="text-right">{%= data[i]['rate'] %}</td>
+                <td>{%= data[i]['item_stuff'] %}</td>
+                <td>{%= data[i]['item_stuff_group'] %}</td>
+                <td>{%= data[i]['item_group'] %}</td>
+                <td>{%= data[i]['purchase_order'] %}</td>
+                <td>{%= data[i]['customer'] %}</td>
+                <td>{%= data[i]['supplier_name'] %}</td>
+                <td class="text-center">{%= data[i]['uom'] %}</td>
+                <td>{%= data[i]['status'] %}</td>
+                <td class="text-center">{%= data[i]['transaction_date'] %}</td>
+                <td class="text-center">{%= data[i]['schedule_date'] %}</td>
+                <td class="text-center">{%= data[i]['posting_date'] %}</td>
+                <td class="text-right">{%= data[i]['received_qty'] %}</td>
+                <td class="text-right">{%= data[i]['diff_qty'] %}</td>
+                </tr>
+                {% } %}
+        </tbody>
+    </table>
+</div>

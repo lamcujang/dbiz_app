@@ -1,0 +1,63 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2024-11-20 10:42:54.798240",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "Leepak",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-11-20 10:42:54.798240",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "AR04 - B\u00e1o c\u00e1o b\u00e1n h\u00e0ng theo doanh thu",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\n    SUBSTRING_INDEX(tsii.income_account, '-', 1) AS 'M\u00e3 t\u00e0i kho\u1ea3n',\n    ta.account_name AS 'T\u00ean t\u00e0i kho\u1ea3n',\n    tso.name,\n    tsoi.item_group AS 'Nh\u00f3m s\u1ea3n ph\u1ea9m',\n    tsoi.item_code AS 'M\u00e3 s\u1ea3n ph\u1ea9m',\n    tsoi.item_name AS 'T\u00ean s\u1ea3n ph\u1ea9m',\n    tsoi.uom AS '\u0110VT',\n    SUM(tsoi.qty) AS 'SL',\n    tsoi.rate AS '\u0110\u01a1n gi\u00e1',\n    SUM(tsoi.net_amount) AS 'Th\u00e0nh ti\u1ec1n (Ch\u01b0a thu\u1ebf)'\nFROM\n    `tabSales Order Item` tsoi\nLEFT JOIN `tabSales Order` tso ON\n    tso.name = tsoi.parent\nLEFT JOIN `tabSales Invoice Item` tsii ON\n    tsii.sales_order = tso.name\nLEFT JOIN tabAccount ta ON\n    ta.name = tsii.income_account\nWHERE\n    tso.company = %(company)s\n    AND tso.transaction_date BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\nGROUP BY\n    tsoi.rate, tsoi.item_code, tsoi.uom",
+ "ref_doctype": "Sales Order",
+ "report_name": "AR04 - B\u00e1o c\u00e1o b\u00e1n h\u00e0ng theo doanh thu",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "Sales Manager"
+  },
+  {
+   "role": "Maintenance User"
+  },
+  {
+   "role": "K\u1ebf to\u00e1n"
+  },
+  {
+   "role": "Stock User"
+  }
+ ]
+}

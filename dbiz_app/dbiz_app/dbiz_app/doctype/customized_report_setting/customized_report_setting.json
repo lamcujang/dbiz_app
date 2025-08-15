@@ -1,0 +1,172 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{report}",
+ "creation": "2024-12-07 11:32:04.401029",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "custom_report_key",
+  "report",
+  "custom_report_name",
+  "calc_last_period",
+  "column_break_xvph",
+  "rpt_module",
+  "pdf_url",
+  "preview",
+  "title",
+  "break",
+  "column_break_imrz",
+  "temp",
+  "temp_detail",
+  "tham_s\u1ed1_b\u00e1o_c\u00e1o_section",
+  "params_detail",
+  "report_key_details_section",
+  "report_column",
+  "rpt_key_detail"
+ ],
+ "fields": [
+  {
+   "depends_on": "eval:doc.custom_report_key === 'No'",
+   "fieldname": "report",
+   "fieldtype": "Link",
+   "label": "Report",
+   "options": "Report",
+   "unique": 1
+  },
+  {
+   "fieldname": "pdf_url",
+   "fieldtype": "Data",
+   "label": "PDF url"
+  },
+  {
+   "fieldname": "preview",
+   "fieldtype": "Section Break",
+   "label": "Preview"
+  },
+  {
+   "description": "Ti\u00eau \u0111\u1ec1 b\u00e1o c\u00e1o",
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "description": "{M\u1eabu s\u1ed1 ####}",
+   "fieldname": "temp",
+   "fieldtype": "Data",
+   "label": "Template No."
+  },
+  {
+   "description": "{Ban h\u00e0nh theo Th\u00f4ng t\u01b0 s\u1ed1: ###/20##/xx-xxx Ng\u00e0y ##/##/20## c\u1ee7a xxx}",
+   "fieldname": "temp_detail",
+   "fieldtype": "Data",
+   "label": "Template Detail"
+  },
+  {
+   "description": "S\u1ed1 l\u1ea7n c\u00e1ch d\u00f2ng c\u0103n ch\u1ec9nh d\u01b0\u1edbi m\u1ee5c Xem tr\u01b0\u1edbc",
+   "fieldname": "break",
+   "fieldtype": "Int",
+   "label": "Bottom Spacing"
+  },
+  {
+   "fieldname": "column_break_imrz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tham_s\u1ed1_b\u00e1o_c\u00e1o_section",
+   "fieldtype": "Section Break",
+   "label": "Tham s\u1ed1 b\u00e1o c\u00e1o"
+  },
+  {
+   "description": "Tham s\u1ed1 hi\u1ec3n th\u1ecb tr\u00ean m\u00e0n h\u00ecnh Xu\u1ea5t b\u00e1o c\u00e1o \u0111\u1ec3 ch\u1ecdn",
+   "fieldname": "params_detail",
+   "fieldtype": "Table",
+   "label": "Parameters",
+   "options": "Customized Report Parameters Setting"
+  },
+  {
+   "fieldname": "column_break_xvph",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rpt_module",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Report Module",
+   "options": "Report Module",
+   "reqd": 1
+  },
+  {
+   "default": "No",
+   "description": "B\u00e1o c\u00e1o c\u00f3 s\u1eb5n ho\u1eb7c b\u00e1o c\u00e1o t\u1ef1 khai b\u00e1o ch\u1ec9 ti\u00eau",
+   "fieldname": "custom_report_key",
+   "fieldtype": "Select",
+   "label": "Custom Report Key",
+   "options": "No\nYes"
+  },
+  {
+   "depends_on": "eval: doc.custom_report_key === 'Yes'",
+   "fieldname": "report_key_details_section",
+   "fieldtype": "Section Break",
+   "label": "Report Key Details"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "description": "C\u00e1c ch\u1ec9 ti\u00eau b\u00e1o c\u00e1o hi\u1ec3n th\u1ecb l\u00ean b\u00e1o c\u00e1o",
+   "fieldname": "rpt_key_detail",
+   "fieldtype": "Table",
+   "label": "Report Key Detail",
+   "options": "Report Key Detail Child Table"
+  },
+  {
+   "depends_on": "eval:doc.custom_report_key === 'Yes'",
+   "fieldname": "custom_report_name",
+   "fieldtype": "Data",
+   "label": "Custom Report Name"
+  },
+  {
+   "description": "C\u1ed9t hi\u1ec3n th\u1ecb cho b\u00e1o c\u00e1o",
+   "fieldname": "report_column",
+   "fieldtype": "Table",
+   "label": "Column",
+   "options": "Customized Report Setting Column"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.custom_report_key === 'Yes'",
+   "fieldname": "calc_last_period",
+   "fieldtype": "Check",
+   "label": "T\u00ednh s\u1ed1 D\u01b0 k\u1ef3 tr\u01b0\u1edbc"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Customized Report Export",
+   "link_fieldname": "rpt_name"
+  }
+ ],
+ "modified": "2024-12-12 13:03:56.426055",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Customized Report Setting",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

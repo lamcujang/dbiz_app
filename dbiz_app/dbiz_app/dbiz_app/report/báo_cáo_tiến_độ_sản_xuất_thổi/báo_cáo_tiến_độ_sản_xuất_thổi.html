@@ -1,0 +1,81 @@
+<style type="text/css">
+    /* General styles for both screen display and print */
+    .print-format {
+        font-size: 10px !important;
+        line-height: 1.8 !important;
+    }
+
+
+    .print-format table td,
+    .print-format table th {
+        vertical-align: middle !important;
+        border: 1px solid #222426 !important;
+    }
+
+    .print-format table th {
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #222426 !important;
+    }
+
+    /* Fit table cell width to the content */
+    .print-format table td.fit,
+    .print-format table th.fit {
+        white-space: nowrap !important;
+        width: 1% !important;
+    }
+
+    .font-weight-bold {
+        font-weight: bold !important;
+    }
+
+    /* Styles specific to printing and PDF generation */
+    @media print {
+        @page {
+            size: A4 landscape !important;
+        }
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-xs-12">
+            <h3 class="text-center">{%= __("BÁO CÁO TIẾN ĐỘ SẢN XUẤT THỔI") %}</h3>
+
+            <table class="table table-bordered text-wrap">
+                <thead>
+                    <tr>
+                        <th>Ngày dự kiến xuất <br> theo khách hàng</th>
+                        <th>Ngày dự kiến xuất <br> của nhà máy</th>
+                        <th>Khách hàng</th>
+                        <th>TBSX</th>
+                        <th>Tên hàng</th>
+                        <th>Kế hoạch</th>
+                        <th>Tồn+thổi</th>
+                        <th>Sản xuất trong tháng</th>
+                        <th>Thiếu KH</th>
+                        <th>Tình trạng</th>
+                        <th>Máy thổi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for(let i = 0; i < data.length; i++) { %} <tr>
+                        <td class="text-center">{%= data[i]['delivery_date'] %}</td>
+                        <td class="text-center">{%= data[i]['export_cont_date'] %}</td>
+                        <td class="text-center">{%= data[i]['customer'] %}</td>
+                        <td class="text-center">{%= data[i]['production_plan'] %}</td>
+                        <td class="text-center">{%= data[i]['final_item'] %}</td>
+                        <td class="text-right">{%= data[i]['planned_qty'] %}</td>
+                        <td class="text-right">{%= data[i]['in_stock'] %}</td>
+                        <td class="text-right">{%= data[i]['produced_qty'] %}</td>
+                        <td class="text-right">{%= data[i]['shortage_qty'] %}</td>
+                        <td>{%= data[i]['status'] %}</td>
+                        <td>{%= data[i]['workstation'] %}</td>
+                        </tr>
+                        {% } %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "week_date",
+   "fieldtype": "Data",
+   "label": "Th\u1ee9",
+   "width": 0
+  },
+  {
+   "fieldname": "formatted_month",
+   "fieldtype": "Data",
+   "label": "Ng\u00e0y th\u00e1ng",
+   "width": 0
+  },
+  {
+   "fieldname": "formatted_week",
+   "fieldtype": "Data",
+   "label": "Ng\u00e0y tu\u1ea7n",
+   "width": 0
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y ",
+   "width": 200
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "T\u00ean nh\u00e2n vi\u00ean",
+   "width": 0
+  },
+  {
+   "fieldname": "REQU_QTY",
+   "fieldtype": "Float",
+   "label": "S\u1ed1 l\u01b0\u1ee3ng sx th\u1ef1c t\u1ebf",
+   "width": 0
+  },
+  {
+   "fieldname": "PLAN_QTY",
+   "fieldtype": "Float",
+   "label": "S\u1ed1 l\u01b0\u1ee3ng theo k\u1ebf ho\u1ea1ch",
+   "width": 0
+  },
+  {
+   "fieldname": "PERCENT",
+   "fieldtype": "Float",
+   "label": "T\u1ec9 l\u1ec7 theo ho\u00e0n th\u00e0nh",
+   "width": 0
+  },
+  {
+   "fieldname": "w_type",
+   "fieldtype": "Data",
+   "label": "Ki\u1ec3u",
+   "width": 0
+  }
+ ],
+ "creation": "2024-12-11 17:27:26.086292",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Lo\u1ea1i",
+   "mandatory": 1,
+   "options": "C\u1eaft\nTh\u1ed5i\nT\u1ea5t c\u1ea3",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-01-09 10:28:15.825753",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "B\u00e1o c\u00e1o t\u00ecnh h\u00ecnh sx c\u1ee7a ca SX h\u00e0ng ng\u00e0y",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "WITH REQY_TB AS (SELECT \r\n\ttjc.posting_date,\r\n\tte.employee_name,\r\n\tSUM(tjci.required_qty) AS REQU_QTY,\r\n\t'Th\u1ed5i' AS w_type\r\nFROM \r\n\t`tabJob Card` tjc\r\nLEFT JOIN\r\n\t`tabJob Card Time Log` tjctl \r\nON\r\n\ttjc.name = tjctl.parent \r\nLEFT JOIN \r\n\t`tabEmployee` te\r\nON \r\n\ttjctl.employee = te.name\r\nLEFT JOIN \r\n    `tabJob Card Item` tjci \r\nON \r\n    tjc.name = tjci.parent\r\nWHERE tjc.operation like 'XA'\r\nGROUP BY\r\n\tte.employee_name, tjc.posting_date\r\nUNION\r\nSELECT \r\n\ttjc.posting_date,\r\n\tte.employee_name,\r\n\tSUM(CASE \r\n\t\tWHEN  tjc.operation like 'NKBTPC' THEN tjci.required_qty \r\n\t\tELSE tjci.qty_counted \r\n\tEND) AS REQU_QTY,\r\n\t'C\u1eaft' AS w_type\r\nFROM \r\n\t`tabJob Card` tjc\r\nLEFT JOIN\r\n\t`tabJob Card Time Log` tjctl \r\nON\r\n\ttjc.name = tjctl.parent \r\nLEFT JOIN \r\n\t`tabEmployee` te\r\nON \r\n\ttjctl.employee = te.name\r\nLEFT JOIN \r\n    `tabJob Card Item` tjci \r\nON \r\n    tjc.name = tjci.parent\r\nLEFT JOIN\r\n\t`tabWork Order` two \r\nON\r\n\ttjc.work_order = two.name\r\nWHERE tjc.operation IN ('NKBTPC','DONGTHUNG')\r\nGROUP BY\r\n\tte.employee_name, tjc.posting_date),\r\nPLAN_TB AS \r\n(SELECT \r\n\ttdpp.plan_date,\r\n\tte.employee_name,\r\n\tSUM(tdppi.quantity) AS PLAN_QTY,\r\n\tCASE\t\r\n\t\tWHEN tdpp.work_order_type like 'WORK_ORDER_BLOW' THEN 'Th\u1ed5i'\r\n\t\tELSE 'C\u1eaft'\r\n\tEND AS w_type\r\nFROM \r\n\t`tabDaily Production Plan` tdpp \r\nLEFT JOIN\r\n\t`tabDaily Production Plan Item` tdppi\r\nON\r\n\ttdpp.name = tdppi.parent \r\nLEFT JOIN \r\n\t`tabEmployee` te\r\nON \r\n\ttdppi.employee = te.name\r\nWHERE\r\n\ttdppi.docstatus = 1\r\n\tAND tdpp.work_order_type in ('WORK_ORDER_BLOW',  'WORK_ORDER_CUT')\r\nGROUP BY\r\n\tte.employee_name, tdpp.plan_date, tdpp.work_order_type)\r\nSELECT\r\n    CONCAT('Th\u1ee9 ', DAYOFWEEK(posting_date)) week_date,\r\n    CONCAT(RIGHT(YEAR(posting_date), 2), '-M', MONTH(posting_date)) formatted_month,\r\n\tCONCAT(RIGHT(YEAR(posting_date), 2), '-W', WEEK(posting_date, 2)) formatted_week,\r\n    posting_date, \r\n    employee_name, \r\n    REQU_QTY, \r\n    PLAN_QTY,\r\n    PLAN_QTY/(PLAN_QTY +  REQU_QTY) PERCENT,\r\n    w_type\r\nFROM \r\n(SELECT\r\n    REQY_TB.posting_date, \r\n    REQY_TB.employee_name,\r\n    REQY_TB.REQU_QTY, \r\n    PLAN_TB.PLAN_QTY,\r\n    REQY_TB.w_type\r\nFROM \r\n\tREQY_TB\r\nLEFT JOIN\r\n\tPLAN_TB\r\nON \r\n\tREQY_TB.employee_name = PLAN_TB.employee_name \r\n\tAND REQY_TB.posting_date = PLAN_TB.plan_date\r\n\tAND PLAN_TB.w_type = REQY_TB.w_type\r\nUNION \r\nSELECT \r\n\tPLAN_TB.plan_date posting_date,\r\n\tPLAN_TB.employee_name,\r\n\tREQY_TB.REQU_QTY,\r\n\tPLAN_TB.PLAN_QTY,\r\n\tPLAN_TB.w_type\r\nFROM \r\n\tREQY_TB\r\nRIGHT JOIN\r\n\tPLAN_TB\r\nON \r\n\tREQY_TB.employee_name = PLAN_TB.employee_name \r\n\tAND REQY_TB.posting_date = PLAN_TB.plan_date\r\n\tAND PLAN_TB.w_type = REQY_TB.w_type) FN_TB\r\nWHERE \r\n    FN_TB.posting_date BETWEEN DATE(%(start_date)s)\r\n                         AND DATE(%(end_date)s)\r\n    AND (%(type)s = \"T\u1ea5t c\u1ea3\" OR FN_TB.w_type = %(type)s)\r\nORDER BY posting_date, w_type\r\n\t\r\n",
+ "ref_doctype": "Job Card",
+ "report_name": "B\u00e1o c\u00e1o t\u00ecnh h\u00ecnh sx c\u1ee7a ca SX h\u00e0ng ng\u00e0y",
+ "report_type": "Script Report",
+ "roles": []
+}

@@ -1,0 +1,519 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:LN-{YYYY}{MM}{DD}-{####}",
+ "creation": "2024-11-12 11:27:24.557910",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "vay_section1",
+  "contract",
+  "loan_type",
+  "remarks",
+  "maturity_date",
+  "contract_number",
+  "amended_from",
+  "is_cancelled",
+  "is_settled",
+  "is_finish",
+  "column_break_iqcv",
+  "company",
+  "submit_date",
+  "short_loan_account",
+  "long_loan_account",
+  "cost_center",
+  "vay_section2",
+  "party_type",
+  "party",
+  "loan_product",
+  "expire_date",
+  "column_break_aypa",
+  "contrac_type",
+  "currency",
+  "limit",
+  "is_limit",
+  "vay_section3",
+  "total_loan",
+  "date_method",
+  "rp_start",
+  "interest",
+  "added_interest",
+  "column_break_vvcn",
+  "rp_method",
+  "advance_check",
+  "rp_period",
+  "calc",
+  "bank_account",
+  "th\u00f4ng_tin_tr\u1ea3_tr\u01b0\u1edbc_section",
+  "advance_account",
+  "advance_gl_entry",
+  "column_break_cjcb",
+  "credit_account_for_advance",
+  "vay_section3tf",
+  "total_payable",
+  "paid_amt",
+  "not_paid_amt",
+  "settled_amt",
+  "column_break_akyi",
+  "current_balance",
+  "prin_paid_amt",
+  "int_paid_amt",
+  "int_prepaid_amt",
+  "section_break_qplo",
+  "rp_scd"
+ ],
+ "fields": [
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Company Loan",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_iqcv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "submit_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "contract",
+   "fieldtype": "Link",
+   "label": "Loan contract",
+   "options": "Loan Contract"
+  },
+  {
+   "default": "12",
+   "fieldname": "rp_period",
+   "fieldtype": "Int",
+   "label": "S\u1ed1 k\u1ef3 tr\u1ea3 n\u1ee3 (theo Th\u00e1ng)",
+   "options": "Number",
+   "reqd": 1
+  },
+  {
+   "default": "100000000",
+   "fieldname": "total_loan",
+   "fieldtype": "Currency",
+   "label": "T\u1ed5ng ti\u1ec1n vay",
+   "options": "currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vvcn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_qplo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "rp_scd",
+   "fieldtype": "Table",
+   "label": "L\u1ecbch tr\u1ea3 n\u1ee3",
+   "no_copy": 1,
+   "options": "Company Loan Repayment Schedule"
+  },
+  {
+   "fieldname": "calc",
+   "fieldtype": "Button",
+   "label": "T\u00ednh l\u1ecbch tr\u1ea3 n\u1ee3"
+  },
+  {
+   "fieldname": "rp_start",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u tr\u1ea3 n\u1ee3",
+   "reqd": 1
+  },
+  {
+   "default": "12",
+   "fieldname": "interest",
+   "fieldtype": "Float",
+   "label": "L\u00e3i su\u1ea5t vay (%)",
+   "precision": "4",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_method",
+   "fieldtype": "Select",
+   "label": "Ng\u00e0y t\u00ednh l\u00e3i",
+   "options": "30/360\nNg\u00e0y th\u1ef1c/360\nNg\u00e0y th\u1ef1c/365"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "rp_method",
+   "fieldtype": "Select",
+   "label": "Ph\u01b0\u01a1ng th\u1ee9c t\u00ednh",
+   "options": "\nTr\u1ea3 c\u1ea3 g\u1ed1c v\u00e0 l\u00e3i khi \u0111\u00e1o h\u1ea1n\nTr\u1ea3 \u0111\u1ecbnh k\u1ef3 g\u1ed1c v\u00e0 l\u00e3i theo D\u01b0 n\u1ee3 g\u1ed1c\nTr\u1ea3 \u0111\u1ecbnh k\u1ef3 g\u1ed1c v\u00e0 l\u00e3i theo D\u01b0 n\u1ee3 gi\u1ea3m d\u1ea7n\nTr\u1ea3 \u0111\u1ecbnh k\u1ef3 l\u00e3i, tr\u1ea3 g\u1ed1c khi \u0111\u00e1o h\u1ea1n\nManual"
+  },
+  {
+   "depends_on": "eval:doc.contract && doc.is_limit === 1",
+   "fetch_from": "contract.limit",
+   "fieldname": "limit",
+   "fieldtype": "Currency",
+   "label": "H\u1ea1n m\u1ee9c c\u00f2n l\u1ea1i",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1,
+   "read_only_depends_on": "eval:doc.contract"
+  },
+  {
+   "description": "Lo\u1ea1i ti\u1ec1n ph\u1ea3i \u1ee9ng v\u1edbi lo\u1ea1i ti\u1ec1n m\u1eb7c \u0111\u1ecbnh c\u1ee7a \u0111\u1ed1i t\u00e1c",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Lo\u1ea1i ti\u1ec1n",
+   "no_copy": 1,
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "current_balance",
+   "fieldtype": "Currency",
+   "label": "S\u1ed1 d\u01b0 hi\u1ec7n t\u1ea1i",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "added_interest",
+   "fieldtype": "Currency",
+   "label": "\u0110i\u1ec1u ch\u1ec9nh ti\u1ec1n vay"
+  },
+  {
+   "fieldname": "total_payable",
+   "fieldtype": "Currency",
+   "label": "T\u1ed5ng ph\u1ea3i tr\u1ea3 g\u1ed1c",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "paid_amt",
+   "fieldtype": "Currency",
+   "label": "\u0110\u00e3 gi\u1ea3i ng\u00e2n",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_akyi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "not_paid_amt",
+   "fieldtype": "Currency",
+   "label": "Ch\u01b0a gi\u1ea3i ng\u00e2n",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "contract.contract_type",
+   "fieldname": "contrac_type",
+   "fieldtype": "Select",
+   "label": "Lo\u1ea1i h\u1ee3p \u0111\u1ed3ng",
+   "options": "\nH\u1ee3p \u0111\u1ed3ng vay v\u1ed1n\nH\u1ee3p \u0111\u1ed3ng b\u1ea3o l\u00e3nh",
+   "read_only_depends_on": "eval:doc.contract"
+  },
+  {
+   "fetch_from": "contract.loan_product",
+   "fieldname": "loan_product",
+   "fieldtype": "Link",
+   "label": "S\u1ea3n ph\u1ea9m vay",
+   "options": "Company Loan Type",
+   "read_only_depends_on": "eval:doc.contract"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "vay_section1",
+   "fieldtype": "Section Break",
+   "label": "Th\u00f4ng tin chung"
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "company.cost_center",
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "vay_section2",
+   "fieldtype": "Section Break",
+   "label": "Th\u00f4ng tin kho\u1ea3n vay"
+  },
+  {
+   "fieldname": "column_break_aypa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:!doc.docstatus",
+   "fieldname": "vay_section3",
+   "fieldtype": "Section Break",
+   "label": "Th\u00f4ng tin chi ti\u1ebft kho\u1ea3n vay"
+  },
+  {
+   "depends_on": "eval:doc.docstatus",
+   "fieldname": "vay_section3tf",
+   "fieldtype": "Section Break",
+   "label": "S\u1ed1 ti\u1ec1n"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "prin_paid_amt",
+   "fieldtype": "Currency",
+   "label": "\u0110\u00e3 thanh to\u00e1n g\u1ed1c",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "int_paid_amt",
+   "fieldtype": "Currency",
+   "label": "\u0110\u00e3 thanh to\u00e1n l\u00e3i",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fetch_from": "contract.is_limit",
+   "fieldname": "is_limit",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "H\u1ee3p \u0111\u1ed3ng h\u1ea1n m\u1ee9c",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.rp_method !== 'Tr\u1ea3 c\u1ea3 g\u1ed1c v\u00e0 l\u00e3i khi \u0111\u00e1o h\u1ea1n'",
+   "fieldname": "advance_check",
+   "fieldtype": "Check",
+   "label": "Tr\u1ea3 tr\u01b0\u1edbc"
+  },
+  {
+   "depends_on": "eval:doc.advance_check === 1",
+   "fetch_from": "company.default_deferred_expense_account",
+   "fieldname": "advance_account",
+   "fieldtype": "Link",
+   "label": "T\u00e0i kho\u1ea3n tr\u1ea3 tr\u01b0\u1edbc",
+   "options": "Account"
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.advance_check === 1",
+   "fieldname": "th\u00f4ng_tin_tr\u1ea3_tr\u01b0\u1edbc_section",
+   "fieldtype": "Section Break",
+   "label": "Th\u00f4ng tin tr\u1ea3 tr\u01b0\u1edbc"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "advance_gl_entry",
+   "fieldtype": "Link",
+   "label": "B\u00fat to\u00e1n tr\u1ea3 tr\u01b0\u1edbc",
+   "no_copy": 1,
+   "options": "GL Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_cjcb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.advance_check === 1",
+   "fieldname": "credit_account_for_advance",
+   "fieldtype": "Link",
+   "label": "T\u00e0i kho\u1ea3n ghi C\u00f3",
+   "mandatory_depends_on": "eval:doc.advance_check === 1",
+   "options": "Account"
+  },
+  {
+   "depends_on": "eval:doc.contract",
+   "fetch_from": "contract.expire_date",
+   "fieldname": "expire_date",
+   "fieldtype": "Date",
+   "label": "Th\u1eddi h\u1ea1n h\u1ee3p \u0111\u1ed3ng",
+   "read_only": 1,
+   "read_only_depends_on": "eval:doc.contract"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "int_prepaid_amt",
+   "fieldtype": "Currency",
+   "label": "\u0110\u00e3 thanh to\u00e1n tr\u01b0\u1edbc l\u00e3i (tr\u1ea3 tr\u01b0\u1edbc)",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.is_cancelled === 1",
+   "fieldname": "is_cancelled",
+   "fieldtype": "Check",
+   "label": "Is cancelled",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "short_loan_account",
+   "fieldtype": "Link",
+   "label": "Short term loan account",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "fieldname": "long_loan_account",
+   "fieldtype": "Link",
+   "label": "Long term loan account",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "settled_amt",
+   "fieldtype": "Currency",
+   "label": "\u0110\u00e3 t\u1ea5t to\u00e1n",
+   "no_copy": 1,
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.is_settled === 1",
+   "fieldname": "is_settled",
+   "fieldtype": "Check",
+   "label": "Is settled",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "contract.party",
+   "fieldname": "party",
+   "fieldtype": "Dynamic Link",
+   "label": "\u0110\u1ed1i t\u00e1c",
+   "options": "party_type",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "contract.party_type",
+   "fieldname": "party_type",
+   "fieldtype": "Select",
+   "label": "Lo\u1ea1i \u0111\u1ed1i t\u00e1c",
+   "options": "Supplier\nEmployee\nCustomer",
+   "read_only_depends_on": "eval:doc.contract",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "contract.loan_type",
+   "fieldname": "loan_type",
+   "fieldtype": "Select",
+   "label": "Loan type",
+   "options": "Borrow\nLend",
+   "read_only_depends_on": "eval:doc.contract",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_finish",
+   "fieldtype": "Check",
+   "label": "Is finish",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "T\u00e0i kho\u1ea3n ng\u00e2n h\u00e0ng",
+   "length": 120,
+   "options": "Bank Account"
+  },
+  {
+   "default": "Today",
+   "fieldname": "maturity_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y \u0111\u00e1o h\u1ea1n"
+  },
+  {
+   "default": "Today",
+   "fieldname": "contract_number",
+   "fieldtype": "Data",
+   "label": "S\u1ed1 kh\u1ebf \u01b0\u1edbc"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "group": "B\u00fat to\u00e1n l\u00e3i vay",
+   "link_doctype": "GL Entry",
+   "link_fieldname": "against_voucher"
+  },
+  {
+   "group": "Ch\u1ee9ng t\u1eeb thanh to\u00e1n",
+   "link_doctype": "Payment Entry",
+   "link_fieldname": "company_loan"
+  },
+  {
+   "group": "H\u00f3a \u0111\u01a1n mua",
+   "link_doctype": "Purchase Invoice",
+   "link_fieldname": "company_loan"
+  }
+ ],
+ "modified": "2025-06-26 17:14:14.624857",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Company Loan",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

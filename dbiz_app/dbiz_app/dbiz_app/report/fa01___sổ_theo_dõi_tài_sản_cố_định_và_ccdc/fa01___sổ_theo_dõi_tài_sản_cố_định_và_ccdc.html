@@ -1,0 +1,210 @@
+<style>
+	.print-format {
+		padding: 4mm;
+		font-size: 8.0pt !important;
+	}
+
+	.print-format td {
+		vertical-align: middle !important;
+	}
+
+	.print-format th {
+		vertical-align: middle !important;
+	}
+
+	table {
+		margin-top: 20px;
+	}
+
+	table,
+	th,
+	tr,
+	td {
+		border: 2px solid black;
+		border-collapse: collapse;
+		font-size: 10px;
+	}
+
+	th {
+		font-weight: bold !important;
+		color: black !important;
+		text-align: center !important;
+		font-size: 10px;
+    	vertical-align: middle !important; 
+	}
+
+	.title {
+		margin-top:30px;
+		margin-bottom: 0px; 
+		font-weight: bold;
+	}
+
+	.title-table {
+		font-weight: bold !important;
+		color: black !important;
+		text-align: center !important;
+		font-size: 10px;
+    	vertical-align: middle !important; 
+	}
+	
+	.signature {
+		margin-bottom: 30px; 
+	}
+
+	.col-7 {
+		width: 7%;
+	}
+
+	.col-8 {
+		width: 8%;
+	}
+
+	.col-12 {
+		width: 12%;
+	}
+</style>
+<p style="margin-top:0">{%= __("Tên công ty: " + filters.company_name) %}</p>
+<p style="margin-top:0">{%= __("Địa chỉ: " + filters.company_address) %}</p>
+<p style="margin-top:0">{%= __("Mã số thuế: " + filters.tax_id) %}</p>
+<h2 class="text-center title">{%= __("SỔ THEO DÕI TẢI SẢN CỐ ĐỊNH VÀ CÔNG CỤ, DỤNG CỤ
+	TẠI NƠI SỬ DỤNG")
+	%}</h2>
+<p class="text-center">
+	Tháng {%= new Date(filters.end_date).getMonth() + 1 %} năm {%= new Date(filters.end_date).getFullYear()%}
+</p>
+<table style="margin-top:0px !important">
+	<thead>
+		<tr>
+			<th class="col-12">A</th>
+			<th class="col-7">B</th>
+			<th class="col-12">C</th>
+			<th class="col-7">D</th>
+			<th class="col-7">1</th>
+			<th class="col-7">2</th>
+			<th class="col-8">3=1*2</th>
+			<th class="col-12">E</th>
+			<th class="col-7">H</th>
+			<th class="col-7">4</th>
+			<th class="col-7">5</th>
+			<th class="col-7">6</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th colspan="7">
+				Ghi tăng tài sản cố đinh và công cụ, dụng cụ
+			</th>
+			<th colspan="4">
+				Ghi giảm tài sản cố định và công cụ, dụng cụ
+			</th>
+			<th rowspan="3" class="col-7">
+				Ghi chú
+			</th>
+		</tr>
+		<tr>
+			<th colspan="2">
+				Chứng từ
+			</th>
+			<th rowspan="2" class="col-12">
+				Tên, nhãn hiệu, quy cách tài sản cố định và công cụ, dụng cụ
+			</th>
+			<th rowspan="2" class="col-7">
+				Đơn vị tính
+			</th>
+			<th rowspan="2" class="col-7">
+				Số lượng
+			</th>
+			<th rowspan="2" class="col-7">
+				Đơn giá
+			</th>
+			<th rowspan="2" class="col-8">
+				Số tiền
+			</th>
+			<th class="col-7">
+				Chứng từ
+			</th>
+			<th rowspan="2" class="col-7">
+				Lý do
+			</th>
+			<th rowspan="2" class="col-7">
+				Số lượng
+			</th>
+			<th rowspan="2" class="col-7">
+				Số tiền
+			</th>
+		</tr>
+		<tr>
+			<th class="col-12">
+				Số hiệu
+			</th>
+			<th class="col-7">
+				Ngày tháng
+			</th>
+			<th class="col-12">
+				Số hiệu
+			</th>
+		</tr>
+		<tr>
+			<td colspan="6"></td>
+			<td style="text-align: right;">
+				<strong>{%= data[data.length-1]['Số tiền ghi tăng'] != null ? data[data.length-1]['Số tiền ghi tăng'].toLocaleString('vi-VN', { minimumFractionDigits: 0 }) : 0 %}</strong>
+			</td>
+			<td colspan="5"></td>
+		</tr>
+		{% for(var i=0, l=data.length; i<l-1; i++) { %} 
+		<tr>
+			<td>{%=data[i]['Mã chứng từ ghi tăng'] %}</td>
+			<td>{%=data[i]['Thời gian ghi tăng'] %}</td>
+			<td>{%=data[i]['Tên, nhãn hiệu, quy cách tài sản cố định và công cụ, dụng cụ'] %}</td>
+			<td>{%=data[i]['Đơn vị'] %}</td>
+			<td>{%=data[i]['Số lượng ghi tăng'] %}</td>
+			<td style="text-align: right;">
+				{%= data[i]['Đơn giá ghi tăng'] != null ? data[i]['Đơn giá ghi tăng'].toLocaleString('vi-VN', { minimumFractionDigits: 0 }) : 0 %}
+			</td>
+			<td style="text-align: right;">
+				{%= data[i]['Số tiền ghi tăng'] != null ? data[i]['Số tiền ghi tăng'].toLocaleString('vi-VN', { minimumFractionDigits: 0 }) : 0 %}
+			</td>			
+			<td>{%=data[i]['Số hiệu ghi giảm'] %}</td>
+			<td>{%=data[i]['Lý do'] %}</td>
+			<td>{%=data[i]['Số lượng ghi giảm'] %}</td>
+			<td style="text-align: right;">
+				{%= data[i]['Số tiền ghi giảm'] != null ? data[i]['Số tiền ghi giảm'].toLocaleString('vi-VN', { minimumFractionDigits: 0 }) : 0 %}
+			</td>			
+			<td>{%=data[i]['Ghi chú'] %}</td>
+			</tr>
+			{% } %}
+			<tr>
+				<td colspan="6" style="text-align: right;"><strong>Tổng cộng</strong></td>
+				<td style="text-align: right;">
+					<strong>
+						{%= data[data.length-1]['Số tiền ghi tăng'] ? data[data.length-1]['Số tiền ghi tăng'].toLocaleString('vi-VN', {
+						minimumFractionDigits: 0 }) : 0 %}
+					</strong>
+				</td>
+				<td colspan="3"></td>
+				<td style="text-align: right;">
+					<strong>
+						{%= data[data.length-1]['Số tiền ghi giảm'] ? data[data.length-1]['Số tiền ghi giảm'].toLocaleString('vi-VN', {
+						minimumFractionDigits: 0 }) : 0 %}
+					</strong>
+				</td>
+				<td></td>
+			</tr>
+	</tbody>
+</table>
+<p style="margin-top: 50px;">
+	- Sổ này có … trang, đánh số từ trang số 01 đến trang …
+</p>
+<p>
+	- Ngày mở sổ: …
+</p>
+<div class="row signature">
+	<div style="padding-left: 100px;margin-top: 30px;">
+		<p>
+			<strong>Người ghi sổ</strong>
+		</p>
+		<p>
+			<i>(Ký, họ tên)</i>
+		</p>
+	</div>
+</div>

@@ -1,0 +1,248 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:ARC-{YYYY}{MM}{DD}-{####}",
+ "creation": "2024-10-31 09:42:45.650755",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "ki\u1ec3m_k\u00ea_tab",
+  "html_button_content",
+  "section_break_ffwv",
+  "column_break_qxsp",
+  "purpose",
+  "method_gl",
+  "method_check",
+  "is_item_code_check",
+  "get_location",
+  "get_code",
+  "get_asset",
+  "scan_qr",
+  "asset_reconciliation_table",
+  "asset_detail",
+  "asset_detail_check",
+  "th\u00f4ng_tin_chung_tab",
+  "member_table",
+  "members",
+  "section_break_of6b",
+  "company",
+  "amended_from",
+  "remarks",
+  "column_break_fprd",
+  "posting_date",
+  "finance_book",
+  "section_break_mbte",
+  "scan_qr_button",
+  "connections_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_of6b",
+   "fieldtype": "Section Break",
+   "label": "Th\u00f4ng tin chung"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Ch\u1ee9ng t\u1eeb g\u1ed1c",
+   "no_copy": 1,
+   "options": "Asset Reconciliation",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "C\u00f4ng ty",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_fprd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Now",
+   "fieldname": "posting_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Ng\u00e0y l\u1eadp",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_ffwv",
+   "fieldtype": "Section Break",
+   "label": "Ki\u1ec3m k\u00ea t\u00e0i s\u1ea3n"
+  },
+  {
+   "fieldname": "scan_qr",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Qu\u00e9t QR Code",
+   "options": "Barcode"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "depends_on": "eval:doc.purpose === \"Book Journal\";",
+   "fieldname": "asset_detail",
+   "fieldtype": "Table",
+   "label": "T\u00e0i s\u1ea3n",
+   "no_copy": 1,
+   "options": "Asset Reconciliation Details"
+  },
+  {
+   "fieldname": "get_location",
+   "fieldtype": "Link",
+   "label": "V\u1ecb tr\u00ed",
+   "options": "Location"
+  },
+  {
+   "fieldname": "get_asset",
+   "fieldtype": "Button",
+   "is_virtual": 1,
+   "label": "L\u1ea5y th\u00f4ng tin t\u00e0i s\u1ea3n hi\u1ec7n c\u00f3"
+  },
+  {
+   "fieldname": "get_code",
+   "fieldtype": "Link",
+   "label": "Lo\u1ea1i s\u1ea3n ph\u1ea9m",
+   "link_filters": "[[\"Item\",\"is_fixed_asset\",\"=\",1]]",
+   "options": "Item"
+  },
+  {
+   "fieldname": "finance_book",
+   "fieldtype": "Link",
+   "label": "S\u1ed5 t\u00e0i s\u1ea3n",
+   "options": "Finance Book",
+   "reqd": 1
+  },
+  {
+   "fieldname": "members",
+   "fieldtype": "Table",
+   "options": "Asset Reconciliation Member"
+  },
+  {
+   "fieldname": "purpose",
+   "fieldtype": "Select",
+   "label": "Purpose",
+   "options": "Check\nBook Journal"
+  },
+  {
+   "depends_on": "eval:doc.purpose===\"Check\"",
+   "fieldname": "asset_detail_check",
+   "fieldtype": "Table",
+   "label": "T\u00e0i s\u1ea3n",
+   "no_copy": 1,
+   "options": "Asset Check Detail"
+  },
+  {
+   "default": "L\u1ea5y th\u00f4ng tin t\u1ef1 \u0111\u1ed9ng",
+   "depends_on": "eval:doc.purpose === \"Book Journal\";",
+   "fieldname": "method_gl",
+   "fieldtype": "Select",
+   "label": "C\u00e1ch th\u1ee9c ki\u1ec3m k\u00ea",
+   "options": "L\u1ea5y th\u00f4ng tin t\u1ef1 \u0111\u1ed9ng\nQu\u00e9t m\u00e3 QR\nL\u1ea5y th\u00f4ng tin v\u00e0 qu\u00e9t m\u00e3 QR"
+  },
+  {
+   "default": "L\u1ea5y th\u00f4ng tin v\u00e0 qu\u00e9t m\u00e3 QR",
+   "depends_on": "eval:doc.purpose==='Check'",
+   "fieldname": "method_check",
+   "fieldtype": "Select",
+   "label": "C\u00e1ch th\u1ee9c ki\u1ec3m tra",
+   "options": "L\u1ea5y th\u00f4ng tin v\u00e0 qu\u00e9t m\u00e3 QR\nQu\u00e9t m\u00e3 QR"
+  },
+  {
+   "default": "1",
+   "depends_on": "eval:doc.purpose==='Check'",
+   "fieldname": "is_item_code_check",
+   "fieldtype": "Check",
+   "label": "Ki\u1ec3m k\u00ea theo t\u1eebng nh\u00f3m s\u1ea3n ph\u1ea9m"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "scan_qr_button",
+   "fieldtype": "Button",
+   "hidden": 1,
+   "label": "Qu\u00e9t QR Code"
+  },
+  {
+   "fieldname": "ki\u1ec3m_k\u00ea_tab",
+   "fieldtype": "Tab Break",
+   "label": "Ki\u1ec3m k\u00ea"
+  },
+  {
+   "fieldname": "th\u00f4ng_tin_chung_tab",
+   "fieldtype": "Tab Break",
+   "label": "Th\u00f4ng tin chung"
+  },
+  {
+   "fieldname": "column_break_qxsp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "html_button_content",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "asset_reconciliation_table",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "member_table",
+   "fieldtype": "Section Break",
+   "label": "Th\u00e0nh vi\u00ean tham gia"
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections",
+   "show_dashboard": 1
+  },
+  {
+   "fieldname": "section_break_mbte",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "group": "Journal Entry",
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "reference_name",
+   "table_fieldname": "accounts"
+  }
+ ],
+ "modified": "2025-01-07 13:48:13.156440",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Asset Reconciliation",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

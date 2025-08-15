@@ -1,0 +1,78 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2024-11-20 12:47:04.422473",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "Ng\u00e0y k\u1ebft th\u00fac",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "Leepak",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "C\u00f4ng ty",
+   "mandatory": 1,
+   "options": "Company",
+   "wildcard_filter": 0
+  },
+  {
+   "default": "",
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Kho",
+   "mandatory": 0,
+   "options": "Warehouse",
+   "wildcard_filter": 0
+  },
+  {
+   "default": "",
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Nh\u00f3m s\u1ea3n ph\u1ea9m",
+   "mandatory": 0,
+   "options": "Item Group",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-11-20 12:47:04.422473",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "INV01 - B\u1ea3ng k\u00ea phi\u1ebfu nh\u1eadp kho mua h\u00e0ng",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT \n    tpri.warehouse AS 'M\u00e3 kho',\n    tw.warehouse_name AS 'T\u00ean kho',\n    'Nh\u1eadp mua h\u00e0ng' AS 'Lo\u1ea1i CT',\n    tpr.posting_date AS 'Ng\u00e0y',\n    tpr.name AS 'S\u1ed1 CT nh\u1eadp kho',\n    tpri.purchase_invoice AS 'S\u1ed1 \u0111\u01a1n h\u00e0ng/h\u00f3a \u0111\u01a1n', \n    tpo.supplier_name AS 'Nh\u00e0 cung c\u1ea5p',\n    tpo.status AS 'Tr\u1ea1ng th\u00e1i',\n    NULL AS 'Di\u1ec5n gi\u1ea3i',\n    tpri.item_group AS 'Nh\u00f3m s\u1ea3n ph\u1ea9m',\n    tpri.item_code AS 'M\u00e3 s\u1ea3n ph\u1ea9m',\n    tpri.item_name  AS 'T\u00ean s\u1ea3n ph\u1ea3m',\n    tpri.stock_uom AS '\u0110VT',\n    tpri.price_list_rate AS 'Gi\u00e1',\n    ABS(tpri.stock_qty) AS 'SL',\n    tpri.price_list_rate  * ABS(tpri.stock_qty) AS 'Th\u00e0nh '\nFROM `tabPurchase Receipt Item` tpri \nLEFT JOIN `tabPurchase Receipt` tpr ON tpr.name = tpri.parent\nLEFT JOIN `tabWarehouse` tw ON tw.name = tpri.warehouse \nLEFT JOIN `tabPurchase Order` tpo ON tpo.name = tpri.purchase_order \nLEFT JOIN `tabSupplier` ts ON ts.name = tpo.supplier\nLEFT JOIN `tabItem Group` tig ON tig.name = tpri.item_group\nWHERE tpr.company = %(company)s\n    AND tpr.posting_date BETWEEN DATE(%(start_date)s) AND DATE(%(end_date)s)\n    OR (tpri.warehouse = %(warehouse)s OR %(warehouse)s IS NULL OR %(warehouse)s = '')\n    OR (tpri.item_group = %(item_group)s OR %(item_group)s IS NULL OR %(item_group)s = '')",
+ "ref_doctype": "Purchase Receipt",
+ "report_name": "INV01 - B\u1ea3ng k\u00ea phi\u1ebfu nh\u1eadp kho mua h\u00e0ng",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Stock Manager"
+  },
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Purchase User"
+  },
+  {
+   "role": "K\u1ebf to\u00e1n"
+  }
+ ]
+}

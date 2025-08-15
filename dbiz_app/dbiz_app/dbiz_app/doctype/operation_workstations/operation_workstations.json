@@ -1,0 +1,718 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-12-28 00:35:44.007508",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "workstation",
+  "semi_fg_to_manufacture",
+  "make_job_card",
+  "section_break_ldtg",
+  "operation",
+  "bom_no",
+  "collective_operation",
+  "column_break_rhyq",
+  "workstation_type",
+  "status",
+  "section_break_zybl",
+  "column_break_kbah",
+  "mix_batch_qty",
+  "sales_order",
+  "item_fg",
+  "item_semi_fg",
+  "column_break_uwld",
+  "total_semi_fg",
+  "completed_semi_fg",
+  "in_progress_qty",
+  "more_information_section",
+  "item_prev_semi_fg",
+  "total_fg",
+  "completed_fg",
+  "multiplier_fg",
+  "multiplier",
+  "other_spec_requirements_blow",
+  "workpiece_weight_min",
+  "wide_tp_min",
+  "average_thickness_min",
+  "extend_tp_min",
+  "bag_length_min",
+  "other_spec_requirement_blow",
+  "column_break_jmwj",
+  "workpiece_weight_max",
+  "wide_tp_max",
+  "average_thickness_max",
+  "extend_tp_max",
+  "bag_length_max",
+  "product_identification",
+  "note_blow",
+  "deploy_blow_note",
+  "check_film_roll",
+  "column_break_sefw",
+  "maket_print_picture",
+  "production_plan_blow",
+  "kg_hours_machine",
+  "kg_shift_machine",
+  "film_roll_weight",
+  "film_roll_radius",
+  "met_film_roll",
+  "scrap_machine_blow",
+  "column_break_qaem",
+  "unit_cost_blow",
+  "code_cylinder_tp",
+  "location_cylinder_tp",
+  "packaging_shaft_code",
+  "qty_packaging_shaft",
+  "tech_spec_operation_blow",
+  "heat_zone_1a",
+  "heat_zone_2a",
+  "heat_zone_3a",
+  "heat_zone_4a",
+  "heat_image_1a",
+  "heat_image_2a",
+  "intermediate_heat_1a",
+  "intermediate_heat_2a",
+  "main_extrusion_speed",
+  "pull_speed",
+  "roll_retraction_speed",
+  "column_break_dxmo",
+  "heat_zone_1b",
+  "heat_zone_2b",
+  "heat_zone_3b",
+  "heat_zone_4b",
+  "heat_image_1b",
+  "heat_image_2b",
+  "intermediate_heat_1b",
+  "intermediate_heat_2b",
+  "wind_speed",
+  "printer_speed",
+  "knife_heat_information",
+  "knife_temperature_1",
+  "sole_temperature_1",
+  "machine_speed_9h",
+  "qty_line_cut_9h",
+  "unit_price_cut_9h",
+  "box_shift_9h",
+  "scrap_machine_cut_9h",
+  "scrap_check_cut_9h",
+  "temperature_c",
+  "column_break_drzh",
+  "knife_temperature_2",
+  "sole_temperature_2",
+  "machine_speed_12h",
+  "qty_line_cut_12h",
+  "unit_price_cut_12h",
+  "box_shift_12h",
+  "scrap_machine_cut_12h",
+  "scrap_check_cut_12h",
+  "maket",
+  "maket_box",
+  "column_break_bfvy",
+  "maket_bag",
+  "column_break_qytk",
+  "maket_tem",
+  "l\u01b0u_\u00fd_l\u1ec7nh_c\u1eaft_section",
+  "packaging_size",
+  "client_requirement_cut",
+  "column_break_rsfs",
+  "carton_size",
+  "pack_box_note"
+ ],
+ "fields": [
+  {
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "label": "Operation",
+   "options": "Operation"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nNot Started\nIn Progress\nPending\nDone"
+  },
+  {
+   "fieldname": "section_break_zybl",
+   "fieldtype": "Section Break",
+   "label": "Detail Information"
+  },
+  {
+   "fieldname": "total_fg",
+   "fieldtype": "Float",
+   "label": "Final Quantity To Manufacture"
+  },
+  {
+   "fieldname": "completed_fg",
+   "fieldtype": "Float",
+   "label": "Completed Final Quantity"
+  },
+  {
+   "fieldname": "column_break_kbah",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_semi_fg",
+   "fieldtype": "Float",
+   "label": "Semi FG To Manufacture"
+  },
+  {
+   "fieldname": "completed_semi_fg",
+   "fieldtype": "Float",
+   "label": "Completed Semi Final Quantity"
+  },
+  {
+   "fieldname": "make_job_card",
+   "fieldtype": "Button",
+   "label": "Make Job Card"
+  },
+  {
+   "fieldname": "item_fg",
+   "fieldtype": "Link",
+   "label": "Final Good",
+   "options": "Item"
+  },
+  {
+   "fieldname": "item_semi_fg",
+   "fieldtype": "Link",
+   "label": "Semi FG",
+   "options": "Item"
+  },
+  {
+   "default": "1",
+   "fieldname": "multiplier_fg",
+   "fieldtype": "Float",
+   "label": "Multiplier FG"
+  },
+  {
+   "fieldname": "multiplier",
+   "fieldtype": "Float",
+   "label": "Multiplier"
+  },
+  {
+   "fieldname": "item_prev_semi_fg",
+   "fieldtype": "Link",
+   "label": "Previous Semi FG",
+   "options": "Item"
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "workstation_type",
+   "fieldtype": "Link",
+   "label": "Workstation Type",
+   "options": "Workstation Type"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "bom_no",
+   "fieldtype": "Link",
+   "label": "BOM",
+   "options": "BOM"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "semi_fg_to_manufacture",
+   "fieldtype": "Float",
+   "label": "Semi-FG to Manufacture"
+  },
+  {
+   "fieldname": "section_break_ldtg",
+   "fieldtype": "Section Break",
+   "label": "Operation Information"
+  },
+  {
+   "fieldname": "column_break_rhyq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "workstation",
+   "fieldtype": "Link",
+   "label": "Workstation",
+   "options": "Workstation"
+  },
+  {
+   "default": "1",
+   "depends_on": "eval:doc.operation === 'CONGDOANTRON'",
+   "fieldname": "mix_batch_qty",
+   "fieldtype": "Float",
+   "label": "Mix Batch Qty"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "more_information_section",
+   "fieldtype": "Section Break",
+   "label": "More Information"
+  },
+  {
+   "fieldname": "column_break_uwld",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.operation === 'CONGDOANTHOI'",
+   "fieldname": "other_spec_requirements_blow",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "C\u00e1c y\u00eau c\u1ea7u d\u1eb7c bi\u1ec7t kh\u00e1c l\u1ec7nh th\u1ed5i"
+  },
+  {
+   "fieldname": "workpiece_weight_min",
+   "fieldtype": "Float",
+   "label": "Dung size T/L ph\u00f4i Min"
+  },
+  {
+   "fieldname": "wide_tp_min",
+   "fieldtype": "Float",
+   "label": "Dung size R\u1ed9ng TP Min"
+  },
+  {
+   "fieldname": "average_thickness_min",
+   "fieldtype": "Float",
+   "label": "\u0110\u1ed9 d\u00e0y TB Min"
+  },
+  {
+   "fieldname": "extend_tp_min",
+   "fieldtype": "Float",
+   "label": "Dung size M\u1edf r\u1ed9ng TP Min"
+  },
+  {
+   "fieldname": "bag_length_min",
+   "fieldtype": "Float",
+   "label": "Dung size D\u00e0i t\u00fai Min"
+  },
+  {
+   "fieldname": "other_spec_requirement_blow",
+   "fieldtype": "Small Text",
+   "label": "C\u00e1c y\u00eau c\u1ea7u \u0111\u1eb7c bi\u1ec7t kh\u00e1c"
+  },
+  {
+   "fieldname": "column_break_jmwj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "workpiece_weight_max",
+   "fieldtype": "Float",
+   "label": "Dung size T/L ph\u00f4i Max"
+  },
+  {
+   "fieldname": "wide_tp_max",
+   "fieldtype": "Float",
+   "label": "Dung size R\u1ed9ng TP Max"
+  },
+  {
+   "fieldname": "average_thickness_max",
+   "fieldtype": "Float",
+   "label": "Dung size \u0110\u1ed9 d\u00e0y TB Max"
+  },
+  {
+   "fieldname": "extend_tp_max",
+   "fieldtype": "Float",
+   "label": "Dung size M\u1edf r\u1ed9ng TP Max"
+  },
+  {
+   "fieldname": "bag_length_max",
+   "fieldtype": "Float",
+   "label": "Dung size D\u00e0i t\u00fai Max"
+  },
+  {
+   "fieldname": "product_identification",
+   "fieldtype": "Small Text",
+   "label": "Nh\u1eadn di\u1ec7n s\u1ea3n ph\u1ea9m"
+  },
+  {
+   "depends_on": "eval:doc.operation === 'CONGDOANTHOI'",
+   "fieldname": "note_blow",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "L\u01b0u \u00fd l\u1ec7nh th\u1ed5i"
+  },
+  {
+   "fieldname": "deploy_blow_note",
+   "fieldtype": "Small Text",
+   "label": "L\u01b0u \u00fd khi tri\u1ec3n khai s\u1ea3n xu\u1ea5t"
+  },
+  {
+   "fieldname": "check_film_roll",
+   "fieldtype": "Small Text",
+   "label": "Ki\u1ec3m tra ch\u1ea5t l\u01b0\u1ee3ng m\u00e0ng th\u1ed5i tr\u01b0\u1edbc khi ch\u1ea1y h\u00e0ng lo\u1ea1t "
+  },
+  {
+   "fieldname": "column_break_sefw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "maket_print_picture",
+   "fieldtype": "Attach Image",
+   "label": "Maket h\u00ecnh in"
+  },
+  {
+   "depends_on": "eval:doc.operation === 'CONGDOANTHOI'",
+   "fieldname": "production_plan_blow",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "K\u1ebf ho\u1ea1ch s\u1ea3n xu\u1ea5t l\u1ec7nh th\u1ed5i"
+  },
+  {
+   "fieldname": "kg_hours_machine",
+   "fieldtype": "Float",
+   "label": "Kg/Gi\u1edd/M\u00e1y"
+  },
+  {
+   "fieldname": "kg_shift_machine",
+   "fieldtype": "Float",
+   "label": "Kg/Ca/M\u00e1y"
+  },
+  {
+   "fieldname": "film_roll_weight",
+   "fieldtype": "Float",
+   "label": "Tr\u1ecdng l\u01b0\u1ee3ng cu\u1ed9n m\u00e0ng (kg)"
+  },
+  {
+   "fieldname": "film_roll_radius",
+   "fieldtype": "Float",
+   "label": "B\u00e1n k\u00ednh cu\u1ed9n m\u00e0ng"
+  },
+  {
+   "fieldname": "met_film_roll",
+   "fieldtype": "Float",
+   "label": "M\u00e9t/cu\u1ed9n m\u00e0ng"
+  },
+  {
+   "fieldname": "scrap_machine_blow",
+   "fieldtype": "Data",
+   "label": "Ph\u1ebf ch\u1ec9nh m\u00e1y th\u1ed5i"
+  },
+  {
+   "fieldname": "column_break_qaem",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "unit_cost_blow",
+   "fieldtype": "Float",
+   "label": "\u0110\u01a1n gi\u00e1 kho\u00e1n l\u1ec7nh th\u1ed5i (\u0111/kg)"
+  },
+  {
+   "fieldname": "code_cylinder_tp",
+   "fieldtype": "Data",
+   "label": "M\u00e3 s\u1ed1 tr\u1ee5c in th\u00e0nh ph\u1ea9m"
+  },
+  {
+   "fieldname": "location_cylinder_tp",
+   "fieldtype": "Data",
+   "label": "V\u1ecb tr\u00ed \u0111\u1ec3 l\u00f4 in th\u00e0nh ph\u1ea9m"
+  },
+  {
+   "fieldname": "packaging_shaft_code",
+   "fieldtype": "Data",
+   "label": "M\u00e3 s\u1ed1 tr\u1ee5c bao g\u00f3i"
+  },
+  {
+   "fieldname": "qty_packaging_shaft",
+   "fieldtype": "Data",
+   "label": "S\u1ed1 l\u01b0\u1ee3ng tr\u1ee5c bao g\u00f3i"
+  },
+  {
+   "depends_on": "eval:doc.operation === 'CONGDOANTHOI'",
+   "fieldname": "tech_spec_operation_blow",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Th\u00f4ng s\u1ed1 k\u1ef9 thu\u1eadt v\u1eadn h\u00e0nh m\u00e1y th\u1ed5i"
+  },
+  {
+   "fieldname": "heat_zone_1a",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t v\u00f9ng 1 (\u02daC) Ph\u1ec5u A"
+  },
+  {
+   "fieldname": "heat_zone_2a",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t v\u00f9ng 2 (\u02daC) Ph\u1ec5u A "
+  },
+  {
+   "fieldname": "heat_zone_3a",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t v\u00f9ng 3 (\u02daC) Ph\u1ec5u A"
+  },
+  {
+   "fieldname": "heat_zone_4a",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t v\u00f9ng 4 (\u02daC) Ph\u1ec5u A "
+  },
+  {
+   "fieldname": "heat_image_1a",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t \u0111\u1ea7u h\u00ecnh 1 (\u02daC) Ph\u1ec5u A "
+  },
+  {
+   "fieldname": "heat_image_2a",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t \u0111\u1ea7u h\u00ecnh 2 (\u02daC) Ph\u1ec5u A"
+  },
+  {
+   "fieldname": "intermediate_heat_1a",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t trung gian 1 (\u02daC) Ph\u1ec5u A"
+  },
+  {
+   "fieldname": "intermediate_heat_2a",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t trung gian 2 (\u02daC) Ph\u1ec5u A"
+  },
+  {
+   "fieldname": "main_extrusion_speed",
+   "fieldtype": "Float",
+   "label": "T\u1ed1c \u0111\u1ed9 \u0111\u00f9n ch\u00ednh (Hz)"
+  },
+  {
+   "fieldname": "pull_speed",
+   "fieldtype": "Float",
+   "label": "T\u1ed1c \u0111\u1ed9 k\u00e9o (Hz)"
+  },
+  {
+   "fieldname": "roll_retraction_speed",
+   "fieldtype": "Float",
+   "label": "T\u1ed1c \u0111\u1ed9 thu cu\u1ed9n (Hz)"
+  },
+  {
+   "fieldname": "column_break_dxmo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "heat_zone_1b",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t v\u00f9ng 1 (\u02daC) Ph\u1ec5u B"
+  },
+  {
+   "fieldname": "heat_zone_2b",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t v\u00f9ng 2 (\u02daC) Ph\u1ec5u B"
+  },
+  {
+   "fieldname": "heat_zone_3b",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t v\u00f9ng 3 (\u02daC) Ph\u1ec5u B"
+  },
+  {
+   "fieldname": "heat_zone_4b",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t v\u00f9ng 4 (\u02daC) Ph\u1ec5u B"
+  },
+  {
+   "fieldname": "heat_image_1b",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t \u0111\u1ea7u h\u00ecnh 1 (\u02daC) Ph\u1ec5u B"
+  },
+  {
+   "fieldname": "heat_image_2b",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t \u0111\u1ea7u h\u00ecnh 2 (\u02daC) Ph\u1ec5u B"
+  },
+  {
+   "fieldname": "intermediate_heat_1b",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t trung gian 1 (\u02daC) Ph\u1ec5u B"
+  },
+  {
+   "fieldname": "intermediate_heat_2b",
+   "fieldtype": "Data",
+   "label": "Nhi\u1ec7t trung gian 2 (\u02daC) Ph\u1ec5u B"
+  },
+  {
+   "fieldname": "wind_speed",
+   "fieldtype": "Float",
+   "label": "T\u1ed1c \u0111\u1ed9 gi\u00f3 (Hz)"
+  },
+  {
+   "fieldname": "printer_speed",
+   "fieldtype": "Float",
+   "label": "T\u1ed1c \u0111\u1ed9 m\u00e1y in (Hz)"
+  },
+  {
+   "depends_on": "eval:doc.operation === 'CONGDOANCAT'",
+   "fieldname": "knife_heat_information",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Th\u00f4ng tin nhi\u1ec7t dao"
+  },
+  {
+   "fieldname": "knife_temperature_1",
+   "fieldtype": "Float",
+   "label": "Nhi\u1ec7t \u0111\u1ed9 dao 1"
+  },
+  {
+   "fieldname": "sole_temperature_1",
+   "fieldtype": "Float",
+   "label": "Nhi\u1ec7t \u0111\u1ed9 \u0111\u1ebf 1 "
+  },
+  {
+   "fieldname": "machine_speed_9h",
+   "fieldtype": "Data",
+   "label": "T\u1ed1c \u0111\u1ed9 m\u00e1y (c\u00e1i/ph\u00fat) ca 9h"
+  },
+  {
+   "fieldname": "qty_line_cut_9h",
+   "fieldtype": "Float",
+   "label": "S\u1ed1 line c\u1eaft ca 9h"
+  },
+  {
+   "fieldname": "unit_price_cut_9h",
+   "fieldtype": "Float",
+   "label": "\u0110\u01a1n gi\u00e1 kho\u00e1n (VN\u0110/kg) ca 9h"
+  },
+  {
+   "fieldname": "box_shift_9h",
+   "fieldtype": "Float",
+   "label": "H\u1ed9p/ca 9h"
+  },
+  {
+   "fieldname": "scrap_machine_cut_9h",
+   "fieldtype": "Data",
+   "label": "Ph\u1ebf ch\u1ec9nh m\u00e1y c\u1eaft ca 9h"
+  },
+  {
+   "fieldname": "scrap_check_cut_9h",
+   "fieldtype": "Data",
+   "label": "Ph\u1ebf ki\u1ec3m h\u00e0ng c\u1eaft ca 9h"
+  },
+  {
+   "fieldname": "temperature_c",
+   "fieldtype": "Float",
+   "label": "Nhi\u1ec7t \u0111\u1ed9 \u02daC"
+  },
+  {
+   "fieldname": "column_break_drzh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "knife_temperature_2",
+   "fieldtype": "Float",
+   "label": "Nhi\u1ec7t \u0111\u1ed9 dao 2"
+  },
+  {
+   "fieldname": "sole_temperature_2",
+   "fieldtype": "Float",
+   "label": "Nhi\u1ec7t \u0111\u1ed9 \u0111\u1ebf 2"
+  },
+  {
+   "fieldname": "machine_speed_12h",
+   "fieldtype": "Data",
+   "label": "T\u1ed1c \u0111\u1ed9 m\u00e1y (c\u00e1i/ph\u00fat) ca 12h"
+  },
+  {
+   "fieldname": "qty_line_cut_12h",
+   "fieldtype": "Float",
+   "label": "S\u1ed1 line c\u1eaft ca 12h"
+  },
+  {
+   "fieldname": "unit_price_cut_12h",
+   "fieldtype": "Float",
+   "label": "\u0110\u01a1n gi\u00e1 kho\u00e1n (VN\u0110/kg) ca 12h"
+  },
+  {
+   "fieldname": "box_shift_12h",
+   "fieldtype": "Float",
+   "label": "H\u1ed9p/ca 12h"
+  },
+  {
+   "fieldname": "scrap_machine_cut_12h",
+   "fieldtype": "Data",
+   "label": "Ph\u1ebf ch\u1ec9nh m\u00e1y c\u1eaft ca 12h"
+  },
+  {
+   "fieldname": "scrap_check_cut_12h",
+   "fieldtype": "Data",
+   "label": "Ph\u1ebf ki\u1ec3m h\u00e0ng c\u1eaft ca 12h"
+  },
+  {
+   "depends_on": "eval:doc.operation === 'CONGDOANCAT'",
+   "fieldname": "maket",
+   "fieldtype": "Section Break",
+   "label": "Maket"
+  },
+  {
+   "fieldname": "maket_box",
+   "fieldtype": "Attach",
+   "label": "Maket h\u1ed9p"
+  },
+  {
+   "fieldname": "column_break_bfvy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "maket_bag",
+   "fieldtype": "Attach",
+   "label": "Maket t\u00fai"
+  },
+  {
+   "depends_on": "eval:doc.operation === 'CONGDOANCAT'",
+   "fieldname": "l\u01b0u_\u00fd_l\u1ec7nh_c\u1eaft_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "L\u01b0u \u00fd l\u1ec7nh c\u1eaft"
+  },
+  {
+   "fieldname": "client_requirement_cut",
+   "fieldtype": "Small Text",
+   "label": "Y\u00eau c\u1ea7u \u0111\u1eb7c bi\u1ec7t c\u1ee7a kh\u00e1ch"
+  },
+  {
+   "fieldname": "column_break_rsfs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pack_box_note",
+   "fieldtype": "Small Text",
+   "label": "C\u00e1ch \u0111\u00f3ng th\u00f9ng/b\u1ecbch v\u00e0 l\u01b0u \u00fd (n\u1ebfu c\u00f3)"
+  },
+  {
+   "default": "0",
+   "fieldname": "collective_operation",
+   "fieldtype": "Check",
+   "label": "Collective Operation"
+  },
+  {
+   "default": "0",
+   "fieldname": "in_progress_qty",
+   "fieldtype": "Float",
+   "label": "In Progress Semi Qty"
+  },
+  {
+   "fieldname": "packaging_size",
+   "fieldtype": "Data",
+   "label": "KT bao g\u00f3i"
+  },
+  {
+   "fieldname": "carton_size",
+   "fieldtype": "Data",
+   "label": "KT th\u00f9ng carton/b\u1ecbch (mm)"
+  },
+  {
+   "fieldname": "maket_tem",
+   "fieldtype": "Attach",
+   "label": "Market tem"
+  },
+  {
+   "fieldname": "maket_tem",
+   "fieldtype": "Attach",
+   "label": "Market tem"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-02-27 16:01:29.215348",
+ "modified_by": "Administrator",
+ "module": "DBIZ APP",
+ "name": "Operation Workstations",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
